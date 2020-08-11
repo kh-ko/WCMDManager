@@ -22,7 +22,6 @@ Window {
         text : model.mText
 
         onSignalEventClicked: {
-            console.debug("")
             model.onCommandTest(model.mText + "01")
         }
     }
