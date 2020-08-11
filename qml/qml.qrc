@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/main.qml</file>
+        <file>uiengine/ViewManager.qml</file>
+        <file>uiengine/FontManager.qml</file>
+        <file>uiengine/font/digital-7.ttf</file>
+        <file>uiengine/font/GodoB.ttf</file>
+        <file>uiengine/font/NanumBarunGothic.ttf</file>
+        <file>uiengine/font/NanumBarunGothicBold.ttf</file>
+        <file>control/UiButton.qml</file>
+        <file>ui/image_sample/btn_home.png</file>
+    </qresource>
+</RCC>
