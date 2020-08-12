@@ -9,5 +9,7 @@
         <file>uiengine/font/NanumBarunGothicBold.ttf</file>
         <file>control/UiButton.qml</file>
         <file>ui/image_sample/btn_home.png</file>
+        <file>ui/PanelLeftMenu.qml</file>
+        <file>ui/PanelWindowFrame.qml</file>
     </qresource>
 </RCC>
