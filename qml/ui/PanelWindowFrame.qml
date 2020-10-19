@@ -124,113 +124,130 @@ Item {
 
     Rectangle
     {
-        height: 35
-        width: 150
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
+        height              : 35
+        width               : 150
+        anchors.top         : parent.top
+        anchors.topMargin   : 0
+        anchors.right       : parent.right
+        anchors.rightMargin : 0
 
         color : "#590085ff"
 
-        Item
+        Rectangle
         {
             property bool isPress : false
+            property bool isHover : false
+
             id : btnMinimize
 
-            width: 25
-            height: 25
+            width                 : 25
+            height                : 25
             anchors.verticalCenter: parent.verticalCenter
-            anchors.right: btnToggleFullScreen.left
-            anchors.rightMargin: 20
+            anchors.right         : btnToggleFullScreen.left
+            anchors.rightMargin   : 20
+
+            color        : "#00000000"
+            border.width : 2
+            border.color : btnMinimize.isHover && btnMinimize.isPress === false ? "#0085FF" : "#00000000"
 
             Rectangle{
                 width: 15
                 height: 1
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenter  : parent.verticalCenter
 
-                color: "#ffffff"
+                color                   : "#ffffff"
             }
 
             Rectangle{
-                anchors.fill: parent
-                color : "#59000000"
+                anchors.fill : parent
+                color        : "#59000000"
 
-                visible: btnMinimize.isPress
+                visible      : btnMinimize.isPress
             }
 
             MouseArea{
-                anchors.fill: parent
-                onPressed : {btnMinimize.isPress = true }
-                onReleased: {btnMinimize.isPress = false}
-                onClicked : {root.showMinimized()}
+                anchors.fill : parent
+                hoverEnabled : true
+
+                onContainsMouseChanged : {btnMinimize.isHover = containsMouse}
+                onPressed              : {btnMinimize.isPress = true }
+                onReleased             : {btnMinimize.isPress = false}
+                onClicked              : {root.showMinimized()}
             }
         }
 
-        Item
+        Rectangle
         {
             property bool isPress : false
+            property bool isHover : false
 
             id : btnToggleFullScreen
 
-            width: 25
-            height: 25
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: btnClose.left
-            anchors.rightMargin: 20
+            width                   : 25
+            height                  : 25
+            anchors.verticalCenter  : parent.verticalCenter
+            anchors.right           : btnClose.left
+            anchors.rightMargin     : 20
+
+            color        : "#00000000"
+            border.width : 2
+            border.color : btnToggleFullScreen.isHover &&  btnToggleFullScreen.isPress === false ? "#0085FF" : "#00000000"
 
             Rectangle{
-                width: 15
-                height: 15
-                anchors.verticalCenter: parent.verticalCenter
+                width                   : 15
+                height                  : 15
+                anchors.verticalCenter  : parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                visible: !(root.visibility === Window.FullScreen)
-                color: "#00000000"
+                visible     : !(root.visibility === Window.FullScreen)
+                color       : "#00000000"
                 border.color: "#ffffff"
                 border.width: 1
             }
 
             Rectangle{
-                width: 13
-                height: 13
-                anchors.verticalCenter: parent.verticalCenter
+                width                   : 13
+                height                  : 13
+                anchors.verticalCenter  : parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                visible: (root.visibility === Window.FullScreen)
-                color: "#00000000"
-                anchors.verticalCenterOffset: -2
-                anchors.horizontalCenterOffset: -2
+                visible                         : (root.visibility === Window.FullScreen)
+                color                           : "#00000000"
+                anchors.verticalCenterOffset    : -2
+                anchors.horizontalCenterOffset  : -2
                 border.color: "#ffffff"
                 border.width: 1
             }
 
             Rectangle{
-                width: 13
-                height: 13
-                anchors.verticalCenter: parent.verticalCenter
+                width                   : 13
+                height                  : 13
+                anchors.verticalCenter  : parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                visible: (root.visibility === Window.FullScreen)
-                color: "#00000000"
-                anchors.verticalCenterOffset: 2
-                anchors.horizontalCenterOffset: 2
-                border.color: "#ffffff"
-                border.width: 1
+                visible                         : (root.visibility === Window.FullScreen)
+                color                           : "#00000000"
+                anchors.verticalCenterOffset    : 2
+                anchors.horizontalCenterOffset  : 2
+                border.color                    : "#ffffff"
+                border.width                    : 1
             }
 
             Rectangle{
                 anchors.fill: parent
-                color : "#59000000"
+                color       : "#59000000"
 
-                visible: btnToggleFullScreen.isPress
+                visible     : btnToggleFullScreen.isPress
             }
 
             MouseArea{
                 anchors.fill: parent
-                onPressed : {btnToggleFullScreen.isPress = true }
-                onReleased: {btnToggleFullScreen.isPress = false}
+                hoverEnabled : true
+
+                onContainsMouseChanged  : {btnToggleFullScreen.isHover = containsMouse}
+                onPressed               : {btnToggleFullScreen.isPress = true }
+                onReleased              : {btnToggleFullScreen.isPress = false}
                 onClicked :
                 {
                     if(root.visibility === Window.FullScreen)
@@ -241,9 +258,10 @@ Item {
             }
         }
 
-        Item
+        Rectangle
         {
             property bool isPress : false
+            property bool isHover : false
 
             id : btnClose
 
@@ -252,6 +270,10 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: 20
+
+            color        : "#00000000"
+            border.width : 2
+            border.color : btnClose.isHover &&  btnClose.isPress === false ? "#0085FF" : "#00000000"
 
             Rectangle{
                 width: 2
@@ -282,9 +304,12 @@ Item {
 
             MouseArea{
                 anchors.fill: parent
-                onPressed : {btnClose.isPress = true }
-                onReleased: {btnClose.isPress = false}
-                onClicked : {Qt.quit()               }
+                hoverEnabled : true
+
+                onContainsMouseChanged  : {btnClose.isHover = containsMouse}
+                onPressed               : {btnClose.isPress = true }
+                onReleased              : {btnClose.isPress = false}
+                onClicked               : {Qt.quit()               }
             }
         }
     }
