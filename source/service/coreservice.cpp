@@ -46,13 +46,19 @@ CoreService::CoreService(QObject *parent) : QObject(parent)
     {
         if(dirList.at(i).toInt() != 0)
         {
-            mDeviceInfoCollector.addDeviceNumber(dirList.at(i).toInt());
+            mLSettingService.addDeviceInfo(dirList.at(i).toInt());
+            //mDeviceInfoCollector.addDeviceNumber(dirList.at(i).toInt());
         }
     }
 
+    /*
     if(mLSettingService.mDeviceNumber == 0 && mDeviceInfoCollector.mListDeviceInfo.size() > 0 )
     {
         mLSettingService.setDeviceNumber(mDeviceInfoCollector.mListDeviceInfo[0]->mDeviceNum);
+    }*/
+    if(mLSettingService.mDeviceNumber == 0 && mLSettingService.mDeviceListModel.size() > 0 )
+    {
+        mLSettingService.setDeviceNumber(mLSettingService.mDeviceListModel.at(0)->mNumber);
     }
 
     connect(&mLSettingService, SIGNAL(signalEventChangedSelectDate  ()), this, SLOT(onSignalEventChangedSelectDate  ()));

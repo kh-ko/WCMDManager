@@ -10,31 +10,44 @@
 class PanelSyncModel : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool mIsSearch      READ getIsSearch  NOTIFY signalEventChangedIsSearch)
+
 public:
     CoreService *  mpCoreService;
     QList<PanelSyncListItemModel *> mListDevice;
 
+    bool mIsSearch = false;
+
+    bool getIsSearch(){ return  mIsSearch;}
+
+    void setIsSearch(bool value){ if(mIsSearch == value) return; mIsSearch = value; emit signalEventChangedIsSearch(mIsSearch);}
 signals:
     void signalEventChangedIsCanceling(bool value);
+    void signalEventChangedIsSearch(bool value);
 
 public slots:
     Q_INVOKABLE void onCommandOpen()
     {
         clearList();
 
-        for(int i = 0; i < mpCoreService->mDeviceInfoCollector.mListDeviceInfo.size(); i ++)
-        {
-            DeviceInfoDto * dInfo = mpCoreService->mDeviceInfoCollector.mListDeviceInfo[i];
-            PanelSyncListItemModel * pItem = new PanelSyncListItemModel(dInfo->mDeviceNum, dInfo->mDeviceName, dInfo->mIp, this);
+        setIsSearch(true);
 
-            //connect(pItem, SIGNAL(signalEventChangedState(int )), this, SLOT(onSignalEventChangedState(int)));
-            mListDevice.append(pItem);
-        }
+        mpCoreService = CoreService::getInstance();
+
+        connect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
+
+        mpCoreService->mDspSearchService.search();
     }
 
     Q_INVOKABLE void onCommandClose()
     {
-        mpCoreService->reLoad();
+        foreach(PanelSyncListItemModel* item, mListDevice)
+        {
+            if(item->mRSyncError == EnumDefine::RemoteSyncErrorType::RSYNC_ERROR_NONE && item->mState == EnumDefine::RemoteSyncState::RSYNC_STATE_FINISHED)
+            {
+                mpCoreService->reLoad();
+            }
+        }
     }
 
     Q_INVOKABLE void onCommandSync()
@@ -74,6 +87,24 @@ public slots:
         }
 
         return false;
+    }
+
+    void onSignalEventCompletedDeviceSearch()
+    {
+        disconnect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
+
+        for(int i = 0; i < mpCoreService->mDspSearchService.mListDeviceInfo.size(); i ++)
+        {
+            int     dNum  = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mNumber;
+            QString dName = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mName;
+            QString dIP   = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mIp;
+
+            PanelSyncListItemModel * pItem = new PanelSyncListItemModel(dNum, dName, dIP, this);
+
+            mListDevice.append(pItem);
+        }
+
+        setIsSearch(false);
     }
 
 public:

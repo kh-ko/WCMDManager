@@ -27,11 +27,6 @@ Item {
         deviceList.model = listModel;
         panelmodel.onCommandOpen();
 
-        for(var i = 0; i < panelmodel.onCommandGetDlistSize(); i ++)
-        {
-            listModel.append({"dataIdx" : i})
-        }
-
         dialog.show();
     }
 
@@ -49,6 +44,16 @@ Item {
 
     PanelSyncModel{
         id :panelmodel
+
+        onSignalEventChangedIsSearch: {
+            if(panelmodel.mIsSearch)
+                true;
+
+            for(var i = 0; i < panelmodel.onCommandGetDlistSize(); i ++)
+            {
+                listModel.append({"dataIdx" : i})
+            }
+        }
     }
 
     ApplicationWindow{
@@ -374,6 +379,11 @@ Item {
                     }
                 }
             }
+        }
+
+        UiDialogLoading{
+            id : busyDlg
+            visible: panelmodel.mIsSearch
         }
     }
 }

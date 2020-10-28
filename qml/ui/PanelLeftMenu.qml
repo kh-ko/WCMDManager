@@ -184,7 +184,7 @@ Item {
                 anchors.bottomMargin    : 20
 
                 text        : qsTr("Monitoring")
-                iconSource  : "image_icon/add_history.png"
+                iconSource  : "image_icon/monitoring.png"
 
                 colType     : EnumDefine.BTN_COLOR_TYPE_BLUE
 
@@ -202,7 +202,7 @@ Item {
                 anchors.bottomMargin    : 20
 
                 text        : qsTr("Sync")
-                iconSource  : "image_icon/add_history.png"
+                iconSource  : "image_icon/refresh.png"
 
                 colType     : EnumDefine.BTN_COLOR_TYPE_BLUE
 
@@ -220,7 +220,7 @@ Item {
                 anchors.bottomMargin    : 20
 
                 text        : qsTr("Setting")
-                iconSource  : "image_icon/add_history.png"
+                iconSource  : "image_icon/setting.png"
 
                 colType     : EnumDefine.BTN_COLOR_TYPE_BLUE
 

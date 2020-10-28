@@ -47,6 +47,13 @@ void LocalSettingService::setDeviceNumber(int value)
 
     emit signalEventChangedDeviceNumber();
 }
+
+void LocalSettingService::setWCProductSeq(quint64 value)
+{
+    mWCProductSeq = value;
+
+    emit signalEventChangedWCProductSeq();
+}
 void LocalSettingService::setManagerSetting(QString company, QString department, QString position, QString name)
 {
     mManagerSettingModel.setCompany   (company   );
@@ -87,6 +94,18 @@ void LocalSettingService::setSignSetting(bool isCheckWrite, bool isCheckReview, 
     mpSettings->setValue("sign/approved", isCheckApproved);
 
     emit signalEventChangedSignSetting();
+}
+
+void LocalSettingService::addDeviceInfo(int num)
+{
+    mDeviceListModel.addDeviceInfo(num, "-");
+    emit signalEventAddedDeviceInfo(num, "-");
+}
+
+void LocalSettingService::setDeviceInfo(int num, QString name)
+{
+    mDeviceListModel.setDeviceInfo(num, name);
+    emit signalEventUpdateDeviceInfo(num, name);
 }
 
 void LocalSettingService::loadLanguage()
@@ -155,6 +174,11 @@ void LocalSettingService::loadSignSetting()
     bool isCheckApproved = mpSettings->value("sign/approved", true).toBool();
 
     setSignSetting(isCheckWrite, isCheckReview, isCheckApproved);
+}
+
+void LocalSettingService::loadDeviceInfoList()
+{
+    // nothing ...
 }
 
 LocalSettingService::LocalSettingService(QObject *parent) : QObject(parent)

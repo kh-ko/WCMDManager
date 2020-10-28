@@ -19,6 +19,7 @@ SOURCES += \
         source/main.cpp \
         source/service/coreservice.cpp \
         source/service/dataloaderservice.cpp \
+        source/service/dspsearchservice.cpp \
         source/service/localsettingservice.cpp \
         source/service/metaldetectorservice.cpp \
         source/service/productstatisticsservice.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
         source/util/myalloc.cpp
 
 RESOURCES += qml/qml.qrc
+RC_FILE = WCMDManager_resource.rc
 
 TRANSLATIONS += Lang_ko_KR.ts
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -50,6 +52,8 @@ HEADERS += \
     source/globaldef/EnumDefine.h \
     source/helper/languagehelper.h \
     source/logger/nsdebug.h \
+    source/model/deviceinfolistmodel.h \
+    source/model/deviceinfomodel.h \
     source/model/eventitemmodel.h \
     source/model/managersettingmodel.h \
     source/model/mdcheckupitemmodel.h \
@@ -58,6 +62,7 @@ HEADERS += \
     source/model/productsettingmodel.h \
     source/model/productstatisticsmodel.h \
     source/model/signsettingmodel.h \
+    source/model/weightcheckermodel.h \
     source/model/weightcheckersettingmodel.h \
     source/qmlmodel/dialogpasswordmodel.h \
     source/qmlmodel/mainmodel.h \
@@ -77,9 +82,14 @@ HEADERS += \
     source/qmlmodel/panelmonitorlistmodel.h \
     source/qmlmodel/panelsynclistitemmodel.h \
     source/qmlmodel/panelsyncmodel.h \
+    source/qmlmodel/panelwchistogram.h \
+    source/qmlmodel/panelwcproductsummary.h \
+    source/qmlmodel/panelwcselectdeviceproduct.h \
+    source/qmlmodel/panelwctrendsmodel.h \
     source/qmlmodel/windowsettingmodel.h \
     source/service/coreservice.h \
     source/service/dataloaderservice.h \
+    source/service/dspsearchservice.h \
     source/service/localsettingservice.h \
     source/service/metaldetectorservice.h \
     source/service/productstatisticsservice.h \

@@ -22,6 +22,7 @@ Item {
     height: 60
 
     signal signalEventClick(var tag, string value)
+    signal signalExtendList()
 
     Rectangle{
         id: rectCombo
@@ -60,13 +61,25 @@ Item {
             }
 
             UiLabel{
-                anchors.fill: parent
-
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment  : Text.AlignVCenter
+                anchors.rightMargin: 0
 
                 color : control.labelColor
                 text  : control.labelText
+                anchors.left: parent.left
+                anchors.right: image.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+            }
+
+            Image{
+                id : image
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                source: "image/combo_arrow.png"
+                anchors.rightMargin: 20
+
             }
         }
 
@@ -108,7 +121,7 @@ Item {
         onContainsMouseChanged  :  { control.isHover = containsMouse }
         onPressed               :  { control.isPress = true          }
         onReleased              :  { control.isPress = false         }
-        onClicked               :  { dlgExtend.open()}
+        onClicked               :  { control.signalExtendList(); dlgExtend.open()}
     }
 
     Dialog

@@ -7,6 +7,7 @@
 #include "source/model/eventitemmodel.h"
 #include "source/model/mdcheckupitemmodel.h"
 #include "source/model/mddetectitemmodel.h"
+#include "source/model/weightcheckermodel.h"
 #include "source/util/fileloaderthread.h"
 #include "source/globaldef/EnumDefine.h"
 #include "source/service/productstatisticsservice.h"
@@ -27,6 +28,7 @@ public:
 
     bool mIsLoading                 = false;
     ProductStatisticsService mProductStatistics;
+    WeightCheckerModel           mWCModel;
     QList<ProductSettingModel *> mListProductHis;
     QList<MDCheckupItemModel *>  mListMDCheckupHis;
     QList<MDDetectItemModel *>   mListMDDetectHis;
@@ -56,6 +58,7 @@ private:
     QString getProductHistoryFileName();
     bool    isMetalCheckupEvent(QString value);
     bool    isMetalDetectEvent(QString value);
+    bool    isWeightCheckerEvent(QString value);
     void    reset();
 public:
     explicit DataLoaderService(QObject *parent = nullptr);

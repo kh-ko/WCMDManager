@@ -88,5 +88,16 @@
         <file>control/UiScrollView.qml</file>
         <file>ui/WindowSetting.qml</file>
         <file>Lang_ko_KR.qm</file>
+        <file>ui/image_icon/monitoring.png</file>
+        <file>ui/image_icon/refresh.png</file>
+        <file>ui/image_icon/setting.png</file>
+        <file>ui/weightchecker/PanelWeightSelectDeviceProduct.qml</file>
+        <file>control/image/combo_arrow.png</file>
+        <file>ui/weightchecker/PanelWeightProductSummary.qml</file>
+        <file>control/UiBarGraph.qml</file>
+        <file>ui/weightchecker/PanelWeightHistogram.qml</file>
+        <file>ui/weightchecker/PanelWeightTrends.qml</file>
+        <file>logo2.ico</file>
+        <file>ui/image_icon/novasen_logo_old.png</file>
     </qresource>
 </RCC>

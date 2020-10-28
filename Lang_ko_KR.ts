@@ -816,85 +816,251 @@
 <context>
     <name>PanelSync</name>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="60"/>
-        <location filename="qml/ui/PanelSync.qml" line="252"/>
+        <location filename="qml/ui/PanelSync.qml" line="67"/>
+        <location filename="qml/ui/PanelSync.qml" line="259"/>
         <source>Sync</source>
         <translation>동기화</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="127"/>
+        <location filename="qml/ui/PanelSync.qml" line="134"/>
         <source>Device : </source>
         <translation>기기 : </translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="151"/>
+        <location filename="qml/ui/PanelSync.qml" line="158"/>
         <source>IP :  </source>
         <translation>IP : </translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="174"/>
+        <location filename="qml/ui/PanelSync.qml" line="181"/>
         <source>Last sync date : </source>
         <translation>최근동기화 : </translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="229"/>
+        <location filename="qml/ui/PanelSync.qml" line="236"/>
         <source>Disconnected device.</source>
         <translation>접속끊김.</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="230"/>
+        <location filename="qml/ui/PanelSync.qml" line="237"/>
         <source>READY</source>
         <translation>준비</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="231"/>
+        <location filename="qml/ui/PanelSync.qml" line="238"/>
         <source>SYNCING</source>
         <translation>동기화중</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="232"/>
+        <location filename="qml/ui/PanelSync.qml" line="239"/>
         <source>FAIL : Synchronization is in progress on another device.</source>
         <translation>실패 : 다른기기와 동기화 진행중입니다.</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="233"/>
+        <location filename="qml/ui/PanelSync.qml" line="240"/>
         <source>FAIL : Synchronization has been cancelled.</source>
         <translation>실패 : 동기화가 취소되었습니다.</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="234"/>
+        <location filename="qml/ui/PanelSync.qml" line="241"/>
         <source>FAIL : The sync file is invalid.</source>
         <translation>실패 : 동기화파일이 잘못되었습니다.</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="235"/>
+        <location filename="qml/ui/PanelSync.qml" line="242"/>
         <source>FAIL : Network error has occurred.</source>
         <translation>실패 : 네트워크 오류가 발생하였습니다.</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="235"/>
+        <location filename="qml/ui/PanelSync.qml" line="242"/>
         <source>COMPLETE</source>
         <translation>완료</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="271"/>
+        <location filename="qml/ui/PanelSync.qml" line="278"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="307"/>
+        <location filename="qml/ui/PanelSync.qml" line="314"/>
         <source>Do you want to cancle sync?</source>
         <translation>동기화를 취소하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="315"/>
+        <location filename="qml/ui/PanelSync.qml" line="322"/>
         <source>Yes</source>
         <translation>예</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelSync.qml" line="334"/>
+        <location filename="qml/ui/PanelSync.qml" line="341"/>
         <source>No</source>
         <translation>아니오</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWeightHistogram</name>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistogram.qml" line="76"/>
+        <source>Histogram</source>
+        <translation>분포도</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistogram.qml" line="987"/>
+        <source>Under</source>
+        <translation>미만</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistogram.qml" line="1288"/>
+        <source>Over</source>
+        <translation>초과</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistogram.qml" line="1322"/>
+        <source>Graph min</source>
+        <translation>분류 최소값</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistogram.qml" line="1351"/>
+        <source>Graph max</source>
+        <translation>분류 최대값</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistogram.qml" line="1374"/>
+        <source>Apply</source>
+        <translation>적용</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWeightProductSummary</name>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="28"/>
+        <source>Product summary</source>
+        <translation>제품 요약</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="47"/>
+        <source>Setting value</source>
+        <translation>설정값</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="57"/>
+        <source>Count</source>
+        <translation>갯수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="67"/>
+        <source>Total weight</source>
+        <translation>총 중량</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="77"/>
+        <source>Avg weight</source>
+        <translation>평균 중량</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="87"/>
+        <source>Rate</source>
+        <translation>비율</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="97"/>
+        <source>SD (CV)</source>
+        <translation>SD (CV)</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="128"/>
+        <source>Total</source>
+        <translation>전체</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="225"/>
+        <source>Trade</source>
+        <translation>정품</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="323"/>
+        <source>Over</source>
+        <translation>초과</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="417"/>
+        <source>Under</source>
+        <translation>미달</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="511"/>
+        <source>Etc NG</source>
+        <translation>기타 NG</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="620"/>
+        <source>Max weight</source>
+        <translation>최대 중량</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="636"/>
+        <source>Min weight</source>
+        <translation>최소 중량</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWeightSelectDeviceProduct</name>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightSelectDeviceProduct.qml" line="38"/>
+        <source>Device</source>
+        <translation>기기</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightSelectDeviceProduct.qml" line="70"/>
+        <source>Product</source>
+        <translation>제품</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWeightTrends</name>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="43"/>
+        <source>Trends</source>
+        <translation>추세 그래프</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="785"/>
+        <source>[pcs]</source>
+        <translation>[갯수]</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="801"/>
+        <source>Y scope</source>
+        <translation>중량 범위</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="805"/>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="817"/>
+        <source>Min to max</source>
+        <translation>최소~최대</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="805"/>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="812"/>
+        <source>Under to over</source>
+        <translation>미달중량~초과중량</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="836"/>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="850"/>
+        <source>Trade</source>
+        <translation>정품만</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="836"/>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="845"/>
+        <source>Total</source>
+        <translation>전체</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightTrends.qml" line="837"/>
+        <source>Filter</source>
+        <translation>필터</translation>
     </message>
 </context>
 <context>
@@ -989,28 +1155,28 @@
         <location filename="qml/control/UiCalendar.qml" line="105"/>
         <location filename="qml/control/UiCalendar.qml" line="110"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="qml/control/UiCalendar.qml" line="106"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="qml/control/UiCalendar.qml" line="107"/>
         <location filename="qml/control/UiCalendar.qml" line="109"/>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="qml/control/UiCalendar.qml" line="108"/>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="qml/control/UiCalendar.qml" line="110"/>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1036,14 +1202,12 @@
         <translation>모니터링 갱신주기</translation>
     </message>
     <message>
-        <location filename="qml/ui/WindowSetting.qml" line="130"/>
         <source>New device</source>
-        <translation>새 기기</translation>
+        <translation type="vanished">새 기기</translation>
     </message>
     <message>
-        <location filename="qml/ui/WindowSetting.qml" line="151"/>
         <source>Device list</source>
-        <translation>기기 목록</translation>
+        <translation type="vanished">기기 목록</translation>
     </message>
     <message>
         <location filename="qml/ui/WindowSetting.qml" line="169"/>
@@ -1051,24 +1215,21 @@
         <translation>적용</translation>
     </message>
     <message>
-        <location filename="qml/ui/WindowSetting.qml" line="193"/>
+        <location filename="qml/ui/WindowSetting.qml" line="195"/>
         <source>Cancle</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="qml/ui/WindowSetting.qml" line="268"/>
         <source>Device number</source>
-        <translation>기기번호</translation>
+        <translation type="vanished">기기번호</translation>
     </message>
     <message>
-        <location filename="qml/ui/WindowSetting.qml" line="280"/>
         <source>Device name</source>
-        <translation>기기명</translation>
+        <translation type="vanished">기기명</translation>
     </message>
     <message>
-        <location filename="qml/ui/WindowSetting.qml" line="291"/>
         <source>Device IP</source>
-        <translation>기기 IP</translation>
+        <translation type="vanished">기기 IP</translation>
     </message>
 </context>
 <context>

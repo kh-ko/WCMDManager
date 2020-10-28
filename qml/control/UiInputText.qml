@@ -11,6 +11,7 @@ Item {
     property color  inputColor       : "#FFFFFF"
     property alias  inputText        : inputText.text
     property alias  echoMode         : inputText.echoMode
+    property alias  validator        : inputText.validator
     property bool   isDisable        : false
     property bool   isHover          : false
     property bool   isPress          : false
@@ -19,6 +20,8 @@ Item {
 
     width: 187
     height: 60
+
+    signal signalEventChangedInputFocus(var value)
 
     Rectangle{
         id: rectInputText
@@ -40,19 +43,19 @@ Item {
             anchors.leftMargin      : 2
 
             radius                  : height / 2
-            border.width            : 2
+            border.width            : control.isDisable ? 0 : 2
             border.color            : "#59FFFFFF"
 
             gradient: Gradient {
                 GradientStop {
                     position: 0
-                    color: "#333333"
+                    color: control.isDisable ? "#59000000" : "#333333"
 
                 }
 
                 GradientStop {
                     position: 1
-                    color: "#535353"
+                    color: control.isDisable ? "#59000000" : "#535353"
                 }
             }
 
@@ -85,6 +88,11 @@ Item {
             anchors.topMargin: 0
             anchors.right: parent.right
             anchors.rightMargin: rectInputText.radius / 2
+
+            onFocusChanged: {
+                console.debug("focus changed : " + focus)
+                control.signalEventChangedInputFocus(focus)
+            }
         }
 
         MouseArea{
@@ -100,7 +108,7 @@ Item {
             radius      : rectLabel.radius
             color       : "#59000000"
 
-            visible     : control.isPress || control.isDisable
+            visible     : control.isPress && !control.isDisable
         }
     }
 
@@ -121,6 +129,8 @@ Item {
             if(inputText.focus == false)
             {
                 inputText.forceActiveFocus()
+
+                if(inputText.text.length > 0)
                 inputText.selectAll()
             }
         }

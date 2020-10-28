@@ -16,7 +16,7 @@ public:
     QList<PanelMonitorItemModel *> mListItem;
 
 signals:
-    void signalEventAddedItem(int idx);
+    void signalEventCompletedDeviceSearch();
 
 public slots:
     Q_INVOKABLE int onCommandGetMonitorListSize()
@@ -32,23 +32,25 @@ public slots:
         return mListItem[idx];
     }
 
-    void onSignalEventAddedDeviceInfo(DeviceInfoDto dInfoDto)
+    void onSignalEventCompletedDeviceSearch()
     {
-        mListItem.append(new PanelMonitorItemModel(dInfoDto,this));
+        disconnect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
 
-        emit signalEventAddedItem(mListItem.size() - 1);
-    }
-
-    void onSignalEventUpdateDeviceInfo(DeviceInfoDto dInfoDto)
-    {
-        for(int i = 0; i < mListItem.size(); i ++)
+        for(int i = 0; i < mpCoreService->mDspSearchService.mListDeviceInfo.size(); i ++)
         {
-            if(mListItem[i]->mDeviceNum == dInfoDto.mDeviceNum)
-            {
-                mListItem[i]->updateDeviceInfo(dInfoDto);
-                return;
-            }
+            int     dNum  = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mNumber;
+            QString dName = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mName;
+            QString dIP   = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mIp;
+
+            mListItem.append(new PanelMonitorItemModel(dNum, dName, dIP,this));
         }
+
+        int cycleTime = mpCoreService->mLSettingService.mMoniteringRefreshCycle;
+        mTimer.setInterval(cycleTime < 100 ? 100 : cycleTime);
+        mTimer.start();
+        connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimeTick()));
+
+        emit signalEventCompletedDeviceSearch();
     }
 
     void onTimeTick()
@@ -64,18 +66,9 @@ public:
     {
         mpCoreService = CoreService::getInstance();
 
-        for(int i = 0; i < mpCoreService->mDeviceInfoCollector.mListDeviceInfo.size(); i ++)
-        {
-            mListItem.append(new PanelMonitorItemModel(*(mpCoreService->mDeviceInfoCollector.mListDeviceInfo.at(i)),this));
-        }
+        connect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
 
-        connect(&mpCoreService->mDeviceInfoCollector, SIGNAL(signalEventAddedDeviceInfo(DeviceInfoDto)),this, SLOT(onSignalEventAddedDeviceInfo(DeviceInfoDto)));
-        connect(&mpCoreService->mDeviceInfoCollector, SIGNAL(signalEventUpdateDeviceInfo(DeviceInfoDto)),this, SLOT(onSignalEventUpdateDeviceInfo(DeviceInfoDto)));
-
-        int cycleTime = mpCoreService->mLSettingService.mMoniteringRefreshCycle;
-        mTimer.setInterval(cycleTime < 100 ? 100 : cycleTime);
-        mTimer.start();
-        connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimeTick()));
+        mpCoreService->mDspSearchService.search();
     }
     ~PanelMonitorListModel()
     {

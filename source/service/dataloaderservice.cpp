@@ -93,6 +93,7 @@ void DataLoaderService::onSignalReadProductHistory(int error, QString content)
             ProductSettingModel * ps = new ProductSettingModel(this);
             ps->setValue(tempList.at(i));
             mListProductHis.append(ps);
+            mWCModel.setProduct(ps);
         }
     }
 
@@ -133,6 +134,10 @@ void DataLoaderService::onSignalReadEventHistory(int error, QStringList content)
                 pItem->setValue(&event, mListProductHis[event.mProductHisIdx]->mNo, mListProductHis[event.mProductHisIdx]->mName);
                 mListMDDetectHis.append(pItem);
             }
+            else if(isWeightCheckerEvent(event.mEventType))
+            {
+                mWCModel.addEvent(mListProductHis[event.mProductHisIdx]->mSeq, event.mEventType, event.mValue);
+            }
         }
     }
 
@@ -147,6 +152,7 @@ void DataLoaderService::onSignalReadEofEventHistory()
     disconnect(&mFileLoader, SIGNAL(signalReadLine(int, QStringList)), this, SLOT(onSignalReadEventHistory(int, QStringList)));
     disconnect(&mFileLoader, SIGNAL(signalReadEof()), this, SLOT(onSignalReadEofEventHistory()));
 
+    mWCModel.finishedAddEvent();
     setIsLoading(false);
 }
 
@@ -227,8 +233,22 @@ bool DataLoaderService::isMetalDetectEvent(QString value)
     return false;
 }
 
+bool DataLoaderService::isWeightCheckerEvent(QString value)
+{
+    if     (value == "N"              )return true;
+    else if(value == "UW"             )return true;
+    else if(value == "OW"             )return true;
+    else if(value == "U"              )return true;
+    else if(value == "O"              )return true;
+    else if(value == "ETC"            )return true;
+    else if(value == "WC MD F"        )return true;
+
+    return false;
+}
+
 void DataLoaderService::reset()
 {
+    mWCModel.reset();
     mAllFileList.clear();
 
     mProductStatistics.reset();

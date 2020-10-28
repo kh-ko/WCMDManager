@@ -25,12 +25,12 @@ ApplicationWindow{
         comboLanguage.selLanguage = settingModel.onCommandGetLanguage();
         inputPassword.inputText = settingModel.onCommandGetPassword();
         inputMonitoringRefreshCycle.inputText = (settingModel.onCommandGetRefreshCycle() / 1000).toLocaleString(ViewManager.locale, 'f', 1)
-
+        /*
         for(var i = 0; i < settingModel.onCommandGetDeviceCnt(); i ++)
         {
             deviceInfoComponent.createObject(containerInfo,{"dataIdx":i})
         }
-
+*/
         win.show()
     }
 
@@ -124,7 +124,7 @@ ApplicationWindow{
                         Layout.fillWidth: true
                         height: 42
                     }
-
+                    /*
                     UiButton{
                         id :btnNewDevice
                         text: qsTr("New device")
@@ -149,7 +149,7 @@ ApplicationWindow{
                         font.pixelSize : 20
 
                         text : qsTr("Device list")
-                    }
+                    }*/
                 }
             }
         }
@@ -179,13 +179,13 @@ ApplicationWindow{
                 onSignalEventClicked:
                 {
                     settingModel.onCommandSetSetting(comboLanguage.selLanguage, inputPassword.inputText, inputMonitoringRefreshCycle.inputText)
-
+/*
                     for(var i = 5; i < containerInfo.children.length; i ++)
                     {
                         var item = containerInfo.children[i]
                         settingModel.onCommandSetDeviceInfo(item.isNew(), item.getDNum(), item.getDName(), item.getDIP())
                     }
-
+*/
                     win.close()
                 }
             }
@@ -206,7 +206,7 @@ ApplicationWindow{
             }
         }
     }
-
+/*
     Component{
         id : deviceInfoComponent
 
@@ -300,6 +300,7 @@ ApplicationWindow{
             }
         }
     }
+    */
 }
 
 /*##^##

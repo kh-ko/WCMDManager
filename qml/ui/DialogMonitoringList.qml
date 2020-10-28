@@ -31,12 +31,8 @@ Window{
 
         dialog.dlgModel = modelComponent.createObject(dialog)
 
-        for(var i = 0; i < dialog.dlgModel.onCommandGetMonitorListSize(); i ++)
-        {
-            itemComponent.createObject(containerItem, {"itemModel":dialog.dlgModel.onCommandGetMonitorListItem(i)})
-        }
-
         dialog.show()
+        busyDlg.open()
     }
 
     onVisibilityChanged:
@@ -86,12 +82,21 @@ Window{
         }
     }
 
+    UiDialogLoading{
+        id : busyDlg
+    }
+
     Component{
         id : modelComponent
 
         PanelMonitorListModel{
-            onSignalEventAddedItem: {
-                itemComponent.createObject(containerItem, {"itemModel":dialog.dlgModel.onCommandGetMonitorListItem(idx)})
+            onSignalEventCompletedDeviceSearch: {
+                for(var i = 0; i < dialog.dlgModel.onCommandGetMonitorListSize(); i ++)
+                {
+                    itemComponent.createObject(containerItem, {"itemModel":dialog.dlgModel.onCommandGetMonitorListItem(i)})
+                }
+
+                busyDlg.close()
             }
         }
     }

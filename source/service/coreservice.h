@@ -8,6 +8,7 @@
 #include "source/globaldef/EnumDefine.h"
 #include "source/service/localsettingservice.h"
 #include "source/service/dataloaderservice.h"
+#include "source/service/dspsearchservice.h"
 #include "source/thread/deviceinfocollector.h"
 #include "source/util/myalloc.h"
 
@@ -21,7 +22,8 @@ public:
     QString              mAppDirPath;
     LocalSettingService  mLSettingService;
     DataLoaderService    mDataLoader;
-    DeviceInfoCollector  mDeviceInfoCollector;
+    DspSearchService     mDspSearchService;
+    //DeviceInfoCollector  mDeviceInfoCollector;
 
     int  mSelMenu   = EnumDefine::Menu::MENU_METAL_DETECTOR;
 

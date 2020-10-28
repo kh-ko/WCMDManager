@@ -69,12 +69,12 @@ signals:
     void signalEventChangedMDCheckupCycle(QString value);
 
 public slots:
-    Q_INVOKABLE int     onCommandGetDListSize(){ return mpCoreService->mDeviceInfoCollector.mListDeviceInfo.size();}
-    Q_INVOKABLE int     onCommandGetDNum(int idx){ return mpCoreService->mDeviceInfoCollector.mListDeviceInfo.at(idx)->mDeviceNum;}
-    Q_INVOKABLE QString onCommandGetDName(int idx){ return mpCoreService->mDeviceInfoCollector.mListDeviceInfo.at(idx)->mDeviceName;}
+    Q_INVOKABLE int     onCommandGetDListSize(){ return mpCoreService->mLSettingService.mDeviceListModel.size();}
+    Q_INVOKABLE int     onCommandGetDNum(int idx){ return mpCoreService->mLSettingService.mDeviceListModel.at(idx)->mNumber;}
+    Q_INVOKABLE QString onCommandGetDName(int idx){ return mpCoreService->mLSettingService.mDeviceListModel.at(idx)->mName;}
     Q_INVOKABLE void    onCommandSetManagementInfo(QString dNum, QString dName, QString company, QString department, QString position, QString name, QString limitCriteriaFe, QString limitCriteriaSus, QString haccp, QString checkupcycle)
     {
-        mpCoreService->mDeviceInfoCollector.setDeviceName(dNum.toInt(), dName);
+        mpCoreService->mLSettingService.setDeviceInfo(dNum.toInt(), dName);
         mpCoreService->mLSettingService.setDeviceNumber(dNum.toInt());
         mpCoreService->mLSettingService.setManagerSetting(company, department, position, name);
         mpCoreService->mLSettingService.setMetalDetectorSetting(limitCriteriaFe, limitCriteriaSus, haccp, checkupcycle);
@@ -84,12 +84,11 @@ public slots:
     {
         setDNum(mpCoreService->mLSettingService.mDeviceNumber);
 
-        DeviceInfoDto * pInfo = mpCoreService->mDeviceInfoCollector.findDeviceInfo(mpCoreService->mLSettingService.mDeviceNumber);
+        DeviceInfoModel * pInfo = mpCoreService->mLSettingService.mDeviceListModel.findDeviceInfo(mpCoreService->mLSettingService.mDeviceNumber);
 
         if(pInfo != nullptr)
         {
-            QString dName = mpCoreService->mDeviceInfoCollector.findDeviceInfo(mpCoreService->mLSettingService.mDeviceNumber)->mDeviceName;
-            setDName(dName);
+            setDName(pInfo->mName);
         }
     }
     void onSignalEventChangedManagerSetting()

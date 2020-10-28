@@ -33,6 +33,7 @@ void FileLoakerThreadWorker::onCommandReadAll(QString path, QString fileName)
     }
 
     QTextStream out(&file);
+    out.setCodec("utf-8");
     QString content = out.readAll();
 
     file.close();
@@ -69,6 +70,7 @@ void FileLoakerThreadWorker::onCommandReadLine(QString path, QString fileName, i
         }
 
         mpOutStream = new QTextStream();
+        mpOutStream->setCodec("UTF-8");
         mpOutStream->setDevice(mpFile);
     }
 

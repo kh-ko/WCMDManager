@@ -292,11 +292,11 @@ public:
         mpCoreService = CoreService::getInstance();
     }
 
-    PanelMonitorItemModel(DeviceInfoDto dInfoDto, QObject *parent):QObject(parent)
+    PanelMonitorItemModel(int dNum, QString dName, QString ip, QObject *parent):QObject(parent)
     {
-        mIp = dInfoDto.mIp;
-        setDeviceNum(dInfoDto.mDeviceNum);
-        setDeviceName(dInfoDto.mDeviceName);
+        mIp = ip;
+        setDeviceNum(dNum);
+        setDeviceName(dName);
         mpCoreService = CoreService::getInstance();
     }
     ~PanelMonitorItemModel()

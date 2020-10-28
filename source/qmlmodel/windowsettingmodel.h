@@ -13,7 +13,7 @@ class WindowSettingModel : public QObject
 
 private:
     CoreService *          mpCoreService;
-    DeviceInfoCollector *  mpDeviceInfoCollector;
+    //DeviceInfoCollector *  mpDeviceInfoCollector;
 
     int     mLanguage;
     QString mPassword;
@@ -33,7 +33,7 @@ public slots:
     {
         return mpCoreService->mLSettingService.mMoniteringRefreshCycle;
     }
-    Q_INVOKABLE int onCommandGetDeviceCnt()
+    /*Q_INVOKABLE int onCommandGetDeviceCnt()
     {
         return mpDeviceInfoCollector->mListDeviceInfo.size();
     }
@@ -48,7 +48,7 @@ public slots:
     Q_INVOKABLE QString onCommandGetDeviceIP(int idx)
     {
         return mpDeviceInfoCollector->mListDeviceInfo[idx]->mIp;
-    }
+    }*/
     Q_INVOKABLE void onCommandSetSetting(int lang, QString pwd, QString cycle)
     {
         float fcycle = cycle.toFloat();
@@ -65,8 +65,9 @@ public slots:
         mpCoreService->mLSettingService.setPassword(pwd);
         mpCoreService->mLSettingService.setMoniteringRefreshCycle(nCycle);
     }
-    Q_INVOKABLE void onCommandSetDeviceInfo(bool isNew, QString dNum, QString dName, QString dIP)
+    /*Q_INVOKABLE void onCommandSetDeviceInfo(bool isNew, QString dNum, QString dName, QString dIP)
     {
+
         int   deviceNum = dNum.toInt();
 
         if(deviceNum < 1)
@@ -80,13 +81,14 @@ public slots:
         {
             mpDeviceInfoCollector->setDeviceInfo(deviceNum, dIP, dName);
         }
-    }
+
+    }*/
 
 public:
     explicit WindowSettingModel(QObject *parent = nullptr):QObject(parent)
     {
         mpCoreService = CoreService::getInstance();
-        mpDeviceInfoCollector = &mpCoreService->mDeviceInfoCollector;
+        //mpDeviceInfoCollector = &mpCoreService->mDeviceInfoCollector;
     }
 };
 #endif // WINDOWSETTINGMODEL_H

@@ -22,12 +22,16 @@
 #include "source/qmlmodel/panelmdcheckreportmodel.h"
 #include "source/qmlmodel/panelmdcheckreportrowmodel.h"
 #include "source/qmlmodel/windowsettingmodel.h"
-
+#include "source/qmlmodel/panelwcselectdeviceproduct.h"
+#include "source/qmlmodel/panelwcproductsummary.h"
+#include "source/qmlmodel/panelwchistogram.h"
+#include "source/qmlmodel/panelwctrendsmodel.h"
 #include "source/util/mouseeventspy.h"
 #include "source/thread/dto/deviceinfodto.h"
 
 int main(int argc, char *argv[])
 {
+    int resultExec = 0;
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
@@ -52,6 +56,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelMetalOperateHistoryModel   >("PanelMetalOperateHistoryModel"   , 1, 0, "PanelMetalOperateHistoryModel"   );
     qmlRegisterType<PanelMetalStatisticsModel       >("PanelMetalStatisticsModel"       , 1, 0, "PanelMetalStatisticsModel"       );
     qmlRegisterType<PanelMetalDetectHistoryModel    >("PanelMetalDetectHistoryModel"    , 1, 0, "PanelMetalDetectHistoryModel"    );
+    qmlRegisterType<PanelWCSelectDeviceProductModel >("PanelWCSelectDeviceProductModel" , 1, 0, "PanelWCSelectDeviceProductModel" );
+    qmlRegisterType<PanelWCProductSummaryModel      >("PanelWCProductSummaryModel"      , 1, 0, "PanelWCProductSummaryModel"      );
+    qmlRegisterType<PanelWCHistogramModel           >("PanelWCHistogramModel"           , 1, 0, "PanelWCHistogramModel"           );
     qmlRegisterType<PanelCalendarModel              >("PanelCalendarModel"              , 1, 0, "PanelCalendarModel"              );
     qmlRegisterType<PanelSyncModel                  >("PanelSyncModel"                  , 1, 0, "PanelSyncModel"                  );
     qmlRegisterType<PanelSyncListItemModel          >("PanelSyncListItemModel"          , 1, 0, "PanelSyncListItemModel"          );
@@ -63,6 +70,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelMDCheckReportContainerModel>("PanelMDCheckReportContainerModel", 1, 0, "PanelMDCheckReportContainerModel");
     qmlRegisterType<PanelMDCheckReportModel         >("PanelMDCheckReportModel"         , 1, 0, "PanelMDCheckReportModel"         );
     qmlRegisterType<PanelMDCheckReportRowModel      >("PanelMDCheckReportRowModel"      , 1, 0, "PanelMDCheckReportRowModel"      );
+    qmlRegisterType<PanelWCTrendsModel              >("PanelWCTrendsModel"              , 1, 0, "PanelWCTrendsModel"              );
     qmlRegisterType<WindowSettingModel              >("WindowSettingModel"              , 1, 0, "WindowSettingModel"              );
 
 	qmlRegisterSingletonType(QUrl("qrc:/uiengine/ViewManager.qml"), "ViewManager", 1, 0, "ViewManager");
@@ -75,8 +83,10 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
+    resultExec = app.exec();
+
     qInstallMessageHandler(nullptr);
     NSDebug::stopService();
 
-    return app.exec();
+    return resultExec;
 }

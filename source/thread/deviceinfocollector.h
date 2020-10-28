@@ -16,6 +16,7 @@ class DeviceInfoCollectWorker : public QObject
 {
     Q_OBJECT
 public:
+    QHostAddress mGroupAddress;
     QUdpSocket * mpSocket = nullptr;
     quint16      mPort    = 10022;
     QHostAddress mHostAddr;

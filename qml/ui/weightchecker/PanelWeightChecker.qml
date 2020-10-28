@@ -7,310 +7,107 @@ import EnumDefine 1.0
 import "../../control/."
 
 Item {
-    property real scaledValue   : 1.0
-
-    property int  dimHeight     : 35 / scaledValue
     property int  spliterHeight : 20
     id: panel
 
-    width : 1695
+    width : 1693
     height: 1080
 
-    signal signalClickedOperateReport()
-    signal signalClickedCheckupReport();
-
-    ScrollView
+    UiScrollView
     {
         id: scrollView
-
         anchors.fill: parent
 
-        clip            : true
-        contentWidth    : parent.width
-        contentHeight   : (leftPanel.height > rightPanel.height ? leftPanel.height : rightPanel.height) + dimHeight
+        contentWidth    : parent.width > 1693 ? parent.width : 1693
+        contentHeight   : panelHistogramTrends.y + panelHistogramTrends.height + 40
 
-        Item
-        {
-            id: leftPanel
-            height              : spliterStatistics.y + spliterStatistics.height
-            anchors.top         : parent.top
-            anchors.topMargin   : panel.dimHeight
-            anchors.left        : parent.left
-            anchors.leftMargin  : 20
-            anchors.right       : rightPanel.left
-            anchors.rightMargin : 20
+        Item{
+            id : scrollContent
+            anchors.fill: parent
 
-            Rectangle
+            PanelWeightSelectDeviceProduct
             {
-                id : panelMetalManagementInfo
+                id : panelSelectDeviceProduct
+                height: 93
 
-                anchors.bottom      : spliterManInfo.top
-                anchors.bottomMargin: 0
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
+                anchors.right       : panelWeightReport.left
+                anchors.rightMargin : 20
                 anchors.left        : parent.left
-                anchors.leftMargin  : 0
+                anchors.leftMargin  : 20
                 anchors.top         : parent.top
-                anchors.topMargin   : 0
+                anchors.topMargin   : 20
 
             }
 
-            UiVSpliter{
-                id : spliterManInfo
+            Item{
+                id : panelWeightReport
+                height: 93
+                width: 439
 
-                height              : panel.spliterHeight
+                anchors.right       : parent.right
+                anchors.rightMargin : 20
                 anchors.top         : parent.top
-                anchors.topMargin   : 93
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-
-                isDisable           : true
+                anchors.topMargin   : 20
             }
 
-            Rectangle
+            PanelWeightProductSummary
             {
-                id : panelMetalCheckupHistory
+                id : panelWeightProductSummary
+                height: 418
 
-                anchors.bottom      : spliterCheckupHistory.top
-                anchors.bottomMargin: 0
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
+                anchors.top         : panelSelectDeviceProduct.bottom
+                anchors.topMargin   : 20
+                anchors.right       : panelWeightCalendar.left
+                anchors.rightMargin : 20
                 anchors.left        : parent.left
-                anchors.leftMargin  : 0
-                anchors.top         : spliterManInfo.bottom
-                anchors.topMargin   : 0
+                anchors.leftMargin  : 20
+
             }
 
-            UiVSpliter{
-                id : spliterCheckupHistory
+            PanelWeightCalendar{
+                id : panelWeightCalendar
+                height: 418
+                width: 439
 
-                height              : panel.spliterHeight
-                anchors.top         : spliterManInfo.bottom
-                anchors.topMargin   : 418
                 anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-
-                minGap              :  200
+                anchors.rightMargin : 20
+                anchors.top         : panelSelectDeviceProduct.bottom
+                anchors.topMargin   : 20
             }
 
-            Rectangle
-            {
-                id : panelMetalOperateHistory
+            RowLayout{
+                id : panelHistogramTrends
+                height: 600
+                spacing: 20
 
-                anchors.bottom      : spliterOperateHistory.top
-                anchors.bottomMargin: 0
+                anchors.top         : panelWeightProductSummary.bottom
+                anchors.topMargin   : 20
                 anchors.right       : parent.right
-                anchors.rightMargin : 0
+                anchors.rightMargin : 20
                 anchors.left        : parent.left
-                anchors.leftMargin  : 0
-                anchors.top         : spliterCheckupHistory.bottom
-                anchors.topMargin   : 0
-            }
+                anchors.leftMargin  : 20
 
-            UiVSpliter{
-                id : spliterOperateHistory
 
-                height              : panel.spliterHeight
-                anchors.top         : spliterCheckupHistory.bottom
-                anchors.topMargin   : 418
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
+                PanelWeightHistogram{
+                    Layout.preferredHeight: 1
+                    Layout.preferredWidth: 1
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
 
-                minGap              :  200
-            }
-
-            Rectangle
-            {
-                id : panelMetalStatistics
-
-                anchors.bottom      : spliterStatistics.top
-                anchors.bottomMargin: 0
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-                anchors.top         : spliterOperateHistory.bottom
-                anchors.topMargin   : 0
-            }
-
-            UiVSpliter{
-                id : spliterStatistics
-
-                height              : panel.dimHeight
-                anchors.top         : spliterOperateHistory.bottom
-                anchors.topMargin   : 344
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-
-                isDisable           : true
-            }
-        }
-
-        Item
-        {
-            id : rightPanel
-
-            width               : 439
-            height              : spliterDetectHistory.y + spliterDetectHistory.height
-            anchors.top         : parent.top
-            anchors.topMargin   : panel.dimHeight
-            anchors.right       : parent.right
-            anchors.rightMargin : 20
-
-            Rectangle
-            {
-                id : panelMetalPrintReport
-
-                anchors.bottom      : spliterPrintReport.top
-                anchors.bottomMargin: 0
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-                anchors.top         : parent.top
-                anchors.topMargin   : 0
-
-               /* onSignalClickedOperateReport :
-                {
-                    panel.signalClickedOperateReport()
                 }
 
-                onSignalClickedCheckupReport :
-                {
-                    panel.signalClickedCheckupReport();
-                }*/
+                PanelWeightTrends{
+                    Layout.preferredHeight: 1
+                    Layout.preferredWidth: 1
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
             }
 
-            UiVSpliter{
-                id : spliterPrintReport
-
-                height              : panel.spliterHeight
-                anchors.top         : parent.top
-                anchors.topMargin   : 93
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-
-                isDisable           : true
-            }
-
-            PanelWeightCalendar
-            {
-                id : panelMetalCalendar
-
-                anchors.bottom      : spliterCalendar.top
-                anchors.bottomMargin: 0
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-                anchors.top         : spliterPrintReport.bottom
-                anchors.topMargin   : 0
-            }
-
-            UiVSpliter{
-                id : spliterCalendar
-
-                height              : panel.spliterHeight
-                anchors.top         : spliterPrintReport.bottom
-                anchors.topMargin   : 418
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-
-                isDisable           : true
-            }
-
-            Rectangle
-            {
-                id : panelMetalDetectHistory
-
-                anchors.bottom      : spliterDetectHistory.top
-                anchors.bottomMargin: 0
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-                anchors.top         : spliterCalendar.bottom
-                anchors.topMargin   : 0
-            }
-
-            UiVSpliter{
-                id : spliterDetectHistory
-
-                height              : panel.dimHeight
-                anchors.top         : spliterCalendar.bottom
-                anchors.topMargin   : 778
-                anchors.right       : parent.right
-                anchors.rightMargin : 0
-                anchors.left        : parent.left
-                anchors.leftMargin  : 0
-
-                minGap              :  200
-            }
         }
     }
 
-    Rectangle{
-        id : rectUpDim
-
-        height: panel.dimHeight
-        gradient: Gradient {
-            GradientStop {
-                position: 0.351
-                color: "#131313"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#00000000"
-            }
-        }
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.top: parent.top
-        anchors.topMargin: 0
-    }
-
-    Rectangle{
-        id : rectDownDim
-
-        height: panel.dimHeight
-        gradient: Gradient {
-
-            GradientStop {
-                position: 0
-                color: "#00000000"
-            }
-
-            GradientStop {
-                position: 0.649
-                color: "#131313"
-            }
-
-
-        }
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.bottom:  parent.bottom
-        anchors.bottomMargin: 0
-    }
 }
-
 
 /*##^##
 Designer {
