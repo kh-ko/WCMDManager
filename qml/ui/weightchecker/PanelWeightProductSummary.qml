@@ -601,7 +601,7 @@ Rectangle {
         height: 42
         anchors.right: parent.right
         anchors.top: totalBar.top
-        labelText: "Tare weight"
+        labelText: qsTr("Tare weight")
         labelWidth: 105
         anchors.topMargin: 0
         anchors.rightMargin: 20

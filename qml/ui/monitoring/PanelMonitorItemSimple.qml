@@ -62,7 +62,7 @@ Item {
         UiLabelProgressBar{
             height: 42
             value02Width: 0
-            label: "Metal NG"
+            label: qsTr("Metal NG")
             value01: panel.totalCnt == 0 ? "0.00 %" : ((panel.mdNGCnt / panel.totalCnt)*100).toLocaleString(ViewManager.locale, 'f', 2) + " %"
             value01Width: 80
             value03: (panel.mdNGCnt).toLocaleString(ViewManager.locale, 'f', 0) + " pcs"
@@ -78,7 +78,7 @@ Item {
         UiLabelProgressBar{
             height: 42
             value02Width: 0
-            label: "Weight NG"
+            label: qsTr("Weight NG")
             value01:  panel.totalCnt == 0 ? "0.00 %" : ((panel.wcNGCnt / panel.totalCnt)*100).toLocaleString(ViewManager.locale, 'f', 2) + " %"
             value01Width: 80
             value03: (panel.wcNGCnt).toLocaleString(ViewManager.locale, 'f', 0) + " pcs"

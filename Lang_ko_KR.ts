@@ -789,6 +789,16 @@
         <source>current weight</source>
         <translation>현재중량</translation>
     </message>
+    <message>
+        <location filename="qml/ui/monitoring/PanelMonitorItemSimple.qml" line="65"/>
+        <source>Metal NG</source>
+        <translation>금속 NG</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/monitoring/PanelMonitorItemSimple.qml" line="81"/>
+        <source>Weight NG</source>
+        <translation>중량 NG</translation>
+    </message>
 </context>
 <context>
     <name>PanelMonitoringItem</name>
@@ -991,6 +1001,11 @@
         <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="511"/>
         <source>Etc NG</source>
         <translation>기타 NG</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="604"/>
+        <source>Tare weight</source>
+        <translation>용기 무게</translation>
     </message>
     <message>
         <location filename="qml/ui/weightchecker/PanelWeightProductSummary.qml" line="620"/>
