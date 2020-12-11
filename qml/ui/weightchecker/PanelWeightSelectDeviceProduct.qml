@@ -27,51 +27,19 @@ Rectangle {
     {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        anchors.rightMargin: 40
+        anchors.rightMargin: 20
         anchors.left: parent.left
-        anchors.leftMargin: 40
+        anchors.leftMargin: 20
 
         height: 42
-        spacing: 40
-
-        UiComboBox{
-            labelText: qsTr("Device")
-            Layout.fillHeight: true
-            Layout.preferredWidth: 1
-            Layout.fillWidth: true
-            labelWidth: 180
-
-            inputText: ("000" + model.mDNum).slice(-3) + " " + model.mDName
-            listModel: deviceListModel
-
-            ListModel{
-                id : deviceListModel
-            }
-
-            onSignalExtendList: {
-
-                deviceListModel.clear()
-
-                for(var i = 0; i < model.onCommandGetDListSize(); i ++)
-                {
-                    var value =("000" + model.onCommandGetDNum(i)).slice(-3) + " " +  model.onCommandGetDName(i);
-                    var tag =model.onCommandGetDNum(i);
-
-                    deviceListModel.append({"itemValue":value,"itemTag":tag})
-                }
-            }
-
-            onSignalEventClick: {
-                model.onCommandSelDevice(tag)
-            }
-        }
+        spacing: 20
 
         UiComboBox{
             labelText: qsTr("Product")
             Layout.fillHeight: true
             Layout.preferredWidth: 1
             Layout.fillWidth: true
-            labelWidth: 180
+            labelWidth: 120
 
             inputText: ("000" + model.mPNum).slice(-3) + " " + model.mPName
             listModel: productListModel
@@ -99,8 +67,4 @@ Rectangle {
     }
 }
 
-/*##^##
-Designer {
-    D{i:1;anchors_width:1060}
-}
-##^##*/
+

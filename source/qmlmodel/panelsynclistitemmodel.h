@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QDebug>
 #include <QDir>
+#include "source/history/def/filedef.h"
 #include "source/service/coreservice.h"
-#include "source/thread/remotehistorydatasyncer.h"
+#include "source/remote/remotesyncer.h"
 
 class PanelSyncListItemModel : public QObject
 {
@@ -20,7 +21,8 @@ class PanelSyncListItemModel : public QObject
     Q_PROPERTY(int     mRSyncError     READ getRSyncError     NOTIFY signalEventChangedRSyncError    );
 
 public:
-    RemoteHistoryDataSyncer mSyncer;
+    QThread      * mpSyncTh = nullptr;
+    RemoteSyncer * mpSyncer = nullptr;
 
     int     mDeviceNO              ;
     QString mDeviceName            ;
@@ -60,13 +62,16 @@ signals:
     void signalEventChangedState         (int     value);
     void signalEventChangedRSyncError    (int     value);
 
+    void signalCommandSync  (QString dstDir, int deviceNum, QString ip, QString syncDate);
+    void signalCommandCancel();
+
 public slots:
-    void onSignalEventProgress(float value)
+    void onProgress(int progressValue, int totalValue)
     {
-        setProgressValue(value);
+        setProgressValue((float)progressValue/(float)totalValue);
     }
 
-    void onSignalEventFinished(int error)
+    void onFinish(int error)
     {
         qDebug() << "[onSignalEventFinished]" << error;
         setState(EnumDefine::RemoteSyncState::RSYNC_STATE_FINISHED);
@@ -85,13 +90,13 @@ public:
             setState(EnumDefine::RemoteSyncState::RSYNC_STATE_SYNCING);
             qDebug() << "[PanelSyncListItemModel::onSignalEventFinished] sync date" << mLastSyncDate;
 
-            mSyncer.sync(mDeviceNO,mDeviceIP, mLastSyncDate, mDeviceNO);
+            openSyncer(QString("%1/%2").arg(FileDef::DATABASE_DIR()).arg(mDeviceNO), mDeviceNO, mDeviceIP, mLastSyncDate);
         }
     }
 
     void cancle()
     {
-        mSyncer.cancle();
+        emit signalCommandCancel();
     }
     explicit PanelSyncListItemModel(QObject *parent = nullptr):QObject(parent)
     {
@@ -106,7 +111,7 @@ public:
         if(deviceIp == "")
             setIsDisconnected(true);
 
-        QDir dir(QString("%1/database/%2").arg(QApplication::applicationDirPath()).arg(deviceNo));
+        QDir dir(QString("%1/%2").arg(FileDef::DATABASE_DIR()).arg(deviceNo));
 
         QStringList dirList = dir.entryList(QStringList() << "*-EH.txt", QDir::Files, QDir::SortFlag::Name);
 
@@ -119,9 +124,48 @@ public:
 
             setLastSyncDate(date.replace('-', ".").left(10));
         }
+    }
 
-        connect(&mSyncer, SIGNAL(signalEventProgress(float)), this, SLOT(onSignalEventProgress(float)));
-        connect(&mSyncer, SIGNAL(signalEventFinished(int  )), this, SLOT(onSignalEventFinished(int  )));
+private:
+    void openSyncer(QString dstDir, int deviceNum, QString ip, QString syncDate)
+    {
+        closeSyncer();
+
+        mpSyncTh = new QThread;
+        mpSyncer = new RemoteSyncer;
+
+        mpSyncer->moveToThread(mpSyncTh);
+        mpSyncTh->start();
+
+        connect(mpSyncTh, &QThread::finished, mpSyncer, &QObject::deleteLater);
+        connect(this, SIGNAL(signalCommandSync  (QString, int, QString, QString)), mpSyncer, SLOT(onCommandSync  (QString, int, QString, QString)));
+        connect(this, SIGNAL(signalCommandCancel(                              )), mpSyncer, SLOT(onCommandCancel(                              )));
+        connect(mpSyncer, SIGNAL(signalEventProgress(int, int)), this, SLOT(onProgress(int, int)));
+        connect(mpSyncer, SIGNAL(signalEventFinished(int     )), this, SLOT(onFinish  (int     )));
+
+        emit signalCommandSync(dstDir, deviceNum, ip, syncDate);
+
+    }
+
+    void closeSyncer()
+    {
+        if(mpSyncer != nullptr)
+        {
+            disconnect(mpSyncer, nullptr, nullptr, nullptr);
+            mpSyncer = nullptr;
+        }
+
+        if(mpSyncTh != nullptr)
+        {
+            if(mpSyncTh->isRunning())
+            {
+                mpSyncTh->quit();
+                mpSyncTh->wait();
+            }
+
+            mpSyncTh->deleteLater();
+            mpSyncTh = nullptr;
+        }
     }
 };
 #endif // PANELSYNCLISTITEMMODEL_H

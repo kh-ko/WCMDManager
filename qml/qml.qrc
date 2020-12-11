@@ -99,5 +99,14 @@
         <file>ui/weightchecker/PanelWeightTrends.qml</file>
         <file>logo2.ico</file>
         <file>ui/image_icon/novasen_logo_old.png</file>
+        <file>ui/report/PanelWCReportWindow.qml</file>
+        <file>ui/weightchecker/PanelWeightPrintReport.qml</file>
+        <file>ui/weightchecker/image_icon/edit.png</file>
+        <file>ui/weightchecker/image_icon/print.png</file>
+        <file>ui/weightchecker/PanelWeightManagementInfo.qml</file>
+        <file>ui/weightchecker/PopupWeightManagerInfoEditor.qml</file>
+        <file>ui/report/PanelWCReportContainer.qml</file>
+        <file>ui/report/PanelWCReportSummaryPage.qml</file>
+        <file>ui/PanelHistoryCopyProgress.qml</file>
     </qresource>
 </RCC>

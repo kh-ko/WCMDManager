@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelMetalDetectHistoryModel : public QObject
 {
@@ -12,8 +13,6 @@ class PanelMetalDetectHistoryModel : public QObject
     Q_PROPERTY(bool    mIsLoading      READ getIsLoading      NOTIFY signalEventChangedIsLoading     );
 
 private:
-    CoreService * mpCoreService;
-
     bool    mIsLoading     ;
 
     bool    getIsLoading     (){ return mIsLoading     ; }
@@ -29,41 +28,45 @@ public slots:
         if(mIsLoading)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDDetectHis.size();
+        return pDLoaderSvc->mDailyHis.mEH.mMDFailList.size();
     }
     Q_INVOKABLE int getPNO(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDDetectHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mMDFailList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDDetectHis[idx]->mProductNo;
+        PDSettingDto setting = pDLoaderSvc->mDailyHis.mEH.findSettingDto(pDLoaderSvc->mDailyHis.mEH.mMDFailList[idx].mPDSeq, pDLoaderSvc->mDailyHis.mEH.mMDFailList[idx].mPDHisIdx);
+
+        return setting.mProductNum;
     }
     Q_INVOKABLE QString getPName(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDDetectHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mMDFailList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDDetectHis[idx]->mProductName;
+        PDSettingDto setting = pDLoaderSvc->mDailyHis.mEH.findSettingDto(pDLoaderSvc->mDailyHis.mEH.mMDFailList[idx].mPDSeq, pDLoaderSvc->mDailyHis.mEH.mMDFailList[idx].mPDHisIdx);
+
+        return setting.mName;
     }
     Q_INVOKABLE QString getTime(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDDetectHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mMDFailList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDDetectHis[idx]->mTime;
+        return pDLoaderSvc->mDailyHis.mEH.mMDFailList[idx].mDateTime.toString(TIME_FMT);
     }
 
 public slots:
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         setIsLoading(value);
     }
@@ -71,11 +74,9 @@ public slots:
 public:
     explicit PanelMetalDetectHistoryModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading           (bool)), this, SLOT(onSignalEventChangedIsLoading           (bool)));
-
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
     }
 };
 

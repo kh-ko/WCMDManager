@@ -21,13 +21,16 @@
 #include "source/qmlmodel/panelmdcheckreportcontainermodel.h"
 #include "source/qmlmodel/panelmdcheckreportmodel.h"
 #include "source/qmlmodel/panelmdcheckreportrowmodel.h"
+#include "source/qmlmodel/panelwcreportcontainermodel.h"
+#include "source/qmlmodel/panelwcreportmodel.h"
+#include "source/qmlmodel/panelwcreportproductmodel.h"
 #include "source/qmlmodel/windowsettingmodel.h"
+#include "source/qmlmodel/panelweightmanagementinfomodel.h"
 #include "source/qmlmodel/panelwcselectdeviceproduct.h"
 #include "source/qmlmodel/panelwcproductsummary.h"
 #include "source/qmlmodel/panelwchistogram.h"
 #include "source/qmlmodel/panelwctrendsmodel.h"
 #include "source/util/mouseeventspy.h"
-#include "source/thread/dto/deviceinfodto.h"
 
 int main(int argc, char *argv[])
 {
@@ -46,8 +49,6 @@ int main(int argc, char *argv[])
 	
 	qmlRegisterUncreatableType<EnumDefine>("EnumDefine", 1, 0, "EnumDefine", "");
 
-    qRegisterMetaType<DeviceInfoDto>();
-
 
     qmlRegisterType<DialogPasswordModel             >("DialogPasswordModel"             , 1, 0, "DialogPasswordModel"             );
     qmlRegisterType<MainModel                       >("MainModel"                       , 1, 0, "MainModel"                       );
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelMetalStatisticsModel       >("PanelMetalStatisticsModel"       , 1, 0, "PanelMetalStatisticsModel"       );
     qmlRegisterType<PanelMetalDetectHistoryModel    >("PanelMetalDetectHistoryModel"    , 1, 0, "PanelMetalDetectHistoryModel"    );
     qmlRegisterType<PanelWCSelectDeviceProductModel >("PanelWCSelectDeviceProductModel" , 1, 0, "PanelWCSelectDeviceProductModel" );
+    qmlRegisterType<PanelWeightManagementInfoModel  >("PanelWeightManagementInfoModel"  , 1, 0, "PanelWeightManagementInfoModel"  );
     qmlRegisterType<PanelWCProductSummaryModel      >("PanelWCProductSummaryModel"      , 1, 0, "PanelWCProductSummaryModel"      );
     qmlRegisterType<PanelWCHistogramModel           >("PanelWCHistogramModel"           , 1, 0, "PanelWCHistogramModel"           );
     qmlRegisterType<PanelCalendarModel              >("PanelCalendarModel"              , 1, 0, "PanelCalendarModel"              );
@@ -70,6 +72,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelMDCheckReportContainerModel>("PanelMDCheckReportContainerModel", 1, 0, "PanelMDCheckReportContainerModel");
     qmlRegisterType<PanelMDCheckReportModel         >("PanelMDCheckReportModel"         , 1, 0, "PanelMDCheckReportModel"         );
     qmlRegisterType<PanelMDCheckReportRowModel      >("PanelMDCheckReportRowModel"      , 1, 0, "PanelMDCheckReportRowModel"      );
+    qmlRegisterType<PanelWCReportContainerModel     >("PanelWCReportContainerModel"     , 1, 0, "PanelWCReportContainerModel"     );
+    qmlRegisterType<PanelWCReportModel              >("PanelWCReportModel"              , 1, 0, "PanelWCReportModel"              );
+    qmlRegisterType<PanelWCReportProductModel       >("PanelWCReportProductModel"       , 1, 0, "PanelWCReportProductModel"       );
     qmlRegisterType<PanelWCTrendsModel              >("PanelWCTrendsModel"              , 1, 0, "PanelWCTrendsModel"              );
     qmlRegisterType<WindowSettingModel              >("WindowSettingModel"              , 1, 0, "WindowSettingModel"              );
 

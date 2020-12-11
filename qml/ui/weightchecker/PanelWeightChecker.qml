@@ -13,6 +13,8 @@ Item {
     width : 1693
     height: 1080
 
+    signal signalClickedReport();
+
     UiScrollView
     {
         id: scrollView
@@ -25,29 +27,48 @@ Item {
             id : scrollContent
             anchors.fill: parent
 
-            PanelWeightSelectDeviceProduct
-            {
-                id : panelSelectDeviceProduct
+            RowLayout {
+                id: panelWCTop
                 height: 93
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                spacing: 20
+                anchors.topMargin: 20
+                anchors.rightMargin: 20
+                anchors.leftMargin: 20
 
-                anchors.right       : panelWeightReport.left
-                anchors.rightMargin : 20
-                anchors.left        : parent.left
-                anchors.leftMargin  : 20
-                anchors.top         : parent.top
-                anchors.topMargin   : 20
+                PanelWeightManagementInfo{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 1
+                    Layout.preferredWidth: 942
+                }
 
-            }
 
-            Item{
-                id : panelWeightReport
-                height: 93
-                width: 439
+                PanelWeightSelectDeviceProduct
+                {
+                    id : panelSelectDeviceProduct
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 1
+                    Layout.preferredWidth: 400
 
-                anchors.right       : parent.right
-                anchors.rightMargin : 20
-                anchors.top         : parent.top
-                anchors.topMargin   : 20
+                }
+
+                PanelWeightPrintReport{
+                    id : panelWeightReport
+
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 1
+                    Layout.preferredWidth: 220
+
+                    onSignalClickedReport :
+                    {
+                        panel.signalClickedReport()
+                    }
+                }
             }
 
             PanelWeightProductSummary
@@ -55,7 +76,7 @@ Item {
                 id : panelWeightProductSummary
                 height: 418
 
-                anchors.top         : panelSelectDeviceProduct.bottom
+                anchors.top         : panelWCTop.bottom
                 anchors.topMargin   : 20
                 anchors.right       : panelWeightCalendar.left
                 anchors.rightMargin : 20
@@ -71,7 +92,7 @@ Item {
 
                 anchors.right       : parent.right
                 anchors.rightMargin : 20
-                anchors.top         : panelSelectDeviceProduct.bottom
+                anchors.top         : panelWCTop.bottom
                 anchors.topMargin   : 20
             }
 
@@ -104,6 +125,7 @@ Item {
                 }
             }
 
+
         }
     }
 
@@ -111,6 +133,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.5}
+    D{i:0;formeditorZoom:0.6600000262260437}D{i:3}
 }
 ##^##*/

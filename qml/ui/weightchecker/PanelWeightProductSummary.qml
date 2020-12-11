@@ -32,97 +32,25 @@ Rectangle {
         anchors.leftMargin: 20
     }
 
-    RowLayout{
-        id : header
-        height: 55
-        anchors.top: title.bottom
-        spacing: 20
-        anchors.topMargin: 20
-        anchors.left: parent.left
-        anchors.leftMargin: 126
-        anchors.right: tareWeightText.left
-        anchors.rightMargin: 40
-
-        UiLabel{
-            text: qsTr("Setting value")
-            Layout.preferredWidth: 100
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment  : Text.AlignVCenter
-        }
-
-        UiLabel{
-            text: qsTr("Count")
-            Layout.preferredWidth: 100
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment  : Text.AlignVCenter
-        }
-
-        UiLabel{
-            text: qsTr("Total weight")
-            Layout.preferredWidth: 100
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment  : Text.AlignVCenter
-        }
-
-        UiLabel{
-            text: qsTr("Avg weight")
-            Layout.preferredWidth: 100
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment  : Text.AlignVCenter
-        }
-
-        UiLabel{
-            text: qsTr("Rate")
-            Layout.preferredWidth: 80
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment  : Text.AlignVCenter
-        }
-
-        UiLabel{
-            text: qsTr("SD (CV)")
-            Layout.preferredWidth: 170
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment  : Text.AlignVCenter
-        }
-    }
-
     Rectangle{
         id : divider
 
         height: 2
+        anchors.top: title.bottom
+        anchors.topMargin: 75
         anchors.left: parent.left
         anchors.leftMargin: 20
         anchors.right: tareWeightText.left
         anchors.rightMargin: 20
 
         color: "#26ffffff"
-        anchors.top: header.bottom
-        anchors.topMargin: 0
     }
 
     UiBarGraph{
         id: totalBar
         height: 42
         anchors.left: parent.left
-        anchors.right: header.right
+        anchors.right: textInfo.right
         anchors.top: divider.bottom
         barColor: "#333333"
         labelText: qsTr("Total")
@@ -220,7 +148,7 @@ Rectangle {
         id: tradeBar
         height: 42
         anchors.left: parent.left
-        anchors.right: header.right
+        anchors.right: textInfo.right
         anchors.top: totalBar.bottom
         labelText: qsTr("Trade")
         anchors.rightMargin: -20
@@ -317,7 +245,7 @@ Rectangle {
         id: overBar
         height: 42
         anchors.left: parent.left
-        anchors.right: header.right
+        anchors.right: textInfo.right
         anchors.top: tradeBar.bottom
         barColor: "#f59a23"
         labelText: qsTr("Over")
@@ -411,7 +339,7 @@ Rectangle {
         id: underBar
         height: 42
         anchors.left: parent.left
-        anchors.right: header.right
+        anchors.right: textInfo.right
         anchors.top: overBar.bottom
         barColor: "#d9001b"
         labelText: qsTr("Under")
@@ -505,7 +433,7 @@ Rectangle {
         id: etcNGBar
         height: 42
         anchors.left: parent.left
-        anchors.right: header.right
+        anchors.right: textInfo.right
         anchors.top: underBar.bottom
         barColor: "#535353"
         labelText: qsTr("Etc NG")
@@ -591,6 +519,146 @@ Rectangle {
 
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment  : Text.AlignVCenter
+            }
+        }
+    }
+
+    RowLayout{
+        id : textInfo
+        anchors.top: title.bottom
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        spacing: 20
+        anchors.topMargin: 20
+        anchors.left: parent.left
+        anchors.leftMargin: 126
+        anchors.right: tareWeightText.left
+        anchors.rightMargin: 40
+
+        Item{
+            id: item1
+            Layout.preferredWidth: 100
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            UiLabel{
+                text: qsTr("Setting value")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 55
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment  : Text.AlignVCenter
+                anchors.topMargin: 0
+            }
+        }
+
+        Item{
+            Layout.preferredWidth: 100
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Rectangle{color: "#1affffff"; radius: 10; anchors.fill: parent ; anchors.rightMargin: -10;anchors.leftMargin: -10 }
+
+            UiLabel{
+                text: qsTr("Count")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 55
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment  : Text.AlignVCenter
+                anchors.topMargin: 0
+            }
+        }
+
+        Item{
+            Layout.preferredWidth: 100
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            UiLabel{
+                text: qsTr("Total weight")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 55
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment  : Text.AlignVCenter
+                anchors.topMargin: 0
+            }
+        }
+
+        Item{
+            Layout.preferredWidth: 100
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Rectangle{color: "#1affffff"; radius: 10; anchors.fill: parent ; anchors.rightMargin: -10;anchors.leftMargin: -10 }
+
+            UiLabel{
+                text: qsTr("Avg weight")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 55
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment  : Text.AlignVCenter
+                anchors.topMargin: 0
+            }
+        }
+
+        Item{
+            Layout.preferredWidth: 80
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            UiLabel{
+                text: qsTr("Rate")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 55
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment  : Text.AlignVCenter
+                anchors.topMargin: 0
+            }
+        }
+
+        Item{
+            Layout.preferredWidth: 170
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Rectangle{color: "#1affffff"; radius: 10; anchors.fill: parent ; anchors.rightMargin: -10;anchors.leftMargin: -10 }
+
+            UiLabel{
+                text: qsTr("SD (CV)")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 0
+                anchors.rightMargin: 0
+                height: 55
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment  : Text.AlignVCenter
+                anchors.topMargin: 0
             }
         }
     }

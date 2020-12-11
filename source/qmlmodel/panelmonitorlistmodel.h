@@ -5,7 +5,10 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/devsearchservice.h"
+#include "source/service/devinfoservice.h"
 #include "source/qmlmodel/panelmonitoritemmodel.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelMonitorListModel : public QObject
 {
@@ -32,20 +35,21 @@ public slots:
         return mListItem[idx];
     }
 
-    void onSignalEventCompletedDeviceSearch()
+    void onCompletedSearch()
     {
-        disconnect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
+        DISABLE_SLOT_DEVSEARCH_COMPLETED;
 
-        for(int i = 0; i < mpCoreService->mDspSearchService.mListDeviceInfo.size(); i ++)
+        pDevInfoSvc->refreshList();
+
+
+        foreach(DevInfoDto devInfo ,pDevSearchSvc->mSearcher.mDevInfoList)
         {
-            int     dNum  = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mNumber;
-            QString dName = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mName;
-            QString dIP   = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mIp;
+            devInfo.mName = pDevInfoSvc->findDevInfo(devInfo.mNumber).mName;
 
-            mListItem.append(new PanelMonitorItemModel(dNum, dName, dIP,this));
+            mListItem.append(new PanelMonitorItemModel(devInfo.mNumber, devInfo.mName, devInfo.mIp, this));
         }
 
-        int cycleTime = mpCoreService->mLSettingService.mMoniteringRefreshCycle;
+        int cycleTime = pLSettingSvc->mMoniteringRefreshCycle;
         mTimer.setInterval(cycleTime < 100 ? 100 : cycleTime);
         mTimer.start();
         connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimeTick()));
@@ -66,9 +70,9 @@ public:
     {
         mpCoreService = CoreService::getInstance();
 
-        connect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
+        pDevSearchSvc->search();
 
-        mpCoreService->mDspSearchService.search();
+        ENABLE_SLOT_DEVSEARCH_COMPLETED;
     }
     ~PanelMonitorListModel()
     {

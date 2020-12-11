@@ -4,6 +4,7 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelMetalStatisticsModel : public QObject
 {
@@ -31,7 +32,6 @@ private:
     QString mSelProductName ;
     quint64 mTotalCnt       ;
     quint64 mNGCnt          ;
-    ProductStatisticsModel listStatistics[31];
 
     bool    getIsLoading     (){ return mIsLoading     ; }
     int     getMaxDay        (){ return mMaxDay        ; }
@@ -69,28 +69,28 @@ signals:
 public slots:
     Q_INVOKABLE int onCommandGetProductListSize()
     {
-        return mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.size();
+        return pDLoaderSvc->mMonthlyStatsHis.mPDList.size();//mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.size();
     }
     Q_INVOKABLE quint64 onCommandGetProductSeqInProductList(int idx)
     {
-        if(idx < 0 || idx >= mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.size())
+        if(idx < 0 || idx >= pDLoaderSvc->mMonthlyStatsHis.mPDList.size())
             return 0;
 
-        return mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.at(idx)->mProductSeq;
+        return pDLoaderSvc->mMonthlyStatsHis.mPDList[idx].mSeq;
     }
     Q_INVOKABLE int onCommandGetProductNoInProductList(int idx)
     {
-        if(idx < 0 || idx >= mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.size())
+        if(idx < 0 || idx >= pDLoaderSvc->mMonthlyStatsHis.mPDList.size())
             return 0;
 
-        return mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.at(idx)->mProductNo;
+        return pDLoaderSvc->mMonthlyStatsHis.mPDList[idx].mNum;
     }
     Q_INVOKABLE QString onCommandGetProductNameInProductList(int idx)
     {
-        if(idx < 0 || idx >= mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.size())
+        if(idx < 0 || idx >= pDLoaderSvc->mMonthlyStatsHis.mPDList.size())
             return 0;
 
-        return mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.at(idx)->mProductName;
+        return pDLoaderSvc->mMonthlyStatsHis.mPDList[idx].mName;
     }
 
     Q_INVOKABLE void onCommandSelProduct(quint64 seq)
@@ -98,19 +98,16 @@ public slots:
         if(mIsLoading)
             return;
 
-        ProductStatisticsModel * pModel = mpCoreService->mDataLoader.mProductStatistics.findMonthStatistcs(seq);
-
-        if(pModel == nullptr)
-            return;
+        PDStatsDto stats = pDLoaderSvc->mMonthlyStatsHis.findStatsDto(seq);
 
         mSelProductSeq = seq;
 
-        UpdateDailyStatistics();
+        emit signalEventCompletedUpdate();
 
-        setSelProductNo(pModel->mProductNo);
-        setSelProductName(pModel->mProductName);
-        setTotalCnt(pModel->mTotalCnt);
-        setNGCnt(pModel->mMDDetectCnt);
+        setSelProductNo  (stats.mNum);
+        setSelProductName(stats.mName);
+        setTotalCnt      (stats.mMDTotalCnt);
+        setNGCnt         (stats.mMDFailCnt);
     }
 
     Q_INVOKABLE qint64 onCommandGetTotalCnt(int day)
@@ -121,7 +118,9 @@ public slots:
         if(day < 1 || day > 31)
             return 0;
 
-        return listStatistics[day - 1].mTotalCnt;
+        PDStatsDto stats = (pDLoaderSvc->mMonthlyStatsHis.mDayList[day - 1].findStatsDto(mSelProductSeq));
+
+        return stats.mMDTotalCnt;
     }
 
     Q_INVOKABLE qint64 onCommandGetDetectCnt(int day)
@@ -132,32 +131,34 @@ public slots:
         if(day < 1 || day > 31)
             return 0;
 
-        return listStatistics[day - 1].mMDDetectCnt;
+        PDStatsDto stats = (pDLoaderSvc->mMonthlyStatsHis.mDayList[day - 1].findStatsDto(mSelProductSeq));
+
+        return stats.mMDFailCnt;
     }
 
 public slots:
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         setIsLoading(value);
 
         if(value == true)
             return;
 
-         if(mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics.size() < 1)
-         {
-             reset();
-             emit signalEventCompletedUpdate();
-             return;
-         }
-
-         onCommandSelProduct(mpCoreService->mDataLoader.mProductStatistics.mListMonthStatistics[0]->mProductSeq);
+        if(pDLoaderSvc->mMonthlyStatsHis.mPDList.size() < 1)
+        {
+            onCommandSelProduct(0);
+        }
+        else
+        {
+            onCommandSelProduct(pDLoaderSvc->mMonthlyStatsHis.mPDList[0].mSeq);
+        }
     }
 
-    void onSignalEventChangedSelectDate()
+    void onChangedSelectDate()
     {
-        setYear(mpCoreService->mLSettingService.mSelectedYear);
-        setMonth(mpCoreService->mLSettingService.mSelectedMonth);
-        setDay(mpCoreService->mLSettingService.mSelectedDay);
+        setYear (pLSettingSvc->mSelectedDate.year());
+        setMonth(pLSettingSvc->mSelectedDate.month());
+        setDay  (pLSettingSvc->mSelectedDate.day());
 
         int maxDay = 1;
 
@@ -184,60 +185,13 @@ public slots:
         setMaxDay(maxDay);
     }
 public:
-    ProductStatisticsModel *findStatisticsBySeq(QList<ProductStatisticsModel *> * pList, quint64 seq)
-    {
-        for(int i = 0; i < pList->size(); i ++)
-        {
-            ProductStatisticsModel * pModel = pList->at(i);
-
-            if(pModel->mProductSeq == seq)
-                return pModel;
-        }
-        return nullptr;
-    }
-
-    void UpdateDailyStatistics()
-    {
-        reset();
-
-        for(int i = 0; i < 31; i ++)
-        {
-            QList<ProductStatisticsModel *> * pList = &mpCoreService->mDataLoader.mProductStatistics.mListDailyStatistics[i];
-
-            ProductStatisticsModel * pModel = findStatisticsBySeq(pList, mSelProductSeq);
-
-            if(pModel == nullptr)
-                continue;
-
-            listStatistics[i].setValue(pModel);
-        }
-
-        emit signalEventCompletedUpdate();
-    }
-
-    void reset()
-    {
-        setSelProductNo  (0);
-        setSelProductName("");
-        setTotalCnt      (0);
-        setNGCnt         (0);
-
-        for(int i = 0; i < 31; i ++)
-        {
-            listStatistics[i].reset();
-        }
-    }
-
     explicit PanelMetalStatisticsModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_DATE;
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading (bool)), this, SLOT(onSignalEventChangedIsLoading (bool)));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedSelectDate(    )), this, SLOT(onSignalEventChangedSelectDate(    )));
-        reset();
-
-        onSignalEventChangedSelectDate();
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedSelectDate();
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
     }
 };
 #endif // PANELMETALSTATISTICSMODEL_H

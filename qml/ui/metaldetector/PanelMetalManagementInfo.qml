@@ -62,7 +62,7 @@ Rectangle {
                 anchors.leftMargin   : 0
 
                 color : "#FFFFFF"
-                text  : ("000" + model.mDNum).slice(-3)
+                text  : ("000" + model.mDNum).slice(-3) + " " + model.mDName
             }
         }
 
@@ -307,6 +307,8 @@ Rectangle {
 
         onSignalEventClicked: {
             deviceListModel.clear()
+
+            model.onCommandDlistRefresh();
 
             for(var i = 0; i < model.onCommandGetDListSize(); i ++)
             {

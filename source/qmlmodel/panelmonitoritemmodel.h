@@ -3,7 +3,10 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QUdpSocket>
 
+#include "source/remote/strpacket.h"
+#include "source/remote/dto/enum/remoteenumdef.h"
 #include "source/service/coreservice.h"
 
 class PanelMonitorItemModel : public QObject
@@ -258,12 +261,12 @@ public:
                 return;
             }
 
-            StPacket packet;
+            StRPacket packet;
 
-            packet.mFuncCode = EnumDefine::FuncCode::FUNC_CODE_MONITOR_STATUS;
+            packet.mFuncCode = RemoteEnumDef::RFUNC_CODE_MONITOR_STATUS;
             packet.mSize     = 0;
 
-            mpSock->writeDatagram((char *)&packet, sizeof(StPacket), mHostAddr, 10026);
+            mpSock->writeDatagram((char *)&packet, sizeof(StRPacket), mHostAddr, 10026);
         }
         else if(mSentChecker > 3)
         {
@@ -272,19 +275,6 @@ public:
         }
 
         mSentChecker++;
-    }
-
-    void updateDeviceInfo(DeviceInfoDto dInfoDto)
-    {
-        //mIp = dInfoDto.mIp;
-        //setDeviceNum(dInfoDto.mDeviceNum);
-        setDeviceName(dInfoDto.mDeviceName);
-
-        if(mIp != dInfoDto.mIp)
-        {
-            mIp = dInfoDto.mIp;
-            onSockError(QAbstractSocket::SocketError::NetworkError);
-        }
     }
 
     explicit PanelMonitorItemModel(QObject *parent = nullptr):QObject(parent)

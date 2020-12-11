@@ -49,6 +49,8 @@ Item {
             if(panelmodel.mIsSearch)
                 true;
 
+            panelmodel.onCommandDlistRefresh();
+
             for(var i = 0; i < panelmodel.onCommandGetDlistSize(); i ++)
             {
                 listModel.append({"dataIdx" : i})

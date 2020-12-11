@@ -2,68 +2,132 @@
 #define DATALOADERSERVICE_H
 
 #include <QObject>
+#include "source/history/def/filedef.h"
+#include "source/history/dailyhistory.h"
+#include "source/history/monthlystatshistory.h"
+#include "source/service/localsettingservice.h"
+#include "source/service/util/svcconnectutil.h"
 
-#include "source/model/productsettingmodel.h"
-#include "source/model/eventitemmodel.h"
-#include "source/model/mdcheckupitemmodel.h"
-#include "source/model/mddetectitemmodel.h"
-#include "source/model/weightcheckermodel.h"
-#include "source/util/fileloaderthread.h"
-#include "source/globaldef/EnumDefine.h"
-#include "source/service/productstatisticsservice.h"
+#define pDLoaderSvc DataLoaderService::getInstance()
 
 class DataLoaderService : public QObject
 {
     Q_OBJECT
 public:
+    static DataLoaderService * getInstance()
+    {
+        static DataLoaderService  *pSelf = nullptr;
 
-    FileLoaderThread   mFileLoader;
-    QStringList mAllFileList;
-    QString mAppDirPath;
-    int mDeviceNumber= -1;
-    int mYear        = -1;
-    int mMonth       = -1;
-    int mDay         = -1;
-    int mProcDay     = 1;
+        if(pSelf == nullptr)
+        {
+            pSelf = new DataLoaderService();
+        }
 
-    bool mIsLoading                 = false;
-    ProductStatisticsService mProductStatistics;
-    WeightCheckerModel           mWCModel;
-    QList<ProductSettingModel *> mListProductHis;
-    QList<MDCheckupItemModel *>  mListMDCheckupHis;
-    QList<MDDetectItemModel *>   mListMDDetectHis;
+        return pSelf;
+    }
 
-    void setIsLoading               (bool value){ if(mIsLoading == value) return; mIsLoading = value; emit signalEventChangedIsLoading(mIsLoading); }
+    bool                mIsRunning      = false;
+    bool                mIsLoading      = false;
+    int                 mDevNum                ;
+    QDate               mDate                  ;
+    DailyHistory        mDailyHis              ;
+    MonthlyStatsHistory mMonthlyStatsHis       ;
+
+    explicit DataLoaderService(QObject *parent = nullptr) : QObject(parent)
+    {
+        connect(&mDailyHis, SIGNAL(signalEventLoadCompleted(int)), this, SLOT(onDailyLoadComplete(int)));
+        connect(&mMonthlyStatsHis, SIGNAL(signalEventLoadCompleted()), this, SLOT(onMonthlyStatsLoadComplete()));
+    }
+
+    ~DataLoaderService()
+    {
+        stop();
+    }
+
+    void start(int devNum, QDate date)
+    {
+        qDebug() << "[DataLoaderService::start]";
+
+        mIsRunning = true;
+
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_DEV;
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_DATE;
+
+        load(devNum, date);
+    }
+
+    void load(int devNum, QDate date)
+    {
+        if(mIsRunning == false)
+            return;
+
+        qDebug() << "[DataLoaderService::load]";
+
+        mDailyHis.clear();
+        mMonthlyStatsHis.clear();
+
+        mDevNum = devNum;
+        mDate = date;
+
+        setIsLoading(true);
+        mDailyHis.load(devNum, QString("%1/%2").arg(FileDef::DATABASE_DIR()).arg(devNum), date.toString(DATE_FILE_NAME_FMT));
+    }
+
+    void stop()
+    {
+        qDebug() << "[DataLoaderService::stop]";
+
+        setIsLoading(false);
+
+        mIsRunning = false;
+
+        mDailyHis.clear();
+        mMonthlyStatsHis.clear();
+    }
+
 signals:
-    void signalEventChangedIsLoading               (bool value);
-
-public:
-    void loadData(int dNumber, int year, int month, int day, bool reLoad = false);
-
-signals:
-    void signalCommandReadProductStatistics(QString path, QString fileName);
-    void signalCommandReadProductHistory(QString path, QString fileName);
-    void signalCommandReadEventHistory(QString path, QString fileName, int lineCnt);
+    void signalEventLoadComplete();
+    void signalEventChangedIsLoading(bool value);
 
 public slots:
-    void onSignalReadProductStatistics(int error, QString content);
-    void onSignalReadProductHistory(int error, QString content);
-    void onSignalReadEventHistory(int error, QStringList content);
-    void onSignalReadEofEventHistory();
+    void onDailyLoadComplete(int err)
+    {
+        qDebug() << "[DataLoaderService::onDailyLoadComplete]";
+        qDebug() << "[debug]getListSize : size = " << pDLoaderSvc->mDailyHis.mPS.mPSList.size();
+
+        mMonthlyStatsHis.load(mDevNum, QString("%1/%2").arg(FileDef::DATABASE_DIR()).arg(mDevNum), mDate);
+    }
+
+    void onMonthlyStatsLoadComplete()
+    {
+        qDebug() << "[DataLoaderService::onMonthlyStatsLoadComplete]";
+
+        setIsLoading(false);
+    }
+
+    void onChangedSelectDate()
+    {
+        qDebug() << "[DataLoaderService::onChangedSelectDate]" << pLSettingSvc->mSelectedDate.toString(DATE_FILE_NAME_FMT);
+
+        load(pLSettingSvc->mDeviceNumber, pLSettingSvc->mSelectedDate);
+    }
+    void onChangedDeviceNumber()
+    {
+        qDebug() << "[DataLoaderService::onChangedDeviceNumber]";
+
+        load(pLSettingSvc->mDeviceNumber, pLSettingSvc->mSelectedDate);
+    }
 
 private:
-    QString getPath();
-    QString getProductStatisticsFileName();
-    QString getEventHistoryFileName();
-    QString getProductHistoryFileName();
-    bool    isMetalCheckupEvent(QString value);
-    bool    isMetalDetectEvent(QString value);
-    bool    isWeightCheckerEvent(QString value);
-    void    reset();
-public:
-    explicit DataLoaderService(QObject *parent = nullptr);
+    void setIsLoading(bool value)
+    {
+        if(mIsLoading == value)
+            return;
 
+        mIsLoading = value;
 
+        emit signalEventChangedIsLoading(mIsLoading);
+    }
 };
 
 #endif // DATALOADERSERVICE_H

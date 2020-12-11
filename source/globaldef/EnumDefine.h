@@ -105,7 +105,7 @@ public:
 
     enum FuncCode{
         FUNC_CODE_INFO                  = 1,
-        FUNC_CODE_RSYNC                 = 2,
+        FUNC_CODE_RSYNC_LIST            = 2,
         FUNC_CODE_RSYNC_INIT            = 3,
         FUNC_CODE_RSYNC_ALREADY_SYNCING = 4,
         FUNC_CODE_RSYNC_FILE_INFO       = 5,

@@ -5,6 +5,8 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/devinfoservice.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelMetalManagementInfoModel : public QObject
 {
@@ -69,41 +71,40 @@ signals:
     void signalEventChangedMDCheckupCycle(QString value);
 
 public slots:
-    Q_INVOKABLE int     onCommandGetDListSize(){ return mpCoreService->mLSettingService.mDeviceListModel.size();}
-    Q_INVOKABLE int     onCommandGetDNum(int idx){ return mpCoreService->mLSettingService.mDeviceListModel.at(idx)->mNumber;}
-    Q_INVOKABLE QString onCommandGetDName(int idx){ return mpCoreService->mLSettingService.mDeviceListModel.at(idx)->mName;}
+    Q_INVOKABLE void    onCommandDlistRefresh()   { pDevInfoSvc->refreshList();         }
+    Q_INVOKABLE int     onCommandGetDListSize()   { return pDevInfoSvc->mDevList.size();}
+    Q_INVOKABLE int     onCommandGetDNum(int idx) { return pDevInfoSvc->mDevList[idx].mNumber;}
+    Q_INVOKABLE QString onCommandGetDName(int idx){ return pDevInfoSvc->mDevList[idx].mName;}
     Q_INVOKABLE void    onCommandSetManagementInfo(QString dNum, QString dName, QString company, QString department, QString position, QString name, QString limitCriteriaFe, QString limitCriteriaSus, QString haccp, QString checkupcycle)
     {
-        mpCoreService->mLSettingService.setDeviceInfo(dNum.toInt(), dName);
-        mpCoreService->mLSettingService.setDeviceNumber(dNum.toInt());
-        mpCoreService->mLSettingService.setManagerSetting(company, department, position, name);
-        mpCoreService->mLSettingService.setMetalDetectorSetting(limitCriteriaFe, limitCriteriaSus, haccp, checkupcycle);
+        pDevInfoSvc->editDevInfo(dNum.toInt(), dName);
+        pLSettingSvc->setDeviceNumber(dNum.toInt());
+        pLSettingSvc->setMDManagerSetting(company, department, position, name);
+        pLSettingSvc->setMetalDetectorSetting(limitCriteriaFe, limitCriteriaSus, haccp, checkupcycle);
     }
 public slots:
-    void onSignalEventChangedDeviceNumber()
+    void onChangedDeviceNumber()
     {
-        setDNum(mpCoreService->mLSettingService.mDeviceNumber);
+        pDevInfoSvc->refreshList();
 
-        DeviceInfoModel * pInfo = mpCoreService->mLSettingService.mDeviceListModel.findDeviceInfo(mpCoreService->mLSettingService.mDeviceNumber);
+        setDNum(pLSettingSvc->mDeviceNumber);
 
-        if(pInfo != nullptr)
-        {
-            setDName(pInfo->mName);
-        }
+        DevInfoDto devInfo = pDevInfoSvc->findDevInfo(pLSettingSvc->mDeviceNumber);
+        setDName(devInfo.mName);
     }
-    void onSignalEventChangedManagerSetting()
+    void onChangedManagerSetting()
     {
-        setCompany   (mpCoreService->mLSettingService.mManagerSettingModel.mCompany    );
-        setDepartment(mpCoreService->mLSettingService.mManagerSettingModel.mDepartment );
-        setPosition  (mpCoreService->mLSettingService.mManagerSettingModel.mPosition   );
-        setName      (mpCoreService->mLSettingService.mManagerSettingModel.mName       );
+        setCompany   (pLSettingSvc->mManagerSettingModel.mCompany      );
+        setDepartment(pLSettingSvc->mManagerSettingModel.mMDDepartment );
+        setPosition  (pLSettingSvc->mManagerSettingModel.mMDPosition   );
+        setName      (pLSettingSvc->mManagerSettingModel.mMDName       );
     }
-    void onSignalEventChangedMetalDetectorSetting()
+    void onChangedMetalDetectorSetting()
     {
-        setLimCriteriaFe (mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaFe );
-        setLimCriteriaSus(mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaSus);
-        setHACCP         (mpCoreService->mLSettingService.mMDSettingModel.mHACCP           );
-        setMDCheckupCycle(mpCoreService->mLSettingService.mMDSettingModel.mCheckupCycle    );
+        setLimCriteriaFe (pLSettingSvc->mMDSettingModel.mLimitCriteriaFe );
+        setLimCriteriaSus(pLSettingSvc->mMDSettingModel.mLimitCriteriaSus);
+        setHACCP         (pLSettingSvc->mMDSettingModel.mHACCP           );
+        setMDCheckupCycle(pLSettingSvc->mMDSettingModel.mCheckupCycle    );
     }
 
 public:
@@ -111,13 +112,13 @@ public:
     {
         mpCoreService = CoreService::getInstance();
 
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedDeviceNumber        ()), this, SLOT(onSignalEventChangedDeviceNumber        ()));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedManagerSetting      ()), this, SLOT(onSignalEventChangedManagerSetting      ()));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedMetalDetectorSetting()), this, SLOT(onSignalEventChangedMetalDetectorSetting()));
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_DEV;
+        ENABLE_SLOT_LSETTING_CHANGED_MAN_SETTING;
+        ENABLE_SLOT_LSETTING_CHANGED_MD_SETTING;
 
-        onSignalEventChangedDeviceNumber        ();
-        onSignalEventChangedManagerSetting      ();
-        onSignalEventChangedMetalDetectorSetting();
+        onChangedDeviceNumber        ();
+        onChangedManagerSetting      ();
+        onChangedMetalDetectorSetting();
     }
 };
 

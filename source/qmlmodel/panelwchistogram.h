@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QDebug>
 
+#include "source/service/util/svcconnectutil.h"
 #include "source/service/coreservice.h"
 
 class PanelWCHistogramModel : public QObject
@@ -59,7 +60,7 @@ public slots:
     {
         return mYGab;
     }
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         if(value == false)
         {
@@ -67,30 +68,20 @@ public slots:
         }
     }
 
-    void onSignalEventChangedProductSeq()
+    void onChangedWCProductSeq()
     {
         loadData(-1, -1);
     }
 public:
     void loadData(int xMin, int xMax)
     {
-        WeightCheckerProduct * pWCProduct = nullptr;
-
-        quint64 mPSeq = mpCoreService->mLSettingService.mWCProductSeq;
-
-        pWCProduct = mpCoreService->mDataLoader.mWCModel.findProductBySeq(mPSeq);
+        PDSettingDto setting = pDLoaderSvc->mDailyHis.mPH.findSettingDto(pLSettingSvc->mWCProductSeq);
 
         if(xMin == -1 || xMax == -1)
         {
-            if(pWCProduct == nullptr)
-            {
-                mXMin = 0; mXMax = 0;
-            }
-            else
-            {
-                mXMin = pWCProduct->mUnderSettingValue;
-                mXMax = pWCProduct->mOverSettingValue ;
-            }
+            mXMin = setting.mWCUnderWeight;//pWCProduct->mUnderSettingValue;
+            mXMax = setting.mWCOverWeight ;//pWCProduct->mOverSettingValue ;
+
         }
         else
         {
@@ -107,14 +98,11 @@ public:
 
         memset(mListYValue, 0x00, sizeof(int) * 12);
 
-        if(pWCProduct != nullptr)
-        {
-            for(int i = 0; i < pWCProduct->mListTotalWeightValue.size(); i ++)
-            {
-                int value = pWCProduct->mListTotalWeightValue[i];
+        PDWCStatsDto wcStats = pDLoaderSvc->mDailyHis.mEH.findPDWCStatsDto(setting.mSeq);
 
-                insertYValue(value);
-            }
+        foreach(int value, wcStats.mTotalTrends)
+        {
+            insertYValue(value);
         }
 
         int yMax = 0;
@@ -154,12 +142,11 @@ public:
 
     explicit PanelWCHistogramModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_WC_PD;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading   (bool)), this, SLOT(onSignalEventChangedIsLoading (bool)));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedWCProductSeq(    )), this, SLOT(onSignalEventChangedProductSeq(    )));
-
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
+        onChangedWCProductSeq();
     }
 };
 

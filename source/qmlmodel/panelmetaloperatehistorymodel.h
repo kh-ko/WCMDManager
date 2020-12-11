@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelMetalOperateHistoryModel : public QObject
 {
@@ -27,94 +28,67 @@ public slots:
         if(mIsLoading)
             return 0;
 
-        QList<ProductStatisticsModel *> * pList = mpCoreService->mDataLoader.mProductStatistics.getStatistics(mpCoreService->mDataLoader.mDay);
-
-        if(pList == nullptr)
-            return 0;
-
-        return pList->size();
+        return pDLoaderSvc->mDailyHis.mPS.mPSList.size();
     }
     Q_INVOKABLE int getPNO(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        QList<ProductStatisticsModel *> * pList = mpCoreService->mDataLoader.mProductStatistics.getStatistics(mpCoreService->mDataLoader.mDay);
-
-        if(pList == nullptr)
+        if(pDLoaderSvc->mDailyHis.mPS.mPSList.size() <= idx)
             return 0;
 
-        if(pList->size() <= idx)
-            return 0;
-
-        return pList->at(idx)->mProductNo;
+        return pDLoaderSvc->mDailyHis.mPS.mPSList[idx].mNum;
     }
     Q_INVOKABLE QString getPName(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        QList<ProductStatisticsModel *> * pList = mpCoreService->mDataLoader.mProductStatistics.getStatistics(mpCoreService->mDataLoader.mDay);
-
-        if(pList == nullptr)
+        if(pDLoaderSvc->mDailyHis.mPS.mPSList.size() <= idx)
             return 0;
 
-        if(pList->size() <= idx)
-            return 0;
-
-        return pList->at(idx)->mProductName;
+        return pDLoaderSvc->mDailyHis.mPS.mPSList[idx].mName;
     }
     Q_INVOKABLE QString getLimCriteriaFe()
     {
-        return mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaFe;
+        return pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
     }
     Q_INVOKABLE QString getLimCriteriaSus()
     {
-        return mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaSus;
+        return pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
     }
     Q_INVOKABLE qint64 getTotalCnt(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        QList<ProductStatisticsModel *> * pList = mpCoreService->mDataLoader.mProductStatistics.getStatistics(mpCoreService->mDataLoader.mDay);
-
-        if(pList == nullptr)
+        if(pDLoaderSvc->mDailyHis.mPS.mPSList.size() <= idx)
             return 0;
 
-        if(pList->size() <= idx)
-            return 0;
-
-        return pList->at(idx)->mTotalCnt;
+        return pDLoaderSvc->mDailyHis.mPS.mPSList[idx].mMDTotalCnt;
     }
     Q_INVOKABLE qint64 getNGCnt(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        QList<ProductStatisticsModel *> * pList = mpCoreService->mDataLoader.mProductStatistics.getStatistics(mpCoreService->mDataLoader.mDay);
-
-        if(pList == nullptr)
+        if(pDLoaderSvc->mDailyHis.mPS.mPSList.size() <= idx)
             return 0;
 
-        if(pList->size() <= idx)
-            return 0;
-
-        return pList->at(idx)->mMDDetectCnt;
+        return pDLoaderSvc->mDailyHis.mPS.mPSList[idx].mMDFailCnt;
     }
 public slots:
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         setIsLoading(value);
     }
 public:
     explicit PanelMetalOperateHistoryModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading           (bool)), this, SLOT(onSignalEventChangedIsLoading           (bool)));
-
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
     }
 };
 #endif // PANELMETALOPERATEHISTORYMODEL_H

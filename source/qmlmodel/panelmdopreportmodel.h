@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QDate>
 #include <QDebug>
-#include "source/service/coreservice.h"
+
 #include "source/qmlmodel/panelmdopreportrowmodel.h"
 
 class PanelMDOPReportModel : public QObject
@@ -13,18 +13,63 @@ class PanelMDOPReportModel : public QObject
     Q_PROPERTY(QString mStrDate READ getStrDate NOTIFY signalEventChangedStrDate);
 
 public:
-    CoreService * mpCoreService;
-
     int mFirstPageRowCnt = 10;
     int mPageRowCnt      = 17;
     QList<PanelMDOPReportRowModel *> mListRow;
 
     QString mStrDate;
-    int     mYear;
-    int     mMonth;
-    int     mDay;
+    DailyHistory mDailyHis;
+
     QStringList mListStrWeekOfDayKor;
     QStringList mListStrMonthEng;
+
+    explicit PanelMDOPReportModel(QObject *parent = nullptr):QObject(parent)
+    {
+        mListStrWeekOfDayKor.append("월");
+        mListStrWeekOfDayKor.append("화");
+        mListStrWeekOfDayKor.append("수");
+        mListStrWeekOfDayKor.append("목");
+        mListStrWeekOfDayKor.append("금");
+        mListStrWeekOfDayKor.append("토");
+        mListStrWeekOfDayKor.append("일");
+
+        mListStrMonthEng.append("January");
+        mListStrMonthEng.append("February");
+        mListStrMonthEng.append("March");
+        mListStrMonthEng.append("April");
+        mListStrMonthEng.append("May");
+        mListStrMonthEng.append("June");
+        mListStrMonthEng.append("July");
+        mListStrMonthEng.append("August");
+        mListStrMonthEng.append("September");
+        mListStrMonthEng.append("October");
+        mListStrMonthEng.append("November");
+        mListStrMonthEng.append("December");
+
+        connect(&mDailyHis, SIGNAL(signalEventLoadCompleted(int)), this, SLOT(onLoaded(int)));
+    }
+
+    void load(int devNum, QDate date)
+    {
+        mDailyHis.load(devNum, QString("%1/%2").arg(FileDef::DATABASE_DIR()).arg(devNum), date.toString(DATE_FILE_NAME_FMT));
+
+        QString weekOfDay = mListStrWeekOfDayKor[date.dayOfWeek() - 1];
+
+        if(pLSettingSvc->mLanguage == EnumDefine::Language::LANG_KOR){
+            mStrDate = QString("%1 년 %2 월 %3 일 %4요일").arg(QString::number(date.year()).rightJustified(4, '0'))
+                                                        .arg(QString::number(date.month()).rightJustified(2, '0'))
+                                                        .arg(QString::number(date.day()).rightJustified(2, '0'))
+                                                        .arg(weekOfDay);
+        }
+        else
+        {
+            QString month = mListStrMonthEng[date.month() - 1];
+
+            mStrDate = QString("%1 %2th, %3").arg(month)
+                                             .arg(QString::number(date.day()).rightJustified(2, '0'))
+                                             .arg(QString::number(date.year()).rightJustified(4, '0'));
+        }
+    }
 
     QString getStrDate(){ return mStrDate; }
 
@@ -32,6 +77,7 @@ public:
 
 signals:
     void signalEventChangedStrDate(QString value);
+    void signalEventLoadCompleted();
 
 public slots:
     Q_INVOKABLE int onCommandGetPageCnt()
@@ -110,91 +156,36 @@ public slots:
             mListRow.removeAt(absIdx);
     }
 
-public:
-    void setValue(QString fileName, QString value)
+    void onLoaded(int err)
     {
-        mListRow.clear();
-
-        QString date = fileName.split("-PS.txt")[0];
-
-        mYear  = date.split("-")[0].toInt();
-        mMonth = date.split("-")[1].toInt();
-        mDay   = date.split("-")[2].toInt();
-        QDate   temp(mYear, mMonth, mDay);
-        QString weekOfDay = mListStrWeekOfDayKor[temp.dayOfWeek() - 1];
-
-        if(mpCoreService->mLSettingService.mLanguage == EnumDefine::Language::LANG_KOR){
-            mStrDate = QString("%1 년 %2 월 %3 일 %4요일").arg(QString::number(mYear).rightJustified(4, '0'))
-                                                        .arg(QString::number(mMonth).rightJustified(2, '0'))
-                                                        .arg(QString::number(mDay).rightJustified(2, '0'))
-                                                        .arg(weekOfDay);
-        }
-        else
+        foreach(PDStatsDto stats, mDailyHis.mPS.mPSList)
         {
-            QString month = mListStrMonthEng[mMonth - 1];
-
-            mStrDate = QString("%1 %2th, %3").arg(month)
-                                             .arg(QString::number(mDay).rightJustified(2, '0'))
-                                             .arg(QString::number(mYear).rightJustified(4, '0'));
-        }
-
-        ProductStatisticsModel tempModel;
-        QStringList rowList = value.split("\n");
-
-        for(int i = 0; i < rowList.size(); i ++)
-        {
-            if(rowList.at(i) == nullptr || rowList.at(i).length() < 1)
-                continue;
-
             PanelMDOPReportRowModel * row = new PanelMDOPReportRowModel(this);
-            tempModel.setValue(rowList.at(i));
 
-            row->mPno = QString::number(tempModel.mProductNo).rightJustified(3,'0');
-            row->mPName = tempModel.mProductName;
-            row->mTotalCnt = QString("%L1").arg(tempModel.mTotalCnt);
-            row->mNGCnt = QString("%L1").arg(tempModel.mMDDetectCnt);
-            row->mLimitFe = mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaFe;
-            row->mLimitSus = mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaSus;
+            row->mPno       = QString::number(stats.mNum).rightJustified(3,'0');
+            row->mPName     = stats.mName;
+            row->mTotalCnt  = QString("%L1").arg(stats.mMDTotalCnt);
+            row->mNGCnt     = QString("%L1").arg(stats.mMDFailCnt);
+            row->mLimitFe   = pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
+            row->mLimitSus  = pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
 
-            if(tempModel.mTotalCnt == 0)
+            if(stats.mMDTotalCnt == 0)
             {
                 row->mNGRate = "0.00";
             }
             else
             {
-                float fValue = (float)tempModel.mMDDetectCnt/tempModel.mTotalCnt;
+                float fValue = (float)stats.mMDFailCnt/stats.mMDTotalCnt;
                 //row->mNGRate = QString::number(fValue * 100, 'f', 2);
                 row->mNGRate = QString("%L1").arg(fValue, 0, 'f', 2);
             }
             row->setIsRemoved(false);
+
             mListRow.append(row);
         }
+
+        emit signalEventLoadCompleted();
     }
 
-    explicit PanelMDOPReportModel(QObject *parent = nullptr):QObject(parent)
-    {
-        mListStrWeekOfDayKor.append("월");
-        mListStrWeekOfDayKor.append("화");
-        mListStrWeekOfDayKor.append("수");
-        mListStrWeekOfDayKor.append("목");
-        mListStrWeekOfDayKor.append("금");
-        mListStrWeekOfDayKor.append("토");
-        mListStrWeekOfDayKor.append("일");
-
-        mListStrMonthEng.append("January");
-        mListStrMonthEng.append("February");
-        mListStrMonthEng.append("March");
-        mListStrMonthEng.append("April");
-        mListStrMonthEng.append("May");
-        mListStrMonthEng.append("June");
-        mListStrMonthEng.append("July");
-        mListStrMonthEng.append("August");
-        mListStrMonthEng.append("September");
-        mListStrMonthEng.append("October");
-        mListStrMonthEng.append("November");
-        mListStrMonthEng.append("December");
-
-        mpCoreService = CoreService::getInstance();
-    }
 };
 #endif // PANELMDOPREPORTMODEL_H

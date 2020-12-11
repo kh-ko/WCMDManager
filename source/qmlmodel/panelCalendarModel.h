@@ -4,7 +4,10 @@
 #include <QObject>
 #include <QDebug>
 
-#include "source/service/coreservice.h"
+#include "source/history/def/filedef.h"
+#include "source/service/dataloaderservice.h"
+#include "source/service/localsettingservice.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelCalendarModel : public QObject
 {
@@ -15,8 +18,6 @@ class PanelCalendarModel : public QObject
 
 
 private:
-    CoreService * mpCoreService;
-
     int mYear ;
     int mMonth;
     int mDay  ;
@@ -43,45 +44,25 @@ signals:
 public slots:
     Q_INVOKABLE bool onCommandIsVaildDate(int year, int month, int day)
     {
-        if(mpCoreService->mDataLoader.mIsLoading)
+        if(pDLoaderSvc->mIsLoading)
             return false;
 
-        int calDateNumber = year * 10000 + month * 100 + day;
-
-        for(int i = 0; i < mpCoreService->mDataLoader.mAllFileList.size(); i++)
-        {
-            QString date = mpCoreService->mDataLoader.mAllFileList.at(i).split(".")[0];
-
-            if(date.contains("-") == false)
-                continue;
-
-            QStringList temp = date.split("-");
-
-            if(temp.size() != 4)
-                continue;
-
-            int dateNumber  = temp[0].toInt() * 10000 + temp[1].toInt() * 100 + temp[2].toInt();
-
-            if(dateNumber == calDateNumber)
-                return true;
-
-            if(calDateNumber < dateNumber)
-                break;
-        }
-
-        return false;
+        QString strDate = QString("%1-%2-%3").arg(QString::number(year).rightJustified(4,'0')).arg(QString::number(month).rightJustified(2,'0')).arg(QString::number(day).rightJustified(2,'0'));
+        return QFile::exists(QString("%1/%2/%3-PS.txt").arg(FileDef::DATABASE_DIR()).arg(pLSettingSvc->mDeviceNumber).arg(strDate));
     }
     Q_INVOKABLE void onCommandSelectDate(int year, int month, int day)
     {
-        mpCoreService->mLSettingService.setSelectDate(year, month, day);
+        QDate selDate(year, month, day);
+
+        pLSettingSvc->setSelectDate(selDate);
     }
 public slots:
-    void onSignalEventChangedSelectDate()
+    void onChangedSelectDate()
     {
-        setDate(mpCoreService->mLSettingService.mSelectedYear, mpCoreService->mLSettingService.mSelectedMonth, mpCoreService->mLSettingService.mSelectedDay);
+        setDate(pLSettingSvc->mSelectedDate.year(), pLSettingSvc->mSelectedDate.month(), pLSettingSvc->mSelectedDate.day());
     }
 
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         if(value == false)
             emit signalEventUpdate();
@@ -91,13 +72,11 @@ public slots:
 public:
     explicit PanelCalendarModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_DATE;
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
 
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedSelectDate(    )), this, SLOT(onSignalEventChangedSelectDate(    )));
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading (bool)), this, SLOT(onSignalEventChangedIsLoading (bool)));
-
-        onSignalEventChangedSelectDate();
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedSelectDate();
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
     }
 };
 #endif // PANELCALENDARMODEL_H

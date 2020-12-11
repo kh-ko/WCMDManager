@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "source/service/coreservice.h"
+#include "source/service/localsettingservice.h"
 
 class DialogPasswordModel : public QObject
 {
@@ -12,7 +12,7 @@ class DialogPasswordModel : public QObject
 public slots:
     Q_INVOKABLE QString onCommandGetPassword()
     {
-        return CoreService::getInstance()->mLSettingService.mPassword;
+        return pLSettingSvc->mPassword;
     }
 public:
     explicit DialogPasswordModel(QObject *parent = nullptr):QObject(parent)

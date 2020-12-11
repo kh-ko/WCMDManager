@@ -25,14 +25,14 @@ ApplicationWindow {
     visible     : true
     width       : 1024//640
     height      : 680//480
-    title       : qsTr("WCMD Manager program")
+    title       : qsTr("WCMD Manager program") + " v" + mainModel.mVersion
     minimumHeight: 680
     minimumWidth: 1000
 
     MainModel{
         id :mainModel
 
-        Component.onCompleted: {onCommandLoadLanguage()}
+        Component.onCompleted: { console.debug("[ApplicationWindow] create instance") }//onCommandLoadLanguage()}
     }
 
     Rectangle
@@ -76,6 +76,8 @@ ApplicationWindow {
 
             onSignalEventClickedAddHistory: {
                 mainModel.onCommandAddHistory(fileUrls);
+                var dlgCopyProgress = dialogCopyProgress.createObject(window,{"model" : mainModel});
+                dlgCopyProgress.open();
             }
 
             onSignalEventClickedSync: {
@@ -126,6 +128,12 @@ ApplicationWindow {
             anchors.topMargin   : 0//35 / parent.scale
 
             visible: mainModel.mSelMenu == EnumDefine.MENU_WEIGHT_CHECKER
+
+            onSignalClickedReport :
+            {
+                var reportDialog = dialogWCReportComponent.createObject(window);
+                reportDialog.open(mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+            }
         }
 
         PanelSync{
@@ -160,6 +168,7 @@ ApplicationWindow {
         }
     }
 
+
     Component{
         id : dialogMDOPReportComponent
         PanelMDOPReportWindow{
@@ -173,8 +182,22 @@ ApplicationWindow {
     }
 
     Component{
+        id : dialogWCReportComponent
+        PanelWCReportWindow{
+        }
+    }
+
+    Component{
         id : winSettingComponent
         WindowSetting{
+        }
+    }
+
+    Component{
+        id : dialogCopyProgress
+        PanelHistoryCopyProgress{
+            height: 100
+            width: 700
         }
     }
 

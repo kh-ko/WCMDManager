@@ -11,15 +11,15 @@ class WeightCheckerProduct: QObject
     Q_OBJECT
 
 public:
-    quint64 mSeq                      ;
-    int     mNo                       ;
-    QString mName                     ;
-    int     mUnderSettingValue        ;
-    int     mUnderWarningSettingValue ;
-    int     mNormalSettingValue       ;
-    int     mOverSettingValue         ;
-    int     mOverWarningSettingValue  ;
-    int     mTareSettingValue         ;
+    quint64 mSeq                      = 0;
+    int     mNo                       = 0;
+    QString mName                     = "";
+    int     mUnderSettingValue        = 0;
+    int     mUnderWarningSettingValue = 0;
+    int     mNormalSettingValue       = 0;
+    int     mOverSettingValue         = 0;
+    int     mOverWarningSettingValue  = 0;
+    int     mTareSettingValue         = 0;
     int    mTotalCnt                  = 0;
     qint64 mTotalWeight               = 0;
     double mTotalAvgWeight            = 0;
@@ -38,6 +38,26 @@ public:
 
     QList<int> mListTotalWeightValue;
     QList<int> mListTradeWeightValue;
+
+    bool setValueFromStrStatistics(QString value)
+    {
+        QStringList fields = value.split(",");
+
+        for(int i = 0; i < fields.size(); i ++)
+        {
+            QString key   = fields.at(i).split(":")[0];
+            QString value = fields.at(i).split(":")[1];
+
+            if     (key == "ProdcutSettingSeq"){mSeq  = value.toULongLong();}
+            else if(key == "ProductNo"        ){mNo   = value.toInt()      ;}
+            else if(key == "ProductName"      ){mName = value              ;}
+        }
+
+        if(mSeq == 0)
+            return false;
+
+        return true;
+    }
 
     void addEvent(QString eventType, int value)
     {
@@ -131,7 +151,27 @@ public:
 
         mListProduct.clear();
     }
-    void setProduct(ProductSettingModel * pPs)
+
+    void setProductList(QStringList psList)
+    {
+        for(int i = 0; i < psList.size(); i ++)
+        {
+            WeightCheckerProduct * pModel = new WeightCheckerProduct(this);
+
+            if(pModel->setValueFromStrStatistics(psList.at(i)) == false)
+            {
+                delete pModel;
+                continue;
+            }
+
+            if(findProductBySeq(pModel->mSeq) == nullptr)
+            {
+                mListProduct.append(pModel);
+            }
+        }
+    }
+
+    void setProductSetting(ProductSettingModel * pPs)
     {
         WeightCheckerProduct * pProduct = nullptr;
 
@@ -139,11 +179,9 @@ public:
 
         if(pProduct == nullptr)
         {
-            pProduct = new WeightCheckerProduct(this);
-            mListProduct.append(pProduct);
+            return;
         }
 
-        pProduct->mSeq                      = pPs->mSeq;
         pProduct->mNo                       = pPs->mNo;
         pProduct->mName                     = pPs->mName;
         pProduct->mUnderSettingValue        = pPs->mUnderWeight;
@@ -196,6 +234,6 @@ public:
             mListProduct.replace(i, pMin);
         }
     }
-    explicit WeightCheckerModel(QObject *parent = nullptr):QObject(parent){}
+    explicit WeightCheckerModel(QObject *parent = nullptr):QObject(parent){ qDebug() << "[WeightCheckerModel] create instance";}
 };
 #endif // WEIGHTCHECKERMODEL_H

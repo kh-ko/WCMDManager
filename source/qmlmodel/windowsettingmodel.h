@@ -23,15 +23,15 @@ signals:
 public slots:
     Q_INVOKABLE int onCommandGetLanguage()
     {
-        return mpCoreService->mLSettingService.mLanguage;
+        return pLSettingSvc->mLanguage;
     }
     Q_INVOKABLE QString onCommandGetPassword()
     {
-        return mpCoreService->mLSettingService.mPassword;
+        return pLSettingSvc->mPassword;
     }
     Q_INVOKABLE int onCommandGetRefreshCycle()
     {
-        return mpCoreService->mLSettingService.mMoniteringRefreshCycle;
+        return pLSettingSvc->mMoniteringRefreshCycle;
     }
     /*Q_INVOKABLE int onCommandGetDeviceCnt()
     {
@@ -61,9 +61,9 @@ public slots:
             return;
 
         LanguageHelper::getInstance()->loadLanguage((EnumDefine::Language)lang);
-        mpCoreService->mLSettingService.setLanguage(lang);
-        mpCoreService->mLSettingService.setPassword(pwd);
-        mpCoreService->mLSettingService.setMoniteringRefreshCycle(nCycle);
+        pLSettingSvc->setLanguage(lang);
+        pLSettingSvc->setPassword(pwd);
+        pLSettingSvc->setMoniteringRefreshCycle(nCycle);
     }
     /*Q_INVOKABLE void onCommandSetDeviceInfo(bool isNew, QString dNum, QString dName, QString dIP)
     {

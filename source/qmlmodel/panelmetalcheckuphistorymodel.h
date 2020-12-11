@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/util/svcconnectutil.h"
 
 class PanelMetalCheckupHistoryModel : public QObject
 {
@@ -13,8 +14,6 @@ class PanelMetalCheckupHistoryModel : public QObject
     Q_PROPERTY(QString mMDCheckupCycle READ getMDCheckupCycle NOTIFY signalEventChangedMDCheckupCycle);
 
 private:
-    CoreService * mpCoreService;
-
     bool    mIsLoading     ;
     QString mMDCheckupCycle;
 
@@ -34,126 +33,124 @@ public slots:
         if(mIsLoading)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis.size();
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size();
     }
     Q_INVOKABLE int getPNO(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mProductNo;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mProductNo;
     }
     Q_INVOKABLE QString getPName(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mProductName;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mProductName;
     }
     Q_INVOKABLE QString getTime(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mTime;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mTime.toString(TIME_FMT);
     }
     Q_INVOKABLE QString getLimCriteriaFe()
     {
-        return mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaFe;
+        return pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
     }
     Q_INVOKABLE QString getLimCriteriaSus()
     {
-        return mpCoreService->mLSettingService.mMDSettingModel.mLimitCriteriaSus;
+        return pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
     }
     Q_INVOKABLE bool getJudgFe01(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mIsPassFe01;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mIsPassFe01;
     }
     Q_INVOKABLE bool getJudgFe02(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mIsPassFe02;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mIsPassFe02;
     }
     Q_INVOKABLE bool getJudgFe03(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mIsPassFe03;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mIsPassFe03;
     }
     Q_INVOKABLE bool getJudgSus01(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mIsPassSus01;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mIsPassSus01;
     }
     Q_INVOKABLE bool getJudgSus02(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mIsPassSus02;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mIsPassSus02;
     }
     Q_INVOKABLE bool getJudgSus03(int idx)
     {
         if(mIsLoading)
             return 0;
 
-        if(mpCoreService->mDataLoader.mListMDCheckupHis.size() <= idx)
+        if(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList.size() <= idx)
             return 0;
 
-        return mpCoreService->mDataLoader.mListMDCheckupHis[idx]->mIsPassSus03;
+        return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mIsPassSus03;
     }
 public slots:
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         setIsLoading(value);
     }
-    void onSignalEventChangedMetalDetectorSetting()
+    void onChangedMetalDetectorSetting()
     {
-        setMDCheckupCycle(mpCoreService->mLSettingService.mMDSettingModel.mCheckupCycle    );
+        setMDCheckupCycle(pLSettingSvc->mMDSettingModel.mCheckupCycle    );
     }
 
 public:
     explicit PanelMetalCheckupHistoryModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
+        ENABLE_SLOT_LSETTING_CHANGED_MD_SETTING;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading           (bool)), this, SLOT(onSignalEventChangedIsLoading           (bool)));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedMetalDetectorSetting(    )), this, SLOT(onSignalEventChangedMetalDetectorSetting(    )));
-
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
-        onSignalEventChangedMetalDetectorSetting();
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
+        onChangedMetalDetectorSetting();
     }
 };
 

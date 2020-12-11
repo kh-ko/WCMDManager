@@ -2,7 +2,9 @@
 #define PANELWCPRODUCTSUMMARY_H
 #include <QObject>
 #include <QDebug>
+#include <QtMath>
 
+#include "source/service/util/svcconnectutil.h"
 #include "source/service/coreservice.h"
 
 class PanelWCProductSummaryModel : public QObject
@@ -114,7 +116,7 @@ signals:
     void signalEventChangedMaxWeight        (int    value);
 
 public slots:
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         if(value)
             return;
@@ -122,63 +124,44 @@ public slots:
         loadData();
     }
 
-    void onSignalEventChangedProductSeq()
+    void onChangedWCProductSeq()
     {
         loadData();
     }
 public:
     void loadData()
     {
-        WeightCheckerProduct * pWCProduct = nullptr;
+        PDSettingDto setting = pDLoaderSvc->mDailyHis.mPH.findSettingDto(pLSettingSvc->mWCProductSeq);
+        PDWCStatsDto wcStats = pDLoaderSvc->mDailyHis.mEH.findPDWCStatsDto(setting.mSeq);
 
-        quint64 mPSeq = mpCoreService->mLSettingService.mWCProductSeq;
-
-        pWCProduct = mpCoreService->mDataLoader.mWCModel.findProductBySeq(mPSeq);
-
-        if(pWCProduct == nullptr)
-        {
-            setTotalCnt         (0);  setTradeAvgWeight   (0);
-            setTotalWeight      (0);  setTradeSD          (0);
-            setTotalAvgWeight   (0);  setTradeCV          (0);
-            setTotalSD          (0);  setOverSettingValue (0);
-            setTotalCV          (0);  setOverCnt          (0);
-            setTradeSettingValue(0);  setUnderSettingValue(0);
-            setTradeCnt         (0);  setUnderCnt         (0);
-            setTradeWeight      (0);  setEtcCnt           (0);
-            setMinWeight        (0);  setMaxWeight        (0);
-            setTareWeight       (0);
-            return;
-        }
-
-        setTotalCnt         (pWCProduct->mTotalCnt            );
-        setTotalWeight      (pWCProduct->mTotalWeight         );
-        setTotalAvgWeight   (pWCProduct->mTotalAvgWeight + 0.5);
-        setTotalSD          (pWCProduct->mTotalSD + 0.5       );
-        setTotalCV          (pWCProduct->mTotalCV             );
-        setTradeSettingValue(pWCProduct->mNormalSettingValue  );
-        setTradeCnt         (pWCProduct->mTradeCnt            );
-        setTradeWeight      (pWCProduct->mTradeWeight         );
-        setTradeAvgWeight   (pWCProduct->mTradeAvgWeight + 0.5);
-        setTradeSD          (pWCProduct->mTradeSD + 0.5       );
-        setTradeCV          (pWCProduct->mTradeCV             );
-        setOverSettingValue (pWCProduct->mOverSettingValue    );
-        setOverCnt          (pWCProduct->mOverCnt             );
-        setUnderSettingValue(pWCProduct->mUnderSettingValue   );
-        setUnderCnt         (pWCProduct->mUnderCnt            );
-        setEtcCnt           (pWCProduct->mEtcCnt              );
-        setMinWeight        (pWCProduct->mMinWeight           );
-        setMaxWeight        (pWCProduct->mMaxWeight           );
-        setTareWeight       (pWCProduct->mTareSettingValue    );
+        setTradeSettingValue(setting.mWCNormalWeight                                );
+        setOverSettingValue (setting.mWCOverWeight                                  );
+        setUnderSettingValue(setting.mWCUnderWeight                                 );
+        setTareWeight       (setting.mWCTareWeight                                  );
+        setTotalCnt         (wcStats.mWCTotalCnt                                    );
+        setTradeCnt         (wcStats.mWCNorCnt + wcStats.mWCOWCnt + wcStats.mWCUWCnt);
+        setOverCnt          (wcStats.mWCOCnt                                        );
+        setUnderCnt         (wcStats.mWCUCnt                                        );
+        setEtcCnt           (wcStats.mWCEtcCnt + wcStats.mWCMDCnt                   );
+        setTradeWeight      (wcStats.mTradeWeight                                   );
+        setTotalWeight      (wcStats.mTotalWeight                                   );
+        setTotalAvgWeight   (wcStats.mTotalAvgWeight                                );
+        setTotalSD          (wcStats.mTotalSD                                       );
+        setTotalCV          (wcStats.mTotalCV                                       );
+        setTradeAvgWeight   (wcStats.mTradeAvgWeight                                );
+        setTradeSD          (wcStats.mTradeSD                                       );
+        setTradeCV          (wcStats.mTradeCV                                       );
+        setMinWeight        (wcStats.mTotalMinWeight                                );
+        setMaxWeight        (wcStats.mTotalMaxWeight                                );
     }
 
     explicit PanelWCProductSummaryModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_WC_PD;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading   (bool)), this, SLOT(onSignalEventChangedIsLoading (bool)));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedWCProductSeq(    )), this, SLOT(onSignalEventChangedProductSeq(    )));
-
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
+        onChangedWCProductSeq();
     }
 };
 

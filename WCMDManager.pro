@@ -17,15 +17,6 @@ SOURCES += \
         source/helper/languagehelper.cpp \
         source/logger/nsdebug.cpp \
         source/main.cpp \
-        source/service/coreservice.cpp \
-        source/service/dataloaderservice.cpp \
-        source/service/dspsearchservice.cpp \
-        source/service/localsettingservice.cpp \
-        source/service/metaldetectorservice.cpp \
-        source/service/productstatisticsservice.cpp \
-        source/service/weightcheckerservice.cpp \
-        source/thread/deviceinfocollector.cpp \
-        source/thread/remotehistorydatasyncer.cpp \
         source/util/fileloaderthread.cpp \
         source/util/filewriter.cpp \
         source/util/mouseeventspy.cpp \
@@ -51,6 +42,23 @@ QML_DESIGNER_IMPORT_PATH =
 HEADERS += \
     source/globaldef/EnumDefine.h \
     source/helper/languagehelper.h \
+    source/history/dailyhistory.h \
+    source/history/dailyhistoryeh.h \
+    source/history/dailyhistoryph.h \
+    source/history/dailyhistoryps.h \
+    source/history/def/datetimeform.h \
+    source/history/def/filedef.h \
+    source/history/dto/enum/enumdef.h \
+    source/history/dto/eventdto.h \
+    source/history/dto/pdcheckupdto.h \
+    source/history/dto/pdsettingdto.h \
+    source/history/dto/pdstatsdto.h \
+    source/history/dto/pdwcstatsdto.h \
+    source/history/fileutil/filecopylocal.h \
+    source/history/fileutil/filereaderex.h \
+    source/history/fileutil/filewriterex.h \
+    source/history/historycopy.h \
+    source/history/monthlystatshistory.h \
     source/logger/nsdebug.h \
     source/model/deviceinfolistmodel.h \
     source/model/deviceinfomodel.h \
@@ -83,21 +91,28 @@ HEADERS += \
     source/qmlmodel/panelsynclistitemmodel.h \
     source/qmlmodel/panelsyncmodel.h \
     source/qmlmodel/panelwchistogram.h \
+    source/qmlmodel/panelwchistogramreportmodel.h \
     source/qmlmodel/panelwcproductsummary.h \
+    source/qmlmodel/panelwcreportcontainermodel.h \
+    source/qmlmodel/panelwcreportmodel.h \
+    source/qmlmodel/panelwcreportproductmodel.h \
     source/qmlmodel/panelwcselectdeviceproduct.h \
+    source/qmlmodel/panelwcsummaryreportmodel.h \
     source/qmlmodel/panelwctrendsmodel.h \
+    source/qmlmodel/panelwctrendsreportmodel.h \
+    source/qmlmodel/panelweightmanagementinfomodel.h \
     source/qmlmodel/windowsettingmodel.h \
+    source/remote/dto/devinfodto.h \
+    source/remote/dto/enum/remoteenumdef.h \
+    source/remote/remotesearcher.h \
+    source/remote/remotesyncer.h \
+    source/remote/strpacket.h \
     source/service/coreservice.h \
     source/service/dataloaderservice.h \
-    source/service/dspsearchservice.h \
+    source/service/devinfoservice.h \
+    source/service/devsearchservice.h \
     source/service/localsettingservice.h \
-    source/service/metaldetectorservice.h \
-    source/service/productstatisticsservice.h \
-    source/service/weightcheckerservice.h \
-    source/thread/deviceinfocollector.h \
-    source/thread/dto/deviceinfodto.h \
-    source/thread/dto/devicesocketdto.h \
-    source/thread/remotehistorydatasyncer.h \
+    source/service/util/svcconnectutil.h \
     source/util/fileloaderthread.h \
     source/util/filewriter.h \
     source/util/mouseeventspy.h \

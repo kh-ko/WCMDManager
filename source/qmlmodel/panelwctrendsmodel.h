@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QDebug>
 
+#include "source/service/util/svcconnectutil.h"
 #include "source/service/coreservice.h"
 
 class PanelWCTrendsModel : public QObject
@@ -174,7 +175,7 @@ public slots:
         return mCanvasHeight - (mCanvasHeight * ((float)temp / (float)mDataWeightRange));
     }
 
-    void onSignalEventChangedIsLoading(bool value)
+    void onChangedIsLoading(bool value)
     {
         if(value == false)
         {
@@ -182,7 +183,7 @@ public slots:
         }
     }
 
-    void onSignalEventChangedProductSeq()
+    void onChangedWCProductSeq()
     {
         loadData();
     }
@@ -190,57 +191,61 @@ public slots:
 public:
     void loadData()
     {
-        WeightCheckerProduct * pWCProduct = nullptr;
+        PDSettingDto setting = pDLoaderSvc->mDailyHis.mPH.findSettingDto(pLSettingSvc->mWCProductSeq);
+        PDWCStatsDto wcStats = pDLoaderSvc->mDailyHis.mEH.findPDWCStatsDto(setting.mSeq);
 
-        quint64 mPSeq = mpCoreService->mLSettingService.mWCProductSeq;
-
-        pWCProduct = mpCoreService->mDataLoader.mWCModel.findProductBySeq(mPSeq);
-
-        if(pWCProduct == nullptr)
+        if(setting.mSeq == 0)
         {
-            qDebug() << "[debug] pWCProduct is null";
+            qDebug() << "[debug] pWCProduct is null, seq = : " << pLSettingSvc->mWCProductSeq;
             clear();
             emit signalEventChangedData();
             return;
         }
 
+        mDataList.clear();
+
         setIsNonData(false);
+
+        mOverWeight = setting.mWCOverWeight;
+        mUnderWeight = setting.mWCUnderWeight;
+
+        quint32 minValue = mUnderWeight;
+        quint32 maxValue = mOverWeight;
 
         if(mFilterMode == true)
         {
-            mDataList = pWCProduct->mListTradeWeightValue;
+            mDataList = wcStats.mTradeTrends   ;
+            minValue  = wcStats.mTradeMinWeight;
+            maxValue  = wcStats.mTradeMaxWeight;
         }
         else
         {
-            mDataList = pWCProduct->mListTotalWeightValue;
+            mDataList = wcStats.mTotalTrends   ;
+            minValue  = wcStats.mTotalMinWeight;
+            maxValue  = wcStats.mTotalMaxWeight;
         }
-
-        mOverWeight = pWCProduct->mOverSettingValue;
-        mUnderWeight = pWCProduct->mUnderSettingValue;
 
         if(mMinMaxMode)
         {
-            int tempMin = pWCProduct->mUnderSettingValue < pWCProduct->mMinWeight ? pWCProduct->mUnderSettingValue : pWCProduct->mMinWeight;
-            int tempMax = pWCProduct->mOverSettingValue  > pWCProduct->mMaxWeight ? pWCProduct->mOverSettingValue  : pWCProduct->mMaxWeight;
-            int tempGap = tempMax - tempMin;
+            int tempGap = maxValue - minValue;
 
             mDataStartIdx  = 0;
             setDataEndIdx(mDataList.size() - 1);
             setDataTotalCnt(mDataList.size());
             setDataGap(mDataTotalCnt < 10  ? 1 : ((float)mDataTotalCnt / 10.0f) + 0.5);
 
-            setYScope(pWCProduct->mMinWeight - (tempGap * 0.2), pWCProduct->mMaxWeight  + (tempGap * 0.2));
+            setYScope(minValue - (tempGap * 0.2), maxValue  + (tempGap * 0.2));
         }
         else
         {
-            int tempGap = pWCProduct->mOverSettingValue - pWCProduct->mUnderSettingValue;
+            int tempGap = mOverWeight - mUnderWeight;
 
             mDataStartIdx  = 0;
             setDataEndIdx(mDataList.size() - 1);
             setDataTotalCnt(mDataList.size());
             setDataGap(mDataTotalCnt < 10 ? 1 : ((float)mDataTotalCnt / 10.0f) + 0.5);
 
-            setYScope(pWCProduct->mUnderSettingValue - (tempGap * 0.2), pWCProduct->mOverSettingValue  + (tempGap * 0.2));
+            setYScope(mUnderWeight - (tempGap * 0.2), mOverWeight  + (tempGap * 0.2));
         }
 
         emit signalEventChangedData();
@@ -277,12 +282,11 @@ public:
 
     explicit PanelWCTrendsModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
+        ENABLE_SLOT_LSETTING_CHANGED_SEL_WC_PD;
+        ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
 
-        connect(&mpCoreService->mDataLoader     , SIGNAL(signalEventChangedIsLoading   (bool)), this, SLOT(onSignalEventChangedIsLoading (bool)));
-        connect(&mpCoreService->mLSettingService, SIGNAL(signalEventChangedWCProductSeq(    )), this, SLOT(onSignalEventChangedProductSeq(    )));
-
-        onSignalEventChangedIsLoading(mpCoreService->mDataLoader.mIsLoading);
+        onChangedIsLoading(pDLoaderSvc->mIsLoading);
+        onChangedWCProductSeq();
     }
 };
 #endif // PANELWCTRENDSMODEL_H

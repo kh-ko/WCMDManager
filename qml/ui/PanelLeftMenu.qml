@@ -26,7 +26,7 @@ Item {
     UiScrollView{
         anchors.fill: parent
 
-        contentHeight: parent.height < 840 ? 840 : parent.height
+        contentHeight: parent.height < 920 ? 920 : parent.height
         contentWidth : parent.width
 
         Rectangle{
@@ -180,7 +180,7 @@ Item {
                 width                   : 185
                 height                  : 60
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom          : btnSync.top
+                anchors.bottom          : btnImportFile.top
                 anchors.bottomMargin    : 20
 
                 text        : qsTr("Monitoring")
@@ -190,6 +190,24 @@ Item {
 
                 onSignalEventClicked:  {
                     panel.signalEventClickedMonitoring();
+                }
+            }
+
+            UiButton{
+                id : btnImportFile
+                width                   : 185
+                height                  : 60
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom          : btnSync.top
+                anchors.bottomMargin    : 20
+
+                text        : qsTr("Add history")
+                iconSource  : "image_icon/add_history.png"
+
+                colType     : EnumDefine.BTN_COLOR_TYPE_BLUE
+
+                onSignalEventClicked:  {
+                    fileDialog.open()
                 }
             }
 
@@ -253,11 +271,11 @@ Item {
         id: fileDialog
             title: "Please choose a file"
             folder: "c:"
-            selectMultiple: true
+            selectFolder: true
 
             onAccepted: {
-                //console.log("You chose: " + fileDialog.fileUrls)
-                panel.signalEventClickedAddHistory(fileDialog.fileUrls)
+                console.log("[debug]" +fileDialog.fileUrl)
+                panel.signalEventClickedAddHistory(fileDialog.fileUrl)
                 //Qt.quit()
             }
             onRejected: {

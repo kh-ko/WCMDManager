@@ -5,6 +5,10 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/devsearchservice.h"
+#include "source/service/devinfoservice.h"
+#include "source/service/util/svcconnectutil.h"
+
 #include "source/qmlmodel/panelsynclistitemmodel.h"
 
 class PanelSyncModel : public QObject
@@ -13,7 +17,6 @@ class PanelSyncModel : public QObject
     Q_PROPERTY(bool mIsSearch      READ getIsSearch  NOTIFY signalEventChangedIsSearch)
 
 public:
-    CoreService *  mpCoreService;
     QList<PanelSyncListItemModel *> mListDevice;
 
     bool mIsSearch = false;
@@ -32,22 +35,14 @@ public slots:
 
         setIsSearch(true);
 
-        mpCoreService = CoreService::getInstance();
+        pDevSearchSvc->search();
 
-        connect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
-
-        mpCoreService->mDspSearchService.search();
+        ENABLE_SLOT_DEVSEARCH_COMPLETED;
     }
 
     Q_INVOKABLE void onCommandClose()
     {
-        foreach(PanelSyncListItemModel* item, mListDevice)
-        {
-            if(item->mRSyncError == EnumDefine::RemoteSyncErrorType::RSYNC_ERROR_NONE && item->mState == EnumDefine::RemoteSyncState::RSYNC_STATE_FINISHED)
-            {
-                mpCoreService->reLoad();
-            }
-        }
+        pDLoaderSvc->load(pLSettingSvc->mDeviceNumber, pLSettingSvc->mSelectedDate);
     }
 
     Q_INVOKABLE void onCommandSync()
@@ -65,6 +60,12 @@ public slots:
             mListDevice[i]->cancle();
         }
     }
+
+    Q_INVOKABLE void onCommandDlistRefresh()
+    {
+        pDevInfoSvc->refreshList();
+    }
+
     Q_INVOKABLE int onCommandGetDlistSize()
     {
         return mListDevice.size();
@@ -89,19 +90,18 @@ public slots:
         return false;
     }
 
-    void onSignalEventCompletedDeviceSearch()
+    void onCompletedSearch()
     {
-        disconnect(&mpCoreService->mDspSearchService, SIGNAL(signalEventCompletedSearch()), this, SLOT(onSignalEventCompletedDeviceSearch()));
+        DISABLE_SLOT_DEVSEARCH_COMPLETED;
 
-        for(int i = 0; i < mpCoreService->mDspSearchService.mListDeviceInfo.size(); i ++)
+        pDevInfoSvc->refreshList();
+
+
+        foreach(DevInfoDto devInfo ,pDevSearchSvc->mSearcher.mDevInfoList)
         {
-            int     dNum  = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mNumber;
-            QString dName = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mName;
-            QString dIP   = mpCoreService->mDspSearchService.mListDeviceInfo.at(i)->mIp;
+            devInfo.mName = pDevInfoSvc->findDevInfo(devInfo.mNumber).mName;
 
-            PanelSyncListItemModel * pItem = new PanelSyncListItemModel(dNum, dName, dIP, this);
-
-            mListDevice.append(pItem);
+            mListDevice.append(new PanelSyncListItemModel(devInfo.mNumber, devInfo.mName, devInfo.mIp, this));
         }
 
         setIsSearch(false);
@@ -110,7 +110,6 @@ public slots:
 public:
     explicit PanelSyncModel(QObject *parent = nullptr):QObject(parent)
     {
-        mpCoreService = CoreService::getInstance();
     }
     ~PanelSyncModel()
     {
