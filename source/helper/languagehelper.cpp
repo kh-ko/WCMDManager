@@ -26,6 +26,7 @@ LanguageHelper* LanguageHelper::getInstance()
 
 void LanguageHelper::setContext(QObject * context)
 {
+    qDebug() << "[LanguageHelper::setContext]";
     mContext = context;
 }
 

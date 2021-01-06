@@ -76,7 +76,7 @@ public slots:
 
 public slots:
     void onChangedSelMenu  (          ){setSelMenu  (pCoreSvc->getSelMenu());}
-    void onChangedIsLoading(bool value){setIsLoading(value                 );}
+    void onChangedIsLoading(bool value){setIsLoading(value                 ); mLanguageHelper.loadLanguage((EnumDefine::Language)pLSettingSvc->mLanguage);}
     void onSignalEventCopyProgress(int procIdx, int totalCnt){ emit signalEventCopyProgress(procIdx, totalCnt);}
     void onSignalEventCopyComplete(bool isSucc)
     {
@@ -96,6 +96,8 @@ public:
 
         ENABLE_SLOT_CORE_CHANGED_SEL_MENU;
         ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
+
+        mLanguageHelper.setContext(this);
 
         setVersion(pLSettingSvc->mVersion);
         onChangedSelMenu();
