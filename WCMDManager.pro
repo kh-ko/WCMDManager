@@ -92,6 +92,7 @@ HEADERS += \
     source/qmlmodel/panelsyncmodel.h \
     source/qmlmodel/panelwchistogram.h \
     source/qmlmodel/panelwchistogramreportmodel.h \
+    source/qmlmodel/panelwchistorymodel.h \
     source/qmlmodel/panelwcproductsummary.h \
     source/qmlmodel/panelwcreportcontainermodel.h \
     source/qmlmodel/panelwcreportmodel.h \

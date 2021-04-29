@@ -96,18 +96,17 @@ Item {
                 anchors.topMargin   : 20
             }
 
-            RowLayout{
+            ColumnLayout{
                 id : panelHistogramTrends
-                height: 600
+                height: 1220
                 spacing: 20
 
                 anchors.top         : panelWeightProductSummary.bottom
                 anchors.topMargin   : 20
-                anchors.right       : parent.right
+                anchors.right       : panelHistory.left
                 anchors.rightMargin : 20
                 anchors.left        : parent.left
                 anchors.leftMargin  : 20
-
 
                 PanelWeightHistogram{
                     Layout.preferredHeight: 1
@@ -125,14 +124,17 @@ Item {
                 }
             }
 
-
+            PanelWeightHistory{
+                id : panelHistory
+                height: 1220; width : 439
+                anchors.top: panelWeightCalendar.bottom; anchors.topMargin : 20; anchors.right : parent.right; anchors.rightMargin : 20
+            }
         }
     }
-
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.6600000262260437}D{i:3}
+    D{i:0;formeditorZoom:0.6600000262260437}
 }
 ##^##*/

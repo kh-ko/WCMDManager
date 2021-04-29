@@ -11,17 +11,17 @@ class PDWCStatsDto
 {
 public:
     quint64      mSeq                = 0;
-    int          mWCOCnt             = 0;
-    int          mWCOWCnt            = 0;
-    int          mWCNorCnt           = 0;
-    int          mWCUCnt             = 0;
-    int          mWCUWCnt            = 0;
-    int          mWCEtcCnt           = 0;
-    int          mWCMDCnt            = 0;
-    int          mMDPassCnt          = 0;
-    int          mMDFailCnt          = 0;
-    int          mWCTotalCnt         = 0;
-    int          mMDTotalCnt         = 0;
+    quint32      mWCOCnt             = 0;
+    quint32      mWCOWCnt            = 0;
+    quint32      mWCNorCnt           = 0;
+    quint32      mWCUCnt             = 0;
+    quint32      mWCUWCnt            = 0;
+    quint32      mWCEtcCnt           = 0;
+    quint32      mWCMDCnt            = 0;
+    quint32      mMDPassCnt          = 0;
+    quint32      mMDFailCnt          = 0;
+    quint32      mWCTotalCnt         = 0;
+    quint32      mMDTotalCnt         = 0;
     qint64       mTotalWeight        = 0;
     int          mTotalAvgWeight     = 0;
     int          mTotalSD            = 0;
@@ -35,8 +35,8 @@ public:
     int          mTradeMinWeight     = 0;
     int          mTradeMaxWeight     = 0;
 
-    QList<int>   mTotalTrends;
-    QList<int>   mTradeTrends;
+    QList<quint32>   mTotalTrends;
+    QList<quint32>   mTradeTrends;
 
 
     PDWCStatsDto(){}
@@ -123,6 +123,11 @@ public:
 
         mWCTotalCnt++;
         mTotalWeight = mTotalWeight + event.mEValue;
+
+        if(mSeq == 1)
+        {
+            qDebug() << "[debug] eventValue = " << event.mEValue << ", total = " << mTotalWeight;
+        }
         mTotalTrends.append(event.mEValue);
 
         if(isTrade)
@@ -141,32 +146,33 @@ public:
         double deviationSum               = 0;
         double variance                   = 0;
 
-        mTotalAvgWeight = mTotalWeight/mWCTotalCnt;
+        mTotalAvgWeight = mWCTotalCnt == 0 ? 0 : mTotalWeight/mWCTotalCnt;
 
         for(int i = 0; i < mTotalTrends.size(); i ++)
         {
             deviationSum += (mTotalTrends[i] - mTotalAvgWeight) * (mTotalTrends[i] - mTotalAvgWeight);
         }
 
-        variance = deviationSum / (double) mTotalTrends.size();
+        variance = mTotalTrends.size() == 0 ? 0 : deviationSum / (double) mTotalTrends.size();
 
         mTotalSD = qSqrt(variance);
-        mTotalCV = (mTotalSD / (double)mTotalAvgWeight) * 100;
+        mTotalCV = mTotalAvgWeight == 0 ? 0 : (mTotalSD / (double)mTotalAvgWeight) * 100;
 
         deviationSum = 0;
         variance = 0;
 
-        mTradeAvgWeight = mTradeWeight/(mWCNorCnt + mWCUWCnt + mWCOWCnt);
+        quint32 tradeTotalCnt = mWCNorCnt + mWCUWCnt + mWCOWCnt;
+        mTradeAvgWeight = tradeTotalCnt == 0 ? 0 : mTradeWeight/tradeTotalCnt;
 
         for(int i = 0; i < mTradeTrends.size(); i ++)
         {
             deviationSum += (mTradeTrends[i] - mTradeAvgWeight) * (mTradeTrends[i] - mTradeAvgWeight);
         }
 
-        variance = deviationSum / (double) mTradeTrends.size();
+        variance = mTradeTrends.size() == 0 ? 0 : deviationSum / (double) mTradeTrends.size();
 
         mTradeSD = qSqrt(variance);
-        mTradeCV = (mTradeSD / (double)mTradeAvgWeight) * 100;
+        mTradeCV = mTradeAvgWeight == 0 ? 0 : (mTradeSD / (double)mTradeAvgWeight) * 100;
     }
 };
 

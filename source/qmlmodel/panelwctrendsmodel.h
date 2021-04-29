@@ -39,9 +39,9 @@ private:
     bool mMinMaxMode     = false;
     bool mFilterMode     = false;
 
-    QList<int> mListMin;
-    QList<int> mListMax;
-    QList<int> mDataList;
+    QList<quint32> mListMin;
+    QList<quint32> mListMax;
+    QList<quint32> mDataList;
 
 public:
     bool getIsNonData    (){ return mIsNonData    ;}

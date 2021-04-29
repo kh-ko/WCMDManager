@@ -30,6 +30,7 @@
 #include "source/qmlmodel/panelwcproductsummary.h"
 #include "source/qmlmodel/panelwchistogram.h"
 #include "source/qmlmodel/panelwctrendsmodel.h"
+#include "source/qmlmodel/panelwchistorymodel.h"
 #include "source/util/mouseeventspy.h"
 
 int main(int argc, char *argv[])
@@ -76,6 +77,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelWCReportModel              >("PanelWCReportModel"              , 1, 0, "PanelWCReportModel"              );
     qmlRegisterType<PanelWCReportProductModel       >("PanelWCReportProductModel"       , 1, 0, "PanelWCReportProductModel"       );
     qmlRegisterType<PanelWCTrendsModel              >("PanelWCTrendsModel"              , 1, 0, "PanelWCTrendsModel"              );
+    qmlRegisterType<PanelWCHistoryModel             >("PanelWCHistoryModel"             , 1, 0, "PanelWCHistoryModel"             );
     qmlRegisterType<WindowSettingModel              >("WindowSettingModel"              , 1, 0, "WindowSettingModel"              );
 
 	qmlRegisterSingletonType(QUrl("qrc:/uiengine/ViewManager.qml"), "ViewManager", 1, 0, "ViewManager");

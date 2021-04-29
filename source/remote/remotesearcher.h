@@ -31,7 +31,7 @@ public:
         mTimer.setInterval(3000);
         connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimeout()));
 
-        open();
+        //open();
     }
     ~RemoteSearcher()
     {
@@ -42,6 +42,8 @@ public:
     void search()
     {
         mDevInfoList.clear();
+
+        open();
 
         mTimer.stop();
         mTimer.start();
@@ -54,6 +56,7 @@ public slots:
     void onTimeout()
     {
         searchComplete();
+        close();
     }
     void onReceive()
     {

@@ -1022,6 +1022,44 @@
     </message>
 </context>
 <context>
+    <name>PanelWeightHistory</name>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="51"/>
+        <source>History</source>
+        <translation>이력</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="67"/>
+        <source>Filter</source>
+        <translation>필터</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="79"/>
+        <source>Only NG</source>
+        <translation>불량</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="84"/>
+        <source>All</source>
+        <translation>전체</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="108"/>
+        <source>Time</source>
+        <translation>시간</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="118"/>
+        <source>Event</source>
+        <translation>이벤트</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="128"/>
+        <source>Value</source>
+        <translation>값</translation>
+    </message>
+</context>
+<context>
     <name>PanelWeightManagementInfo</name>
     <message>
         <location filename="qml/ui/weightchecker/PanelWeightManagementInfo.qml" line="53"/>

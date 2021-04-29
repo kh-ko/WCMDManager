@@ -32,6 +32,7 @@ public:
 
     void load(int devNum, QString srcPath, QString strDate)
     {
+        qDebug() << "[debug]devNum = " << devNum << ", srcPath = " << srcPath << ", strDate = " << strDate;
         mDevNum  = devNum ;
         mStrDate = strDate;
         mSrcPath = srcPath;

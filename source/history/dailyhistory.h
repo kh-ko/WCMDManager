@@ -57,7 +57,7 @@ signals:
 private slots:
     void loadedPH(int err)
     {
-        qDebug() << "[debug]loadedPH : size = " << mPS.mPSList.size();
+        qDebug() << "[debug]loadedPH : size = " << mPH.mPDList.size();
         mPS.load(mDevNum, mSrcPath, mStrDate);
     }
     void loadedPS(int err)

@@ -29,6 +29,7 @@ public:
     QList<PDCheckupDto> mCheckupEventList;
     QList<EventDto>     mMDFailList;
     QList<PDWCStatsDto> mPDWCStatsList;
+    QList<EventDto>     mWCEventList;
 
     explicit DailyHistoryEH(QObject *parent = nullptr) : QObject(parent)
     {
@@ -48,6 +49,7 @@ public:
         mCheckupEventList.clear();
         mMDFailList.clear();
         mPDWCStatsList.clear();
+        mWCEventList.clear();
     }
 
     void load(int devNum, QString srcPath, QString strDate, DailyHistoryPH * pPH, DailyHistoryPS * pPS)
@@ -142,6 +144,7 @@ private slots:
                     }
                 }
                 mpRecentPDWCStats->addEvent(dto);
+                mWCEventList.append(dto);
             }
         }
 

@@ -108,5 +108,6 @@
         <file>ui/report/PanelWCReportContainer.qml</file>
         <file>ui/report/PanelWCReportSummaryPage.qml</file>
         <file>ui/PanelHistoryCopyProgress.qml</file>
+        <file>ui/weightchecker/PanelWeightHistory.qml</file>
     </qresource>
 </RCC>

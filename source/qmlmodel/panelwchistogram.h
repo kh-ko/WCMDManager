@@ -13,12 +13,12 @@ class PanelWCHistogramModel : public QObject
 private:
     CoreService * mpCoreService;
 
-    int    mXMin           = 0;
-    int    mXMax           = 0;
-    int    mXGab           = 0;
-    int    mYGab           = 1;
-    int    mListYValue[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-    int    mListXValue[11] = {0,0,0,0,0,0,0,0,0,0,0,};
+    int     mXMin           = 0;
+    int     mXMax           = 0;
+    int     mXGab           = 0;
+    int     mYGab           = 1;
+    quint32 mListYValue[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
+    quint32 mListXValue[11] = {0,0,0,0,0,0,0,0,0,0,0,};
 
     int  getXMin     (){ return mXMin     ; }
     int  getXMax     (){ return mXMax     ; }
@@ -52,7 +52,7 @@ public slots:
     {
         return mListXValue[idx];
     }
-    Q_INVOKABLE int onCommandGetYValue(int idx)
+    Q_INVOKABLE quint32 onCommandGetYValue(int idx)
     {
         return mListYValue[idx];
     }
@@ -100,7 +100,7 @@ public:
 
         PDWCStatsDto wcStats = pDLoaderSvc->mDailyHis.mEH.findPDWCStatsDto(setting.mSeq);
 
-        foreach(int value, wcStats.mTotalTrends)
+        foreach(quint32 value, wcStats.mTotalTrends)
         {
             insertYValue(value);
         }
@@ -128,7 +128,7 @@ public:
         emit signalEventChangedGraphData();
     }
 
-    void insertYValue(int value)
+    void insertYValue(quint32 value)
     {
         for(int i = 0; i < 12; i ++)
         {
