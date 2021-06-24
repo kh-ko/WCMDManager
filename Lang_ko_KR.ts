@@ -514,67 +514,72 @@
 <context>
     <name>PanelMetalCheckupHistory</name>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="46"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="52"/>
         <source>Checkup history</source>
         <translation>점검기록</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="64"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="70"/>
         <source>Checkup cycle</source>
         <translation>점검주기</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="81"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="82"/>
+        <source>Edit limit criteria</source>
+        <translation>한계기준 수정</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="103"/>
         <source>P NO</source>
         <translation>품번</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="91"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="113"/>
         <source>P name</source>
         <translation>제품명</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="101"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="123"/>
         <source>Time</source>
         <translation>시간</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="111"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="133"/>
         <source>Limit criteria&lt;br&gt;(Fe)</source>
         <translation>한계기준&lt;br&gt;(Fe)</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="121"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="143"/>
         <source>Limit criteria&lt;br&gt;(Sus)</source>
         <translation>한계기준&lt;br&gt;(Sus)</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="131"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="153"/>
         <source>Judgment&lt;br&gt;(Fe) 1 st.</source>
         <translation>판정&lt;br&gt;(Fe) 1회</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="141"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="163"/>
         <source>Judgment&lt;br&gt;(Fe) 2 st.</source>
         <translation>판정&lt;br&gt;(Fe) 2회</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="151"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="173"/>
         <source>Judgment&lt;br&gt;(Fe) 3 st.</source>
         <translation>판정&lt;br&gt;(Fe) 3회</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="161"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="183"/>
         <source>Judgment&lt;br&gt;(Sus) 1 st.</source>
         <translation>판정&lt;br&gt;(Sus) 1회</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="171"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="193"/>
         <source>Judgment&lt;br&gt;(Sus) 2 st.</source>
         <translation>판정&lt;br&gt;(Sus) 2회</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="181"/>
+        <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="203"/>
         <source>Judgment&lt;br&gt;(Sus) 3 st.</source>
         <translation>판정&lt;br&gt;(Sus) 3회</translation>
     </message>
@@ -922,7 +927,7 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="80"/>
         <source>Sign</source>
-        <translation type="unfinished">결재</translation>
+        <translation>결재</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="124"/>
@@ -932,17 +937,17 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="166"/>
         <source>Review</source>
-        <translation type="unfinished">검토</translation>
+        <translation>검토</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="212"/>
         <source>Approved</source>
-        <translation type="unfinished">승인</translation>
+        <translation>승인</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="283"/>
         <source>Company name</source>
-        <translation type="unfinished">업체명</translation>
+        <translation>업체명</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="317"/>
@@ -957,22 +962,22 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="399"/>
         <source>Product</source>
-        <translation type="unfinished">제품</translation>
+        <translation>제품</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="447"/>
         <source>Department</source>
-        <translation type="unfinished">점검부서</translation>
+        <translation>점검부서</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="482"/>
         <source>Position</source>
-        <translation type="unfinished">직위</translation>
+        <translation>직위</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="521"/>
         <source>Name</source>
-        <translation type="unfinished">성명</translation>
+        <translation>성명</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="574"/>
@@ -1225,6 +1230,34 @@
     </message>
 </context>
 <context>
+    <name>PopupMetalLimitCriteria</name>
+    <message>
+        <location filename="qml/ui/metaldetector/PopupMetalLimitCriteria.qml" line="49"/>
+        <source>Edit limit criteria</source>
+        <translation>한계기준 수정</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/metaldetector/PopupMetalLimitCriteria.qml" line="106"/>
+        <source>Limit criteria(Fe)</source>
+        <translation>한계기준(Fe)</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/metaldetector/PopupMetalLimitCriteria.qml" line="125"/>
+        <source>Limit criteria(Sus)</source>
+        <translation>한계기준(Sus)</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/metaldetector/PopupMetalLimitCriteria.qml" line="160"/>
+        <source>Cancle</source>
+        <translation>취소</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/metaldetector/PopupMetalLimitCriteria.qml" line="171"/>
+        <source>Apply</source>
+        <translation>적용</translation>
+    </message>
+</context>
+<context>
     <name>PopupMetalManagementInfoEditor</name>
     <message>
         <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="52"/>
@@ -1262,32 +1295,30 @@
         <translation>성명</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="185"/>
         <source>Limit criteria(Fe)</source>
-        <translation>한계기준(Fe)</translation>
+        <translation type="vanished">한계기준(Fe)</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="200"/>
         <source>Limit criteria(Sus)</source>
-        <translation>한계기준(Sus)</translation>
+        <translation type="vanished">한계기준(Sus)</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="215"/>
+        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="217"/>
         <source>HACCP</source>
         <translation>HACCP</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="230"/>
+        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="232"/>
         <source>Checkup cycle</source>
         <translation>점검주기</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="252"/>
+        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="254"/>
         <source>Cancle</source>
         <translation>취소</translation>
     </message>
     <message>
-        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="263"/>
+        <location filename="qml/ui/metaldetector/PopupMetalManagementInfoEditor.qml" line="265"/>
         <source>Apply</source>
         <translation>적용</translation>
     </message>

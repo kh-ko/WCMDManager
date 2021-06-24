@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QDebug>
 
+#include "source/service/devinfoservice.h"
 #include "source/qmlmodel/panelmdopreportrowmodel.h"
 
 class PanelMDOPReportModel : public QObject
@@ -158,6 +159,8 @@ public slots:
 
     void onLoaded(int err)
     {
+        DevInfoDto devInfo = pDevInfoSvc->findDevInfo(mDailyHis.mDevNum);
+
         foreach(PDStatsDto stats, mDailyHis.mPS.mPSList)
         {
             PanelMDOPReportRowModel * row = new PanelMDOPReportRowModel(this);
@@ -166,8 +169,8 @@ public slots:
             row->mPName     = stats.mName;
             row->mTotalCnt  = QString("%L1").arg(stats.mMDTotalCnt);
             row->mNGCnt     = QString("%L1").arg(stats.mMDFailCnt);
-            row->mLimitFe   = pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
-            row->mLimitSus  = pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
+            row->mLimitFe   = devInfo.getLimFe(stats.mSeq);//pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
+            row->mLimitSus  = devInfo.getLimSus(stats.mSeq);// pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
 
             if(stats.mMDTotalCnt == 0)
             {

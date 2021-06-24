@@ -33,8 +33,8 @@ Item {
         inputDepartment.inputText   = department
         inputPosition.inputText     = position
         inputName.inputText         = name
-        inputLimitFe.inputText      = limitCriteriaFe
-        inputLimitSus.inputText     = limitCriteriaSus
+        //inputLimitFe.inputText      = limitCriteriaFe
+        //inputLimitSus.inputText     = limitCriteriaSus
         inputHACCP.inputText        = haccp
         inputCheckupCycle.inputText = checkupcycle
 
@@ -46,7 +46,7 @@ Item {
         id : popup
 
         modality : Qt.WindowModal
-        minimumHeight: 630
+        minimumHeight: 526
         minimumWidth: 500
 
         title: qsTr("Management infomation")
@@ -73,7 +73,7 @@ Item {
                     anchors.right: parent.right
                     anchors.rightMargin: 20
 
-                    height: 800
+                    height: 696 //800
 
                     UiComboBox{
                         id : comboDeviceNum
@@ -171,6 +171,7 @@ Item {
                         labelWidth: 160
                     }
 
+                    /*
                     UiInputText{
                         id: inputLimitFe
                         anchors.top: inputName.bottom
@@ -200,10 +201,11 @@ Item {
                         labelText: qsTr("Limit criteria(Sus)")
                         labelWidth: 160
                     }
+                    */
 
                     UiInputText{
                         id: inputHACCP
-                        anchors.top: inputLimitSus.bottom
+                        anchors.top: inputName.bottom
                         anchors.topMargin: 10
                         anchors.left: parent.left
                         anchors.leftMargin: 0

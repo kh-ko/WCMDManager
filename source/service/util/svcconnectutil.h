@@ -16,6 +16,8 @@
 #define ENABLE_SLOT_DLOAD_LOAD_COMPLETE            connect(DataLoaderService::getInstance()  , SIGNAL(signalEventLoadComplete()                 ), this, SLOT(onLoadComplete()                 ))
 #define ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING       connect(DataLoaderService::getInstance()  , SIGNAL(signalEventChangedIsLoading(bool)         ), this, SLOT(onChangedIsLoading(bool)         ))
 
-#define ENABLE_SLOT_DEVSEARCH_COMPLETED            connect   (DevSearchService::getInstance()   , SIGNAL(signalEventCompletedSearch()              ), this, SLOT(onCompletedSearch()              ))
-#define DISABLE_SLOT_DEVSEARCH_COMPLETED           disconnect(DevSearchService::getInstance()   , SIGNAL(signalEventCompletedSearch()              ), this, SLOT(onCompletedSearch()              ))
+#define ENABLE_SLOT_DINFO_CHANGED_LIMIT_CRITERIA   connect(DevInfoService::getInstance()     , SIGNAL(signalEventChangedDevMDLimit(int, QString)), this, SLOT(onChangedLimitCriteria(int, QString)))
+
+#define ENABLE_SLOT_DEVSEARCH_COMPLETED            connect   (DevSearchService::getInstance()   , SIGNAL(signalEventCompletedSearch()              ), this, SLOT(onCompletedSearch()           ))
+#define DISABLE_SLOT_DEVSEARCH_COMPLETED           disconnect(DevSearchService::getInstance()   , SIGNAL(signalEventCompletedSearch()              ), this, SLOT(onCompletedSearch()           ))
 #endif // SVCCONNECTUTIL_H

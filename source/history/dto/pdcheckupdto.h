@@ -8,6 +8,7 @@
 class PDCheckupDto
 {
 public:
+    quint64 mProductSeq = 0;
     int     mProductNo  = 0;
     QString mProductName= "";
     QTime   mTime;
@@ -20,6 +21,7 @@ public:
 
     PDCheckupDto(){}
     PDCheckupDto(const PDCheckupDto& copy):
+        mProductSeq (copy.mProductSeq ),
         mProductNo  (copy.mProductNo  ),
         mProductName(copy.mProductName),
         mTime       (copy.mTime       ),
@@ -33,6 +35,7 @@ public:
 
     PDCheckupDto& operator=(const PDCheckupDto& other)
     {
+        mProductSeq  = other.mProductSeq ;
         mProductNo   = other.mProductNo  ;
         mProductName = other.mProductName;
         mTime        = other.mTime       ;
@@ -47,6 +50,7 @@ public:
 
     bool setValue(EventDto event, int pdNum, QString pdName)
     {
+        mProductSeq  = event.mPDSeq;
         mProductNo   = pdNum;
         mProductName = pdName;
         mTime        = event.mDateTime.time();
@@ -76,7 +80,8 @@ public:
             QString key   = field.left(splitIdx);
             QString value = field.mid(splitIdx+1);
 
-            if     (key == "PNO"  ){findFieldCnt++; mProductNo   = value.toInt()              ;}
+            if     (key == "PSEQ" ){findFieldCnt++; mProductSeq  = value.toULongLong()        ;}
+            else if(key == "PNO"  ){findFieldCnt++; mProductNo   = value.toInt()              ;}
             else if(key == "PNAME"){findFieldCnt++; mProductName = value                      ;}
             else if(key == "TIME" ){findFieldCnt++; mTime        = QTime::fromString(TIME_FMT);}
             else if(key == "FE01" ){findFieldCnt++; mIsPassFe01  = (value.toInt() == 1)       ;}
@@ -91,7 +96,8 @@ public:
     }
 
     QString toString(){
-        return QString("PNO:%1,PNAME:%2,TIME:%3,FE01:%4,FE02:%5,FE03:%6,SUS01:%7,SUS02:%8,SUS03:%9")
+        return QString("PSEQ:%1,PNO:%2,PNAME:%3,TIME:%4,FE01:%5,FE02:%6,FE03:%7,SUS01:%8,SUS02:%9,SUS03:%10")
+                .arg(mProductSeq)
                 .arg(mProductNo)
                 .arg(mProductName)
                 .arg(mTime.toString(TIME_FMT))

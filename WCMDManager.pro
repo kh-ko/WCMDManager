@@ -102,6 +102,7 @@ HEADERS += \
     source/qmlmodel/panelwctrendsmodel.h \
     source/qmlmodel/panelwctrendsreportmodel.h \
     source/qmlmodel/panelweightmanagementinfomodel.h \
+    source/qmlmodel/popupmetallimitcriteriamodel.h \
     source/qmlmodel/windowsettingmodel.h \
     source/remote/dto/devinfodto.h \
     source/remote/dto/enum/remoteenumdef.h \

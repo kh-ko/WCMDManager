@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "source/service/coreservice.h"
+#include "source/service/devinfoservice.h"
 #include "source/service/util/svcconnectutil.h"
 
 class PanelMetalCheckupHistoryModel : public QObject
@@ -65,13 +66,15 @@ public slots:
 
         return pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mTime.toString(TIME_FMT);
     }
-    Q_INVOKABLE QString getLimCriteriaFe()
+    Q_INVOKABLE QString getLimCriteriaFe(int idx)
     {
-        return pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
+        return mDevInfo.getLimFe(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mProductSeq);
+        //return pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
     }
-    Q_INVOKABLE QString getLimCriteriaSus()
+    Q_INVOKABLE QString getLimCriteriaSus(int idx)
     {
-        return pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
+        return mDevInfo.getLimSus(pDLoaderSvc->mDailyHis.mEH.mCheckupEventList[idx].mProductSeq);
+        //return pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
     }
     Q_INVOKABLE bool getJudgFe01(int idx)
     {
@@ -137,17 +140,30 @@ public slots:
     void onChangedIsLoading(bool value)
     {
         setIsLoading(value);
+
+        mDevInfo = pDevInfoSvc->findDevInfo(pDLoaderSvc->mDevNum);
     }
+
+    void onChangedLimitCriteria(int dNum, QString strLimitCriteria)
+    {
+        mDevInfo = pDevInfoSvc->findDevInfo(pDLoaderSvc->mDevNum);
+
+        emit signalEventChangedIsLoading(false);
+    }
+
     void onChangedMetalDetectorSetting()
     {
         setMDCheckupCycle(pLSettingSvc->mMDSettingModel.mCheckupCycle    );
     }
 
 public:
+    DevInfoDto mDevInfo;
+
     explicit PanelMetalCheckupHistoryModel(QObject *parent = nullptr):QObject(parent)
     {
         ENABLE_SLOT_DLOAD_CHANGED_IS_LOADING;
         ENABLE_SLOT_LSETTING_CHANGED_MD_SETTING;
+        ENABLE_SLOT_DINFO_CHANGED_LIMIT_CRITERIA;
 
         onChangedIsLoading(pDLoaderSvc->mIsLoading);
         onChangedMetalDetectorSetting();

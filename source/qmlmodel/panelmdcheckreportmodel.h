@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDate>
 #include <QDebug>
+#include "source/service/devinfoservice.h"
 #include "source/history/dailyhistory.h"
 #include "source/qmlmodel/panelmdcheckreportrowmodel.h"
 
@@ -16,6 +17,7 @@ public:
     int mFirstPageRowCnt = 16;
     int mPageRowCnt      = 23;
 
+    DevInfoDto     mDevInfo;
     DailyHistory   mDailyHis;
     QList<PanelMDCheckReportRowModel *> mListRow;
 
@@ -70,6 +72,8 @@ public:
                                              .arg(QString::number(date.day()).rightJustified(2, '0'))
                                              .arg(QString::number(date.year()).rightJustified(4, '0'));
         }
+
+        mDevInfo = pDevInfoSvc->findDevInfo(pDLoaderSvc->mDevNum);
     }
 
     QString getStrDate(){ return mStrDate; }
@@ -172,8 +176,8 @@ public slots:
             pRow->mSus01     = checkup.mIsPassSus01 == true ? "O" : "X";
             pRow->mSus02     = checkup.mIsPassSus02 == true ? "O" : "X";
             pRow->mSus03     = checkup.mIsPassSus03 == true ? "O" : "X";
-            pRow->mLimitFe   = pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
-            pRow->mLimitSus  = pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
+            pRow->mLimitFe   = mDevInfo.getLimFe(checkup.mProductSeq);//pLSettingSvc->mMDSettingModel.mLimitCriteriaFe;
+            pRow->mLimitSus  = mDevInfo.getLimSus(checkup.mProductSeq);//pLSettingSvc->mMDSettingModel.mLimitCriteriaSus;
 
             mListRow.append(pRow);
         }

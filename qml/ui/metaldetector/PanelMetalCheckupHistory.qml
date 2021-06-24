@@ -32,7 +32,13 @@ Rectangle {
     PanelMetalCheckupHistoryModel{
         id : panelmodel
 
-        onSignalEventChangedIsLoading: { if(mIsLoading == false){ loadList() } }
+        onSignalEventChangedIsLoading:
+        {
+            if(mIsLoading == false)
+            {
+                loadList()
+            }
+        }
     }
 
     Component.onCompleted:
@@ -65,6 +71,22 @@ Rectangle {
         labelWidth: 142
 
         isDisable:  true
+    }
+
+    UiButton{
+        id : btnEditLimit
+        width: 180
+        height: 42
+        colType: EnumDefine.BTN_COLOR_TYPE_DEFAULT
+        isTextBtn: true
+        text : qsTr("Edit limit criteria")
+
+        anchors.verticalCenter: inputCheckupCycle.verticalCenter; anchors.right: inputCheckupCycle.left; anchors.rightMargin: 20
+        //fontColor: "#ffffff"
+
+        onSignalEventClicked: {
+            popupEditLimit.open()
+        }
     }
 
     RowLayout{
@@ -287,7 +309,7 @@ Rectangle {
                 }
 
                 UiLabel{
-                    text: panelmodel.getLimCriteriaFe()
+                    text: panelmodel.getLimCriteriaFe(dataIdx)
                     Layout.preferredWidth: 110
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -299,7 +321,7 @@ Rectangle {
                 }
 
                 UiLabel{
-                    text: panelmodel.getLimCriteriaSus()
+                    text: panelmodel.getLimCriteriaSus(dataIdx)
                     Layout.preferredWidth: 110
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -383,5 +405,10 @@ Rectangle {
                 }
             }
         }
+    }
+
+
+    PopupMetalLimitCriteria{
+        id : popupEditLimit
     }
 }
