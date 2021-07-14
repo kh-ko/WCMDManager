@@ -23,7 +23,7 @@ Item {
     width: 300
     height: 300
 
-    signal signalEventChagnedValue(string dNum, string dName, string company, string department, string position, string name, string limitCriteriaFe, string limitCriteriaSus, string haccp, string checkupcycle)
+    signal signalEventChagnedValue(string dNum, string dName, string company, string department, string position, string name, string haccp, string checkupcycle)
 
     function open(dNum, dName, company, department, position, name, limitCriteriaFe, limitCriteriaSus, haccp, checkupcycle)
     {
@@ -274,8 +274,6 @@ Item {
                                                           inputDepartment.inputText  ,
                                                           inputPosition.inputText    ,
                                                           inputName.inputText        ,
-                                                          inputLimitFe.inputText     ,
-                                                          inputLimitSus.inputText    ,
                                                           inputHACCP.inputText       ,
                                                           inputCheckupCycle.inputText)
 

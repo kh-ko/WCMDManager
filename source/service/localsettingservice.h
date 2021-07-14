@@ -32,7 +32,7 @@ public:
     }
 
     QString                   mOldVersion           ;
-    QString                   mVersion              = "0.2.0";
+    QString                   mVersion              = "0.2.1";
     int                       mLanguage             ;
     QString                   mPassword             ;
     int                       mMoniteringRefreshCycle;
@@ -146,15 +146,15 @@ public:
         emit signalEventChangedManagerSetting();
     }
 
-    void setMetalDetectorSetting(QString limitCriteriaFe, QString limitCriteriaSus, QString haccp, QString checkupCycle)
+    void setMetalDetectorSetting(QString haccp, QString checkupCycle)
     {
-        mMDSettingModel.setLimitCriteriaFe (limitCriteriaFe );
-        mMDSettingModel.setLimitCriteriaSus(limitCriteriaSus);
+        //mMDSettingModel.setLimitCriteriaFe (limitCriteriaFe );
+        //mMDSettingModel.setLimitCriteriaSus(limitCriteriaSus);
         mMDSettingModel.setHACCP           (haccp           );
         mMDSettingModel.setCheckupCycle    (checkupCycle    );
 
-        mpSettings->setValue("metaldetector/limit_criteria_fe" , limitCriteriaFe );
-        mpSettings->setValue("metaldetector/limit_criteria_sus", limitCriteriaSus);
+        //mpSettings->setValue("metaldetector/limit_criteria_fe" , limitCriteriaFe );
+        //mpSettings->setValue("metaldetector/limit_criteria_sus", limitCriteriaSus);
         mpSettings->setValue("metaldetector/haccp"             , haccp           );
         mpSettings->setValue("metaldetector/checkup_cycle"     , checkupCycle    );
 
@@ -241,7 +241,7 @@ private:
         QString haccp            =  mpSettings->value("metaldetector/haccp"             , "CCP - 2P").toString();
         QString checkupCycle     =  mpSettings->value("metaldetector/checkup_cycle"     , "매 운전시 마다").toString();
 
-        setMetalDetectorSetting(limitCriteriaFe, limitCriteriaSus, haccp, checkupCycle);
+        setMetalDetectorSetting(haccp, checkupCycle);
     }
 
     void loadSignSetting()

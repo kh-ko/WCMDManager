@@ -336,7 +336,7 @@ Rectangle {
         }
 
         onSignalEventChagnedValue: {
-            model.onCommandSetManagementInfo(dNum, dName, company, department, position, name, limitCriteriaFe, limitCriteriaSus, haccp, checkupcycle)
+            model.onCommandSetManagementInfo(dNum, dName, company, department, position, name, haccp, checkupcycle)
         }
     }
 }

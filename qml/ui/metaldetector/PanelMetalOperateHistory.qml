@@ -231,7 +231,7 @@ Rectangle {
                 }
 
                 UiLabel{
-                    text: panelmodel.getLimCriteriaFe()
+                    text: panelmodel.getLimCriteriaFe(dataIdx)
                     Layout.preferredWidth: 158
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -243,7 +243,7 @@ Rectangle {
                 }
 
                 UiLabel{
-                    text: panelmodel.getLimCriteriaSus()
+                    text: panelmodel.getLimCriteriaSus(dataIdx)
                     Layout.preferredWidth: 158
                     Layout.fillWidth: true
                     Layout.fillHeight: true

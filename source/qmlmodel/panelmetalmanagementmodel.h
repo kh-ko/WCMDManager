@@ -75,12 +75,12 @@ public slots:
     Q_INVOKABLE int     onCommandGetDListSize()   { return pDevInfoSvc->mDevList.size();}
     Q_INVOKABLE int     onCommandGetDNum(int idx) { return pDevInfoSvc->mDevList[idx].mNumber;}
     Q_INVOKABLE QString onCommandGetDName(int idx){ return pDevInfoSvc->mDevList[idx].mName;}
-    Q_INVOKABLE void    onCommandSetManagementInfo(QString dNum, QString dName, QString company, QString department, QString position, QString name, QString limitCriteriaFe, QString limitCriteriaSus, QString haccp, QString checkupcycle)
+    Q_INVOKABLE void    onCommandSetManagementInfo(QString dNum, QString dName, QString company, QString department, QString position, QString name, QString haccp, QString checkupcycle)
     {
         pDevInfoSvc->editDevInfo(dNum.toInt(), dName);
         pLSettingSvc->setDeviceNumber(dNum.toInt());
         pLSettingSvc->setMDManagerSetting(company, department, position, name);
-        pLSettingSvc->setMetalDetectorSetting(limitCriteriaFe, limitCriteriaSus, haccp, checkupcycle);
+        pLSettingSvc->setMetalDetectorSetting(haccp, checkupcycle);
     }
 public slots:
     void onChangedDeviceNumber()
