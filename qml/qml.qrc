@@ -72,17 +72,12 @@
         <file>ui/report/DocCheckBox.qml</file>
         <file>ui/report/DocButton.qml</file>
         <file>ui/report/PanelMDOPReportNextPage.qml</file>
-        <file>ui/report/PanelMDOPReportContainer.qml</file>
         <file>ui/report/ControlInputDate.qml</file>
         <file>ui/report/ControlReportMenu.qml</file>
         <file>ui/report/DialogPassword.qml</file>
         <file>control/UiDialogLoading.qml</file>
         <file>ui/report/ControlSignatureCheck.qml</file>
         <file>ui/report/image_icon/protect.jpg</file>
-        <file>ui/report/PanelMDCheckReportContainer.qml</file>
-        <file>ui/report/PanelMDCheckReportWindow.qml</file>
-        <file>ui/report/PanelMDCheckReportFirstPage.qml</file>
-        <file>ui/report/PanelMDCheckReportOtherPage.qml</file>
         <file>ui/report/TestRow.qml</file>
         <file>ui/weightchecker/PanelWeightCalendar.qml</file>
         <file>control/UiScrollView.qml</file>
@@ -110,5 +105,14 @@
         <file>ui/PanelHistoryCopyProgress.qml</file>
         <file>ui/weightchecker/PanelWeightHistory.qml</file>
         <file>ui/metaldetector/PopupMetalLimitCriteria.qml</file>
+        <file>ui/report/PanelReportWindow.qml</file>
+        <file>ui/report/PanelMDCheckReportFirstPage.qml</file>
+        <file>ui/report/PanelMDCheckReportNextPage.qml</file>
+        <file>ui/report/PanelMDDetectReportFirstPage.qml</file>
+        <file>ui/report/PanelMDDetectReportNextPage.qml</file>
+        <file>ui/report/PanelWCOPReportFirstPage.qml</file>
+        <file>ui/report/PanelWCOPReportNextPage.qml</file>
+        <file>ui/report/PanelWCDetectReportFirstPage.qml</file>
+        <file>ui/report/PanelWCDetectReportNextPage.qml</file>
     </qresource>
 </RCC>

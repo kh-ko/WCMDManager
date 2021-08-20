@@ -51,6 +51,12 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 0
+
+        onTextChanged: {
+            if(inputFocus == false) return;
+
+            pageModel.onCommandSetTitle(text)
+        }
     }
 
     Rectangle {
@@ -254,7 +260,7 @@ Rectangle {
 
         ColumnLayout {
             id: header
-            height: 132
+            height: 99
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
@@ -300,10 +306,15 @@ Rectangle {
                     anchors.bottom: parent.bottom
                     anchors.top: parent.top
                     anchors.leftMargin: 0
+
+                    onTextChanged: {
+                        if(inputFocus == false) return;
+                        pageModel.onCommandSetCompany(text)
+                    }
                 }
 
                 Rectangle {
-                    id: labelDeviceNum
+                    id: labelCheckDate
                     width: 130
                     color: "#00000000"
                     border.width: 1
@@ -311,7 +322,7 @@ Rectangle {
                     anchors.leftMargin: 0
                     Text {
                         id: element1
-                        text: qsTr("Device number")
+                        text: qsTr("Checkup date")
                         anchors.fill: parent
                         font.pixelSize: 12
                         horizontalAlignment: Text.AlignHCenter
@@ -325,57 +336,20 @@ Rectangle {
                 }
 
                 DocTextField {
-                    id: inputDeviceNum
-                    text: pageModel.mDevNum
-                    anchors.left: labelDeviceNum.right
-                    anchors.leftMargin: 0
-                    anchors.bottom: parent.bottom
-                    anchors.top: parent.top
-                    anchors.rightMargin: 0
-                    anchors.right: parent.right
-                }
-            }
-
-            Rectangle {
-                id: rectangle9
-                width: 200
-                height: 91
-                color: "#00000000"
-                Rectangle {
-                    id: labelDate
-                    width: 130
-                    color: "#00000000"
-                    border.width: 1
-                    Text {
-                        id: element2
-                        width: 120
-                        text: qsTr("Operate date")
-                        anchors.fill: parent
-                        font.pixelSize: 12
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        anchors.rightMargin: 0
-                    }
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: parent.top
-                    anchors.bottomMargin: 0
-                }
-
-                DocTextField {
-                    id: inputDate
-                    y: 0
+                    id: inputCheckDate
                     text: pageModel.mStrDate
-                    anchors.right: parent.right
-                    anchors.rightMargin: 0
-                    anchors.left: labelDate.right
+                    anchors.left: labelCheckDate.right
                     anchors.leftMargin: 0
                     anchors.bottom: parent.bottom
                     anchors.top: parent.top
+                    anchors.rightMargin: 0
+                    anchors.right: parent.right
+
+                    onTextChanged: {
+                        if(inputFocus == false) return;
+                        pageModel.onCommandSetStrDate(text)
+                    }
                 }
-                border.width: 1
-                Layout.fillHeight: true
-                Layout.fillWidth: true
             }
 
             Rectangle {
@@ -383,13 +357,132 @@ Rectangle {
                 width: 200
                 height: 91
                 color: "#00000000"
+                border.width: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                Rectangle {
+                    id: labelCycle
+                    width: 130
+                    color: "#00000000"
+                    border.width: 1
+                    Text {
+                        id: element4
+                        width: 120
+                        text: qsTr("Checkup cycle")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.rightMargin: 0
+                    }
+                    anchors.bottom: parent.bottom
+                    anchors.topMargin: 0
+                    anchors.top: parent.top
+                    anchors.bottomMargin: 0
+                }
+
+                DocTextField {
+                    id: inputCycle
+                    width : 180
+                    text: pageModel.mCheckCycle
+                    anchors.left: labelCycle.right
+                    anchors.leftMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.top: parent.top
+
+                    onTextChanged: {
+                        if(inputFocus == false) return;
+                        pageModel.onCommandSetCheckupCycle(text)
+                    }
+                }
+
+                Rectangle {
+                    id: labelDNum
+                    width: 61
+                    color: "#00000000"
+                    border.width: 1
+                    Text {
+                        width: 120
+                        text: qsTr("Device")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.rightMargin: 0
+                    }
+                    anchors.left: inputCycle.right
+                    anchors.leftMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
+                }
+
+                DocTextField {
+                    id: inputDNum
+                    width : 128
+                    text: pageModel.mDevNum
+                    anchors.left: labelDNum.right
+                    anchors.leftMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
+                }
+
+                Rectangle {
+                    id: labelJudg
+                    width: 82
+                    color: "#00000000"
+                    border.width: 1
+                    Text {
+                        width: 120
+                        text: qsTr("Judgment")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.rightMargin: 0
+                    }
+                    anchors.left: inputDNum.right
+                    anchors.leftMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
+                }
+
+                Text {
+                    text: qsTr("PASS : O, FAIL : X")
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.left: labelJudg.right
+                    anchors.leftMargin: 0
+                    anchors.right: parent.right
+                    anchors.rightMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
+                }
+
+            }
+
+            Rectangle {
+                width: 200
+                height: 91
+                color: "#00000000"
+                border.width: 1
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
                 Rectangle {
                     id: labelDepartment
                     width: 130
                     color: "#00000000"
                     border.width: 1
                     Text {
-                        id: element4
                         width: 120
                         text: qsTr("Department")
                         anchors.fill: parent
@@ -406,32 +499,20 @@ Rectangle {
 
                 DocTextField {
                     id: inputDepartment
-                    y: 0
+                    width : 180
                     text: pageModel.mDepartment
-                    anchors.right: parent.right
-                    anchors.rightMargin: 0
                     anchors.left: labelDepartment.right
                     anchors.leftMargin: 0
                     anchors.bottom: parent.bottom
                     anchors.top: parent.top
                 }
-                border.width: 1
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-            }
 
-            Rectangle {
-                id: rectangle11
-                width: 200
-                height: 91
-                color: "#00000000"
                 Rectangle {
                     id: labelPosition
-                    width: 130
+                    width: 61
                     color: "#00000000"
                     border.width: 1
                     Text {
-                        id: element6
                         width: 120
                         text: qsTr("Position")
                         anchors.fill: parent
@@ -440,60 +521,62 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                         anchors.rightMargin: 0
                     }
+                    anchors.left: inputDepartment.right
+                    anchors.leftMargin: 0
                     anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: parent.top
                     anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
                 }
 
                 DocTextField {
                     id: inputPosition
-                    x: 200
-                    y: 0
-                    width: 240
+                    width : 128
                     text: pageModel.mPosition
                     anchors.left: labelPosition.right
                     anchors.leftMargin: 0
                     anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
                     anchors.top: parent.top
+                    anchors.topMargin: 0
                 }
 
                 Rectangle {
                     id: labelName
-                    width: 130
+                    width: 82
                     color: "#00000000"
                     border.width: 1
                     Text {
-                        id: element7
+                        width: 120
                         text: qsTr("Name")
                         anchors.fill: parent
                         font.pixelSize: 12
-                        verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
                         anchors.rightMargin: 0
                     }
                     anchors.left: inputPosition.right
                     anchors.leftMargin: 0
                     anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: parent.top
                     anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
                 }
 
                 DocTextField {
                     id: inputName
-                    y: -1
+                    width : 128
                     text: pageModel.mName
                     anchors.left: labelName.right
                     anchors.leftMargin: 0
-                    anchors.bottom: parent.bottom
-                    anchors.top: parent.top
-                    anchors.rightMargin: 0
                     anchors.right: parent.right
+                    anchors.rightMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
                 }
-                border.width: 1
-                Layout.fillHeight: true
-                Layout.fillWidth: true
+
             }
         }
 
@@ -513,7 +596,7 @@ Rectangle {
                 id: element3
                 height: 34
                 color: "#ffffff"
-                text: qsTr("Operate history")
+                text: qsTr("Monitoring history")
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 anchors.fill: parent
@@ -536,7 +619,7 @@ Rectangle {
             Rectangle {
                 id: listHeader
                 width: 200
-                height: 100
+                height: 60
                 color: "#00000000"
                 Layout.fillWidth: true
 
@@ -563,6 +646,26 @@ Rectangle {
                 }
 
                 Rectangle {
+                    id: labelTimeTitle
+                    width: 80
+                    color: "#00000000"
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 0
+                    anchors.left: labelPNumTitle.right
+                    anchors.leftMargin: -1
+                    Text {
+                        text: qsTr("Detect time")
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                    }
+                    border.width: 1
+                }
+
+                Rectangle {
                     id: labelPNameTitle
                     width: 200
                     color: "#00000000"
@@ -570,7 +673,7 @@ Rectangle {
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 0
-                    anchors.left: labelPNumTitle.right
+                    anchors.left: labelTimeTitle.right
                     anchors.leftMargin: -1
                     Text {
                         id: element8
@@ -584,68 +687,9 @@ Rectangle {
                 }
 
                 Rectangle {
-                    id: labellimitTitle
-                    width: 150
+                    id: labelDescriptionTitle
+                    width: 140
                     color: "#00000000"
-                    Text {
-                        id: element9
-                        text: qsTr("Limit criteria<br><br>(θ, mm)")
-                        anchors.bottom: labelLimitFeTitle.top
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottomMargin: 0
-                        anchors.leftMargin: 0
-                        anchors.rightMargin: 0
-                        font.pixelSize: 12
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Rectangle {
-                        id: labelLimitFeTitle
-                        y: 87
-                        width: parent.width / 2
-                        height: 33
-                        color: "#00000000"
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 0
-                        anchors.left: parent.left
-                        anchors.leftMargin: 0
-                        border.width: 1
-
-                        Text {
-                            id: element10
-                            text: qsTr("Fe")
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            anchors.fill: parent
-                            font.pixelSize: 12
-                        }
-                    }
-
-                    Rectangle {
-                        id: labelLimitSusTitle
-                        color: "#00000000"
-                        border.width: 1
-                        anchors.top: labelLimitFeTitle.top
-                        anchors.topMargin: 0
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 0
-                        anchors.right: parent.right
-                        anchors.rightMargin: 0
-                        anchors.left: labelLimitFeTitle.right
-                        anchors.leftMargin: -1
-
-                        Text {
-                            id: element11
-                            text: qsTr("Sus")
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            anchors.fill: parent
-                            font.pixelSize: 12
-                        }
-                    }
                     anchors.left: labelPNameTitle.right
                     anchors.leftMargin: -1
                     border.width: 1
@@ -653,70 +697,79 @@ Rectangle {
                     anchors.topMargin: 0
                     anchors.top: parent.top
                     anchors.bottomMargin: 0
-                }
 
-                Rectangle {
-                    id: labelTotalCntTitle
-                    width: 120
-                    color: "#00000000"
                     Text {
-                        id: element12
-                        text: qsTr("Total count")
+                        id: element9
+                        text: qsTr("Description")
                         anchors.fill: parent
                         font.pixelSize: 12
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                     }
-                    anchors.left: labellimitTitle.right
+                }
+
+                Rectangle {
+                    id: labelActionTitle
+                    width: 140
+                    color: "#00000000"
+                    anchors.left: labelDescriptionTitle.right
                     anchors.leftMargin: -1
                     border.width: 1
                     anchors.bottom: parent.bottom
                     anchors.topMargin: 0
                     anchors.top: parent.top
                     anchors.bottomMargin: 0
+
+                    Text {
+                        id: element10
+                        text: qsTr("Follow up<br>action")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                    }
                 }
 
                 Rectangle {
-                    id: labelNGCntTitle
-                    width: 120
+                    id: labelComplete
                     color: "#00000000"
-                    Text {
-                        id: element13
-                        text: qsTr("Detect count")
-                        anchors.fill: parent
-                        font.pixelSize: 12
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                    anchors.left: labelTotalCntTitle.right
-                    anchors.leftMargin: -1
+                    width: 70
                     border.width: 1
+                    anchors.left: labelActionTitle.right
+                    anchors.leftMargin: -1
                     anchors.bottom: parent.bottom
                     anchors.topMargin: 0
                     anchors.top: parent.top
                     anchors.bottomMargin: 0
+                    Text {
+                        id: element14
+                        text: qsTr("Action<br>complete<br>/Sign")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                    }
                 }
 
                 Rectangle {
-                    id: labelNGRateTitle
+                    id: labelComment
                     color: "#00000000"
                     anchors.right: parent.right
                     anchors.rightMargin: 0
-                    Text {
-                        id: element14
-                        text: qsTr("Detect rate(%)")
-                        anchors.fill: parent
-                        font.pixelSize: 12
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                    anchors.left: labelNGCntTitle.right
+                    anchors.left: labelComplete.right
                     anchors.leftMargin: -1
                     border.width: 1
                     anchors.bottom: parent.bottom
                     anchors.topMargin: 0
                     anchors.top: parent.top
                     anchors.bottomMargin: 0
+                    Text {
+                        text: qsTr("Confirmer<br>/Sign")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                    }
                 }
             }
         }
@@ -743,7 +796,6 @@ Rectangle {
         font.pixelSize: 12
     }
 
-
     MouseArea{
         anchors.fill: parent
         hoverEnabled: true
@@ -751,189 +803,159 @@ Rectangle {
     }
 
     Component{
-        id: listRow
+        id : listRow
+
         Rectangle {
+            color: "#00000000"
+            Layout.preferredHeight: 1
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
             property int rowPageIdx
 
             function setValus()
             {
-                inputPNum.text     = pageModel.onCommandGetColumnValue(rowPageIdx, 0 )
-                inputPName.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 1 )
-                inputLimitFe.text  = pageModel.onCommandGetColumnValue(rowPageIdx, 2 )
-                inputLimitSus.text = pageModel.onCommandGetColumnValue(rowPageIdx, 3 )
-                inputTotalCnt.text = pageModel.onCommandGetColumnValue(rowPageIdx, 4 )
-                inputNGCnt.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 5 )
-                inputNGRate.text   = pageModel.onCommandGetColumnValue(rowPageIdx, 6 )
+                inputPNum.text           = pageModel.onCommandGetColumnValue(rowPageIdx, 0 )
+                inputTime.text           = pageModel.onCommandGetColumnValue(rowPageIdx, 1 )
+                inputPName.text          = pageModel.onCommandGetColumnValue(rowPageIdx, 2 )
+                inputDescription.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 3 )
+                inputFollowUpAction.text = pageModel.onCommandGetColumnValue(rowPageIdx, 4 )
+                inputActionComplete.text = pageModel.onCommandGetColumnValue(rowPageIdx, 5 )
+                inputConfirmer.text      = pageModel.onCommandGetColumnValue(rowPageIdx, 6 )
             }
 
             Component.onCompleted: {
                 setValus();
             }
 
-            width: 200
-            height: 120
-            color: "#00000000"
-
             Rectangle {
                 id: inputPNumBox
                 width: 50
                 color: "#00000000"
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0
+                border.width: 1
+
                 DocTextField {
                     id : inputPNum
                     anchors.fill: parent
                 }
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                border.width: 1
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 0
+            }
+
+            Rectangle {
+                id: inputTimeBox
+                width: 80
+                color: "#00000000"
                 anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
                 anchors.bottomMargin: 0
+                anchors.left: inputPNumBox.right
+                anchors.leftMargin: -1
+                border.width: 1
+
+                DocTextField {
+                    id : inputTime
+                    anchors.fill: parent
+                }
             }
 
             Rectangle {
                 id: inputPNameBox
                 width: 200
                 color: "#00000000"
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0
+                anchors.left: inputTimeBox.right
+                anchors.leftMargin: -1
+                border.width: 1
+
                 DocTextField {
                     id : inputPName
                     anchors.fill: parent
                 }
-                anchors.left: inputPNumBox.right
-                anchors.leftMargin: -1
-                border.width: 1
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 0
-                anchors.top: parent.top
-                anchors.bottomMargin: 0
             }
 
             Rectangle {
-                id: inputlimitBox
-                width: 150
+                id: inputDescriptionBox
+                width: 140
                 color: "#00000000"
-                Rectangle {
-                    id: inputLimitFeBox
-                    width: parent.width / 2
-                    color: "#00000000"
-                    DocTextField {
-                        id : inputLimitFe
-                        anchors.fill: parent
-                    }
-                    anchors.left: parent.left
-                    anchors.leftMargin: 0
-                    border.width: 1
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: parent.top
-                    anchors.bottomMargin: 0
-                }
-
-                Rectangle {
-                    id: inputLimitSusBox
-                    color: "#00000000"
-                    DocTextField {
-                        id: inputLimitSus
-                        anchors.fill: parent
-                    }
-                    anchors.left: inputLimitFeBox.right
-                    anchors.leftMargin: -1
-                    border.width: 1
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: inputLimitFeBox.top
-                    anchors.rightMargin: 0
-                    anchors.right: parent.right
-                    anchors.bottomMargin: 0
-                }
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0
                 anchors.left: inputPNameBox.right
                 anchors.leftMargin: -1
                 border.width: 1
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 0
-                anchors.top: parent.top
-                anchors.bottomMargin: 0
+
+                DocTextField {
+                    id : inputDescription
+                    anchors.fill: parent
+                }
             }
 
             Rectangle {
-                id: inputTotalCntBox
-                width: 120
+                id: inputFollowUpActionBox
+                width: 140
                 color: "#00000000"
-                DocTextField {
-                    id : inputTotalCnt
-                    anchors.fill: parent
-                }
-                anchors.left: inputlimitBox.right
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0
+                anchors.left: inputDescriptionBox.right
                 anchors.leftMargin: -1
                 border.width: 1
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 0
-                anchors.top: parent.top
-                anchors.bottomMargin: 0
+
+                DocTextField {
+                    id : inputFollowUpAction
+                    anchors.fill: parent
+                }
             }
 
             Rectangle {
-                id: inputNGCntBox
-                width: 120
+                id: inputActionCompleteBox
+                width: 70
                 color: "#00000000"
-                DocTextField {
-                    id : inputNGCnt
-                    anchors.fill: parent
-                }
-                anchors.left: inputTotalCntBox.right
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0
+                anchors.left: inputFollowUpActionBox.right
                 anchors.leftMargin: -1
                 border.width: 1
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 0
-                anchors.top: parent.top
-                anchors.bottomMargin: 0
+
+                DocTextField {
+                    id : inputActionComplete
+                    anchors.fill: parent
+                }
             }
 
+
             Rectangle {
-                id: inputNGRateBox
+                id: inputConfirmerBox
                 color: "#00000000"
-                DocTextField {
-                    id : inputNGRate
-                    anchors.fill: parent
-                }
-                anchors.left: inputNGCntBox.right
-                anchors.leftMargin: -1
-                border.width: 1
-                anchors.bottom: parent.bottom
-                anchors.topMargin: 0
                 anchors.top: parent.top
-                anchors.rightMargin: 0
+                anchors.topMargin: 0
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 0
+                anchors.left: inputActionCompleteBox.right
+                anchors.leftMargin: -1
                 anchors.right: parent.right
-                anchors.bottomMargin: 0
+                border.width: 1
+
+                DocTextField {
+                    id : inputConfirmer
+                    anchors.fill: parent
+                }
             }
-
-            /*
-            DocButton {
-                width: height
-                text: "X"
-                visible: page.isEditMode
-
-                anchors.left: parent.right
-                anchors.leftMargin: 3
-                anchors.top: parent.top
-                anchors.topMargin: 5
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 5
-
-                onClicked: {
-                    page.signalEventDeleteRow(page.pageIdx, rowPageIdx)}
-            }*/
-            Layout.fillHeight: true
-            Layout.fillWidth: true
         }
     }
-
-
 }
 
-/*##^##
-Designer {
-    D{i:23;anchors_x:200}D{i:30;anchors_x:200}D{i:34;anchors_x:200}D{i:41;anchors_x:203}
-D{i:18;anchors_height:200;anchors_width:200;anchors_x:78;anchors_y:463}
-}
-##^##*/
+

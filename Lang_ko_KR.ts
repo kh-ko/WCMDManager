@@ -42,22 +42,22 @@
 <context>
     <name>ControlReportMenu</name>
     <message>
-        <location filename="qml/ui/report/ControlReportMenu.qml" line="56"/>
+        <location filename="qml/ui/report/ControlReportMenu.qml" line="48"/>
         <source>Load</source>
         <translation>검색</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/ControlReportMenu.qml" line="142"/>
+        <location filename="qml/ui/report/ControlReportMenu.qml" line="125"/>
         <source>Lock</source>
         <translation>잠금</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/ControlReportMenu.qml" line="142"/>
+        <location filename="qml/ui/report/ControlReportMenu.qml" line="125"/>
         <source>Edit</source>
         <translation>수정</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/ControlReportMenu.qml" line="162"/>
+        <location filename="qml/ui/report/ControlReportMenu.qml" line="145"/>
         <source>Print</source>
         <translation>프린트</translation>
     </message>
@@ -155,128 +155,196 @@
 <context>
     <name>PanelMDCheckReportFirstPage</name>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="86"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="88"/>
         <source>Sign</source>
         <translation>결재</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="130"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="132"/>
         <source>Write</source>
         <translation>작성자</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="172"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="174"/>
         <source>Review</source>
         <translation>검토</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="218"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="220"/>
         <source>Approved</source>
         <translation>승인</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="289"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="291"/>
         <source>Company name</source>
         <translation>업체명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="323"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="325"/>
         <source>Checkup date</source>
         <translation>점검일자</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="370"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="372"/>
         <source>Checkup cycle</source>
         <translation>점검 주기</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="405"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="407"/>
         <source>Device</source>
         <translation>기기번호</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="444"/>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="802"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="441"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="784"/>
         <source>Judgment</source>
         <translation>판정</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="460"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="457"/>
         <source>PASS : O, FAIL : X</source>
         <translation>적합 : O, 부적합 : X</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="490"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="487"/>
         <source>Department</source>
         <translation>점검부서</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="525"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="517"/>
         <source>Position</source>
         <translation>직위</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="564"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="551"/>
         <source>Name</source>
         <translation>성명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="617"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="599"/>
         <source>Check history</source>
         <translation>점검 기록</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="658"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="640"/>
         <source>P NO</source>
         <translation>품번</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="677"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="659"/>
         <source>Check time</source>
         <translation>시간</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="698"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="680"/>
         <source>Product name</source>
         <translation>제품명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="713"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="695"/>
         <source>Limit criteria&lt;br&gt;&lt;br&gt;(θ, mm)</source>
         <translation>한계기준&lt;br&gt;&lt;br&gt;(θ, mm)</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="740"/>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="832"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="722"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="814"/>
         <source>Fe</source>
         <translation>Fe</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="763"/>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="852"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="745"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="834"/>
         <source>Sus</source>
         <translation>Sus</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="882"/>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="942"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="864"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="924"/>
         <source>1th</source>
         <translation>1회</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="902"/>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="962"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="884"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="944"/>
         <source>2th</source>
         <translation>2회</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="922"/>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="982"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="904"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="964"/>
         <source>3th</source>
         <translation>3회</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="999"/>
+        <location filename="qml/ui/report/PanelMDCheckReportFirstPage.qml" line="981"/>
+        <source>Comment</source>
+        <translation>특이사항</translation>
+    </message>
+</context>
+<context>
+    <name>PanelMDCheckReportNextPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="85"/>
+        <source>Check history</source>
+        <translation>점검 기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="126"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="145"/>
+        <source>Check time</source>
+        <translation>시간</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="166"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="181"/>
+        <source>Limit criteria&lt;br&gt;&lt;br&gt;(θ, mm)</source>
+        <translation>한계기준&lt;br&gt;&lt;br&gt;(θ, mm)</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="208"/>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="300"/>
+        <source>Fe</source>
+        <translation>Fe</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="231"/>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="320"/>
+        <source>Sus</source>
+        <translation>Sus</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="270"/>
+        <source>Judgment</source>
+        <translation>판정</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="350"/>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="410"/>
+        <source>1th</source>
+        <translation>1회</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="370"/>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="430"/>
+        <source>2th</source>
+        <translation>2회</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="390"/>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="450"/>
+        <source>3th</source>
+        <translation>3회</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDCheckReportNextPage.qml" line="467"/>
         <source>Comment</source>
         <translation>특이사항</translation>
     </message>
@@ -284,173 +352,306 @@
 <context>
     <name>PanelMDCheckReportOtherPage</name>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="89"/>
         <source>Check history</source>
-        <translation>점검 기록</translation>
+        <translation type="vanished">점검 기록</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="130"/>
         <source>P NO</source>
-        <translation>품번</translation>
+        <translation type="vanished">품번</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="149"/>
         <source>Check time</source>
-        <translation>시간</translation>
+        <translation type="vanished">시간</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="170"/>
         <source>Product name</source>
-        <translation>제품명</translation>
+        <translation type="vanished">제품명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="185"/>
         <source>Limit criteria&lt;br&gt;&lt;br&gt;(θ, mm)</source>
-        <translation>한계기준&lt;br&gt;&lt;br&gt;(θ, mm)</translation>
+        <translation type="vanished">한계기준&lt;br&gt;&lt;br&gt;(θ, mm)</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="212"/>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="304"/>
         <source>Fe</source>
-        <translation>Fe</translation>
+        <translation type="vanished">Fe</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="235"/>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="324"/>
         <source>Sus</source>
-        <translation>Sus</translation>
+        <translation type="vanished">Sus</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="274"/>
         <source>Judgment</source>
-        <translation>판정</translation>
+        <translation type="vanished">판정</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="354"/>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="414"/>
         <source>1th</source>
-        <translation>1회</translation>
+        <translation type="vanished">1회</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="374"/>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="434"/>
         <source>2th</source>
-        <translation>2회</translation>
+        <translation type="vanished">2회</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="394"/>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="454"/>
         <source>3th</source>
-        <translation>3회</translation>
+        <translation type="vanished">3회</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportOtherPage.qml" line="471"/>
         <source>Comment</source>
-        <translation>특이사항</translation>
+        <translation type="vanished">특이사항</translation>
     </message>
 </context>
 <context>
     <name>PanelMDCheckReportWindow</name>
     <message>
-        <location filename="qml/ui/report/PanelMDCheckReportWindow.qml" line="23"/>
         <source>Metal detector checkup report</source>
-        <translation>금속검출기 점검 보고서</translation>
+        <translation type="vanished">금속검출기 점검 보고서</translation>
+    </message>
+</context>
+<context>
+    <name>PanelMDDetectReportFirstPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="88"/>
+        <source>Sign</source>
+        <translation>결재</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="132"/>
+        <source>Write</source>
+        <translation>작성자</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="174"/>
+        <source>Review</source>
+        <translation>검토</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="220"/>
+        <source>Approved</source>
+        <translation>승인</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="291"/>
+        <source>Company name</source>
+        <translation>업체명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="325"/>
+        <source>Checkup date</source>
+        <translation>점검일자</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="372"/>
+        <source>Checkup cycle</source>
+        <translation>점검 주기</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="407"/>
+        <source>Device</source>
+        <translation>기기번호</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="441"/>
+        <source>Judgment</source>
+        <translation>판정</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="457"/>
+        <source>PASS : O, FAIL : X</source>
+        <translation>적합 : O, 부적합 : X</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="487"/>
+        <source>Department</source>
+        <translation>점검부서</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="517"/>
+        <source>Position</source>
+        <translation>직위</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="551"/>
+        <source>Name</source>
+        <translation>성명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="599"/>
+        <source>Monitoring history</source>
+        <translation>모니터링 기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="640"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="659"/>
+        <source>Detect time</source>
+        <translation>발생시간</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="680"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="703"/>
+        <source>Description</source>
+        <translation>이상 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="725"/>
+        <source>Follow up&lt;br&gt;action</source>
+        <translation>조치 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="746"/>
+        <source>Action&lt;br&gt;complete&lt;br&gt;/Sign</source>
+        <translation>조치완료&lt;br&gt;/서명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportFirstPage.qml" line="767"/>
+        <source>Confirmer&lt;br&gt;/Sign</source>
+        <translation>확인자&lt;br&gt;/서명</translation>
+    </message>
+</context>
+<context>
+    <name>PanelMDDetectReportNextPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="85"/>
+        <source>Monitoring history</source>
+        <translation>모니터링 기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="126"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="145"/>
+        <source>Detect time</source>
+        <translation>발생시간</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="166"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="189"/>
+        <source>Description</source>
+        <translation>이상 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="211"/>
+        <source>Follow up&lt;br&gt;action</source>
+        <translation>조치 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="232"/>
+        <source>Action&lt;br&gt;complete&lt;br&gt;/Sign</source>
+        <translation>조치완료&lt;br&gt;/서명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelMDDetectReportNextPage.qml" line="253"/>
+        <source>Confirmer&lt;br&gt;/Sign</source>
+        <translation>확인자&lt;br&gt;/서명</translation>
     </message>
 </context>
 <context>
     <name>PanelMDOPReportFirstPage</name>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="86"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="82"/>
         <source>Sign</source>
         <translation>결재</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="130"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="126"/>
         <source>Write</source>
         <translation>작성</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="172"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="168"/>
         <source>Review</source>
         <translation>검토</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="218"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="214"/>
         <source>Approved</source>
         <translation>승인</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="289"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="285"/>
         <source>Company name</source>
         <translation>업체명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="323"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="314"/>
         <source>Device number</source>
         <translation>기기번호</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="366"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="352"/>
         <source>Operate date</source>
         <translation>운전일자</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="412"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="394"/>
         <source>Department</source>
         <translation>점검부서</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="459"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="436"/>
         <source>Position</source>
         <translation>직위</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="496"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="468"/>
         <source>Name</source>
         <translation>성명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="549"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="516"/>
         <source>Operate history</source>
         <translation>운전기록</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="590"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="557"/>
         <source>P NO</source>
         <translation>품번</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="610"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="577"/>
         <source>Product name</source>
         <translation>제품명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="625"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="592"/>
         <source>Limit criteria&lt;br&gt;&lt;br&gt;(θ, mm)</source>
         <translation>한계기준&lt;br&gt;&lt;br&gt;(θ, mm)</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="652"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="619"/>
         <source>Fe</source>
         <translation>Fe</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="675"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="642"/>
         <source>Sus</source>
         <translation>Sus</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="697"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="664"/>
         <source>Total count</source>
         <translation>전체수</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="718"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="685"/>
         <source>Detect count</source>
         <translation>검출수</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="740"/>
+        <location filename="qml/ui/report/PanelMDOPReportFirstPage.qml" line="707"/>
         <source>Detect rate(%)</source>
         <translation>불량률(%)</translation>
     </message>
@@ -458,47 +659,47 @@
 <context>
     <name>PanelMDOPReportNextPage</name>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="66"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="70"/>
         <source>Operate history</source>
         <translation>운전일자</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="107"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="111"/>
         <source>P NO</source>
         <translation>품번</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="127"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="131"/>
         <source>Product name</source>
         <translation>제품명</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="142"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="146"/>
         <source>Limit criteria&lt;br&gt;&lt;br&gt;(θ, mm)</source>
         <translation>한계기준&lt;br&gt;&lt;br&gt;(θ, mm)</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="169"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="173"/>
         <source>Fe</source>
         <translation>Fe</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="192"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="196"/>
         <source>Sus</source>
         <translation>Sus</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="214"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="218"/>
         <source>Total count</source>
         <translation>전체수</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="235"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="239"/>
         <source>Detect count</source>
         <translation>검출수</translation>
     </message>
     <message>
-        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="257"/>
+        <location filename="qml/ui/report/PanelMDOPReportNextPage.qml" line="261"/>
         <source>Detect rate(%)</source>
         <translation>불량률</translation>
     </message>
@@ -834,6 +1035,18 @@
     </message>
 </context>
 <context>
+    <name>PanelReportWindow</name>
+    <message>
+        <source>Metal detector checkup report</source>
+        <translation type="vanished">보고서</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelReportWindow.qml" line="20"/>
+        <source>Report</source>
+        <translation>보고서</translation>
+    </message>
+</context>
+<context>
     <name>PanelSync</name>
     <message>
         <location filename="qml/ui/PanelSync.qml" line="69"/>
@@ -915,6 +1128,283 @@
         <location filename="qml/ui/PanelSync.qml" line="343"/>
         <source>No</source>
         <translation>아니오</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWCDetectReportFirstPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="82"/>
+        <source>Sign</source>
+        <translation>결재</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="126"/>
+        <source>Write</source>
+        <translation>작성자</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="168"/>
+        <source>Review</source>
+        <translation>검토</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="214"/>
+        <source>Approved</source>
+        <translation>승인</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="285"/>
+        <source>Company name</source>
+        <translation>업체명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="314"/>
+        <source>Device number</source>
+        <translation>기기번호</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="352"/>
+        <source>Operate date</source>
+        <translation>운전일자</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="395"/>
+        <source>Department</source>
+        <translation>점검부서</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="437"/>
+        <source>Position</source>
+        <translation>직위</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="469"/>
+        <source>Name</source>
+        <translation>성명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="517"/>
+        <source>Monitoring history</source>
+        <translation>모니터링 기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="558"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="577"/>
+        <source>Detect time</source>
+        <translation>발생시간</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="598"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="621"/>
+        <source>Description</source>
+        <translation>이상 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="643"/>
+        <source>Follow up&lt;br&gt;action</source>
+        <translation>조치 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="664"/>
+        <source>Action&lt;br&gt;complete&lt;br&gt;/Sign</source>
+        <translation>조치완료&lt;br&gt;/서명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportFirstPage.qml" line="685"/>
+        <source>Confirmer&lt;br&gt;/Sign</source>
+        <translation>확인자&lt;br&gt;/서명</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWCDetectReportNextPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="70"/>
+        <source>Monitoring history</source>
+        <oldsource>Operate history</oldsource>
+        <translation>모니터링 기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="111"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="130"/>
+        <source>Detect time</source>
+        <translation>발생시간</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="151"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="174"/>
+        <source>Description</source>
+        <translation>이상 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="196"/>
+        <source>Follow up&lt;br&gt;action</source>
+        <translation>조치 내용</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="217"/>
+        <source>Action&lt;br&gt;complete&lt;br&gt;/Sign</source>
+        <translation>조치완료&lt;br&gt;/서명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCDetectReportNextPage.qml" line="238"/>
+        <source>Confirmer&lt;br&gt;/Sign</source>
+        <translation>확인자&lt;br&gt;/서명</translation>
+    </message>
+    <message>
+        <source>Total count</source>
+        <translation type="obsolete">전체수</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWCOPReportFirstPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="82"/>
+        <source>Sign</source>
+        <translation>결재</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="126"/>
+        <source>Write</source>
+        <translation>작성자</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="168"/>
+        <source>Review</source>
+        <translation>검토</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="214"/>
+        <source>Approved</source>
+        <translation>승인</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="285"/>
+        <source>Company name</source>
+        <translation>업체명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="314"/>
+        <source>Device number</source>
+        <translation>기기번호</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="352"/>
+        <source>Operate date</source>
+        <translation>운전일자</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="395"/>
+        <source>Department</source>
+        <translation>점검부서</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="437"/>
+        <source>Position</source>
+        <translation>직위</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="469"/>
+        <source>Name</source>
+        <translation>성명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="517"/>
+        <source>Operate history</source>
+        <translation>운전기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="558"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="578"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="593"/>
+        <source>Over count</source>
+        <translation>초과수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="613"/>
+        <source>Under count</source>
+        <translation>미달수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="634"/>
+        <source>Etc error&lt;br&gt;count</source>
+        <translation>기타수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="655"/>
+        <source>Total count</source>
+        <translation>전체수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportFirstPage.qml" line="677"/>
+        <source>NG rate(%)</source>
+        <translation>불량률(%)</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWCOPReportNextPage</name>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="70"/>
+        <source>Operate history</source>
+        <translation>운전기록</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="111"/>
+        <source>P NO</source>
+        <translation>품번</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="131"/>
+        <source>Product name</source>
+        <translation>제품명</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="146"/>
+        <source>Over count</source>
+        <translation>초과수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="166"/>
+        <source>Under count</source>
+        <translation>미달수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="187"/>
+        <source>Etc error&lt;br&gt;count</source>
+        <translation>기타수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="208"/>
+        <source>Total count</source>
+        <translation>전체수</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/report/PanelWCOPReportNextPage.qml" line="230"/>
+        <source>NG rate(%)</source>
+        <translation>불량률(%)</translation>
     </message>
 </context>
 <context>
@@ -1090,6 +1580,14 @@
         <location filename="qml/ui/weightchecker/PanelWeightManagementInfo.qml" line="181"/>
         <source>Name</source>
         <translation>성명</translation>
+    </message>
+</context>
+<context>
+    <name>PanelWeightPrintReport</name>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightPrintReport.qml" line="27"/>
+        <source>Report</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

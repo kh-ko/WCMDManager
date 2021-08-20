@@ -16,7 +16,8 @@ class EnumDefine: public QObject{
     Q_ENUMS(RemoteSyncState)
     Q_ENUMS(FuncCode)
     Q_ENUMS(ConnectState)
-    Q_ENUMS(Report)
+    Q_ENUMS(ReportType)
+    Q_ENUMS(ReportPageType)
 
 public:
 
@@ -120,8 +121,18 @@ public:
         CONN_STATE_CONNECT      = 2
     };
 
-    enum Report{
-        REPORT_MD_OPERATE = 0
+    enum ReportType{
+        REPORT_MD_OPERATE = 0,
+        REPORT_MD_CHECKUP = 1,
+        REPORT_WC_OPERATE = 2
+    };
+
+    enum ReportPageType{
+        REPORT_PAGE_MD_OP = 0,
+        REPORT_PAGE_MD_CHECKUP = 1,
+        REPORT_PAGE_MD_DETECT = 2,
+        REPORT_PAGE_WC_OP = 3,
+        REPORT_PAGE_WC_DETECT = 4,
     };
 };
 

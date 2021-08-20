@@ -10,26 +10,18 @@ import "../../control/."
 
 Rectangle {
     property bool isEditMode : false
+    property var  selectDate : ""
 
-    function addDate(value, idx)
+    function addDate(value)
     {
-        dateListModel.append({"dateValue":value,"idx":idx})
+        dateListModel.append({"dateValue":value})
+        selectDate = value
     }
 
     function clearDate()
     {
-        dateList.selectDateIdx = -1
+        selectDate = ""
         dateListModel.clear()
-    }
-
-    function selectDateIdx(idx)
-    {
-        dateList.selectDateIdx = idx;
-    }
-
-    function getSelectedDateIdx()
-    {
-        return dateList.selectDateIdx;
     }
 
     id: control
@@ -69,8 +61,6 @@ Rectangle {
     }
 
     ListView{
-        property int selectDateIdx : -1
-
         id : dateList
         anchors.right: parent.right
         anchors.rightMargin: 20
@@ -95,7 +85,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.rightMargin: 0
 
-            color : dateList.selectDateIdx == idx ? "#0085FF" :"#00000000"
+            color : dateValue == control.selectDate ? "#0085FF" :"#00000000"
             border.width: 2
             border.color: mouseItem.containsMouse ? "#0085FF" : "#00000000"
 
@@ -123,16 +113,9 @@ Rectangle {
                 onReleased: { isPress = false}
                 onClicked:
                 {
-                    dateList.selectDateIdx = idx
+                    control.selectDate = dateValue
                 }
             }
-        }
-
-        onSelectDateIdxChanged: {
-            if(dateList.selectDateIdx < 0)
-                return;
-
-            control.signalEventSelectDate(dateList.selectDateIdx)
         }
     }
 

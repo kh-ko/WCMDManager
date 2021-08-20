@@ -75,12 +75,6 @@ HEADERS += \
     source/qmlmodel/dialogpasswordmodel.h \
     source/qmlmodel/mainmodel.h \
     source/qmlmodel/panelCalendarModel.h \
-    source/qmlmodel/panelmdcheckreportcontainermodel.h \
-    source/qmlmodel/panelmdcheckreportmodel.h \
-    source/qmlmodel/panelmdcheckreportrowmodel.h \
-    source/qmlmodel/panelmdopreportcontainermodel.h \
-    source/qmlmodel/panelmdopreportmodel.h \
-    source/qmlmodel/panelmdopreportrowmodel.h \
     source/qmlmodel/panelmetalcheckuphistorymodel.h \
     source/qmlmodel/panelmetaldetecthistorymodel.h \
     source/qmlmodel/panelmetalmanagementmodel.h \
@@ -91,18 +85,15 @@ HEADERS += \
     source/qmlmodel/panelsynclistitemmodel.h \
     source/qmlmodel/panelsyncmodel.h \
     source/qmlmodel/panelwchistogram.h \
-    source/qmlmodel/panelwchistogramreportmodel.h \
     source/qmlmodel/panelwchistorymodel.h \
     source/qmlmodel/panelwcproductsummary.h \
-    source/qmlmodel/panelwcreportcontainermodel.h \
-    source/qmlmodel/panelwcreportmodel.h \
-    source/qmlmodel/panelwcreportproductmodel.h \
     source/qmlmodel/panelwcselectdeviceproduct.h \
     source/qmlmodel/panelwcsummaryreportmodel.h \
     source/qmlmodel/panelwctrendsmodel.h \
-    source/qmlmodel/panelwctrendsreportmodel.h \
     source/qmlmodel/panelweightmanagementinfomodel.h \
     source/qmlmodel/popupmetallimitcriteriamodel.h \
+    source/qmlmodel/report/panelreportwindowmodel.h \
+    source/qmlmodel/report/reportpagemodel.h \
     source/qmlmodel/windowsettingmodel.h \
     source/remote/dto/devinfodto.h \
     source/remote/dto/enum/remoteenumdef.h \
@@ -119,3 +110,5 @@ HEADERS += \
     source/util/filewriter.h \
     source/util/mouseeventspy.h \
     source/util/myalloc.h
+
+DISTFILES +=

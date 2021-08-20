@@ -105,14 +105,14 @@ ApplicationWindow {
 
             onSignalClickedOperateReport :
             {
-                var reportDialog = dialogMDOPReportComponent.createObject(window);
-                reportDialog.open(mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+                var reportDialog = dialogReport.createObject(window);
+                reportDialog.open(EnumDefine.REPORT_MD_OPERATE,mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
             }
 
             onSignalClickedCheckupReport:
             {
-                var reportDialog = dialogMDCheckReportComponent.createObject(window);
-                reportDialog.open(mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+                var reportDialog = dialogReport.createObject(window);
+                reportDialog.open(EnumDefine.REPORT_MD_CHECKUP, mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
             }
         }
 
@@ -131,8 +131,8 @@ ApplicationWindow {
 
             onSignalClickedReport :
             {
-                var reportDialog = dialogWCReportComponent.createObject(window);
-                reportDialog.open(mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+                var reportDialog = dialogReport.createObject(window);
+                reportDialog.open(EnumDefine.REPORT_WC_OPERATE,mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
             }
         }
 
@@ -168,7 +168,12 @@ ApplicationWindow {
         }
     }
 
+    Component{
+        id : dialogReport
 
+        PanelReportWindow{}
+    }
+/*
     Component{
         id : dialogMDOPReportComponent
         PanelMDOPReportWindow{
@@ -186,7 +191,7 @@ ApplicationWindow {
         PanelWCReportWindow{
         }
     }
-
+*/
     Component{
         id : winSettingComponent
         WindowSetting{

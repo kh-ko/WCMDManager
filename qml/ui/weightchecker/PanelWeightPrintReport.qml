@@ -16,7 +16,7 @@ Rectangle {
     radius: 10
 
     signal signalClickedReport()
-/*
+
     UiButton{
         id : btnReport
         width: 200
@@ -28,5 +28,5 @@ Rectangle {
         iconSource: "image_icon/print.png"
 
         onSignalEventClicked: { panel.signalClickedReport(); }
-    }*/
+    }
 }

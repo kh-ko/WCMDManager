@@ -15,15 +15,8 @@
 #include "source/qmlmodel/panelsyncmodel.h"
 #include "source/qmlmodel/panelmonitorlistmodel.h"
 #include "source/qmlmodel/panelmonitoritemmodel.h"
-#include "source/qmlmodel/panelmdopreportcontainermodel.h"
-#include "source/qmlmodel/panelmdopreportmodel.h"
-#include "source/qmlmodel/panelmdopreportrowmodel.h"
-#include "source/qmlmodel/panelmdcheckreportcontainermodel.h"
-#include "source/qmlmodel/panelmdcheckreportmodel.h"
-#include "source/qmlmodel/panelmdcheckreportrowmodel.h"
-#include "source/qmlmodel/panelwcreportcontainermodel.h"
-#include "source/qmlmodel/panelwcreportmodel.h"
-#include "source/qmlmodel/panelwcreportproductmodel.h"
+#include "source/qmlmodel/report/reportpagemodel.h"
+#include "source/qmlmodel/report/panelreportwindowmodel.h"
 #include "source/qmlmodel/windowsettingmodel.h"
 #include "source/qmlmodel/panelweightmanagementinfomodel.h"
 #include "source/qmlmodel/panelwcselectdeviceproduct.h"
@@ -69,15 +62,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelSyncListItemModel          >("PanelSyncListItemModel"          , 1, 0, "PanelSyncListItemModel"          );
     qmlRegisterType<PanelMonitorListModel           >("PanelMonitorListModel"           , 1, 0, "PanelMonitorListModel"           );
     qmlRegisterType<PanelMonitorItemModel           >("PanelMonitorItemModel"           , 1, 0, "PanelMonitorItemModel"           );
-    qmlRegisterType<PanelMDOPReportContainerModel   >("PanelMDOPReportContainerModel"   , 1, 0, "PanelMDOPReportContainerModel"   );
-    qmlRegisterType<PanelMDOPReportModel            >("PanelMDOPReportModel"            , 1, 0, "PanelMDOPReportModel"            );
-    qmlRegisterType<PanelMDOPReportRowModel         >("PanelMDOPReportRowModel"         , 1, 0, "PanelMDOPReportRowModel"         );
-    qmlRegisterType<PanelMDCheckReportContainerModel>("PanelMDCheckReportContainerModel", 1, 0, "PanelMDCheckReportContainerModel");
-    qmlRegisterType<PanelMDCheckReportModel         >("PanelMDCheckReportModel"         , 1, 0, "PanelMDCheckReportModel"         );
-    qmlRegisterType<PanelMDCheckReportRowModel      >("PanelMDCheckReportRowModel"      , 1, 0, "PanelMDCheckReportRowModel"      );
-    qmlRegisterType<PanelWCReportContainerModel     >("PanelWCReportContainerModel"     , 1, 0, "PanelWCReportContainerModel"     );
-    qmlRegisterType<PanelWCReportModel              >("PanelWCReportModel"              , 1, 0, "PanelWCReportModel"              );
-    qmlRegisterType<PanelWCReportProductModel       >("PanelWCReportProductModel"       , 1, 0, "PanelWCReportProductModel"       );
+    qmlRegisterType<ReportPageModel                 >("ReportPageModel"                 , 1, 0, "ReportPageModel"                 );
+    qmlRegisterType<PanelReportWindowModel          >("PanelReportWindowModel"          , 1, 0, "PanelReportWindowModel"          );
     qmlRegisterType<PanelWCTrendsModel              >("PanelWCTrendsModel"              , 1, 0, "PanelWCTrendsModel"              );
     qmlRegisterType<PanelWCHistoryModel             >("PanelWCHistoryModel"             , 1, 0, "PanelWCHistoryModel"             );
     qmlRegisterType<WindowSettingModel              >("WindowSettingModel"              , 1, 0, "WindowSettingModel"              );

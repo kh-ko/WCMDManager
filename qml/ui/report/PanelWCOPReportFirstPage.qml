@@ -383,6 +383,7 @@ Rectangle {
                 width: 200
                 height: 91
                 color: "#00000000"
+
                 Rectangle {
                     id: labelDepartment
                     width: 130
@@ -536,7 +537,7 @@ Rectangle {
             Rectangle {
                 id: listHeader
                 width: 200
-                height: 100
+                height: 60
                 color: "#00000000"
                 Layout.fillWidth: true
 
@@ -584,67 +585,16 @@ Rectangle {
                 }
 
                 Rectangle {
-                    id: labellimitTitle
-                    width: 150
+                    id: labelOverCntTitle
+                    width: 99
                     color: "#00000000"
                     Text {
-                        id: element9
-                        text: qsTr("Limit criteria<br><br>(θ, mm)")
-                        anchors.bottom: labelLimitFeTitle.top
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottomMargin: 0
-                        anchors.leftMargin: 0
-                        anchors.rightMargin: 0
+                        id: element12
+                        text: qsTr("Over count")
+                        anchors.fill: parent
                         font.pixelSize: 12
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Rectangle {
-                        id: labelLimitFeTitle
-                        y: 87
-                        width: parent.width / 2
-                        height: 33
-                        color: "#00000000"
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 0
-                        anchors.left: parent.left
-                        anchors.leftMargin: 0
-                        border.width: 1
-
-                        Text {
-                            id: element10
-                            text: qsTr("Fe")
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            anchors.fill: parent
-                            font.pixelSize: 12
-                        }
-                    }
-
-                    Rectangle {
-                        id: labelLimitSusTitle
-                        color: "#00000000"
-                        border.width: 1
-                        anchors.top: labelLimitFeTitle.top
-                        anchors.topMargin: 0
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 0
-                        anchors.right: parent.right
-                        anchors.rightMargin: 0
-                        anchors.left: labelLimitFeTitle.right
-                        anchors.leftMargin: -1
-
-                        Text {
-                            id: element11
-                            text: qsTr("Sus")
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            anchors.fill: parent
-                            font.pixelSize: 12
-                        }
                     }
                     anchors.left: labelPNameTitle.right
                     anchors.leftMargin: -1
@@ -656,18 +606,38 @@ Rectangle {
                 }
 
                 Rectangle {
-                    id: labelTotalCntTitle
-                    width: 120
+                    id: labelUnderCntTitle
+                    width: 99
                     color: "#00000000"
                     Text {
-                        id: element12
-                        text: qsTr("Total count")
+                        text: qsTr("Under count")
                         anchors.fill: parent
                         font.pixelSize: 12
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                     }
-                    anchors.left: labellimitTitle.right
+                    anchors.left: labelOverCntTitle.right
+                    anchors.leftMargin: -1
+                    border.width: 1
+                    anchors.bottom: parent.bottom
+                    anchors.topMargin: 0
+                    anchors.top: parent.top
+                    anchors.bottomMargin: 0
+                }
+
+
+                Rectangle {
+                    id: labelEtcCntTitle
+                    width: 99
+                    color: "#00000000"
+                    Text {
+                        text: qsTr("Etc error<br>count")
+                        anchors.fill: parent
+                        font.pixelSize: 12
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                    anchors.left: labelUnderCntTitle.right
                     anchors.leftMargin: -1
                     border.width: 1
                     anchors.bottom: parent.bottom
@@ -677,18 +647,18 @@ Rectangle {
                 }
 
                 Rectangle {
-                    id: labelNGCntTitle
-                    width: 120
+                    id: labelTotalCntTitle
+                    width: 99
                     color: "#00000000"
                     Text {
                         id: element13
-                        text: qsTr("Detect count")
+                        text: qsTr("Total count")
                         anchors.fill: parent
                         font.pixelSize: 12
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
-                    anchors.left: labelTotalCntTitle.right
+                    anchors.left: labelEtcCntTitle.right
                     anchors.leftMargin: -1
                     border.width: 1
                     anchors.bottom: parent.bottom
@@ -704,13 +674,13 @@ Rectangle {
                     anchors.rightMargin: 0
                     Text {
                         id: element14
-                        text: qsTr("Detect rate(%)")
+                        text: qsTr("NG rate(%)")
                         anchors.fill: parent
                         font.pixelSize: 12
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
                     }
-                    anchors.left: labelNGCntTitle.right
+                    anchors.left: labelTotalCntTitle.right
                     anchors.leftMargin: -1
                     border.width: 1
                     anchors.bottom: parent.bottom
@@ -759,10 +729,10 @@ Rectangle {
             {
                 inputPNum.text     = pageModel.onCommandGetColumnValue(rowPageIdx, 0 )
                 inputPName.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 1 )
-                inputLimitFe.text  = pageModel.onCommandGetColumnValue(rowPageIdx, 2 )
-                inputLimitSus.text = pageModel.onCommandGetColumnValue(rowPageIdx, 3 )
-                inputTotalCnt.text = pageModel.onCommandGetColumnValue(rowPageIdx, 4 )
-                inputNGCnt.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 5 )
+                inputOver.text     = pageModel.onCommandGetColumnValue(rowPageIdx, 2 )
+                inputUnder.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 3 )
+                inputEtc.text      = pageModel.onCommandGetColumnValue(rowPageIdx, 4 )
+                inputTotal.text    = pageModel.onCommandGetColumnValue(rowPageIdx, 5 )
                 inputNGRate.text   = pageModel.onCommandGetColumnValue(rowPageIdx, 6 )
             }
 
@@ -809,42 +779,12 @@ Rectangle {
             }
 
             Rectangle {
-                id: inputlimitBox
-                width: 150
+                id: inputOverBox
+                width: 99
                 color: "#00000000"
-                Rectangle {
-                    id: inputLimitFeBox
-                    width: parent.width / 2
-                    color: "#00000000"
-                    DocTextField {
-                        id : inputLimitFe
-                        anchors.fill: parent
-                    }
-                    anchors.left: parent.left
-                    anchors.leftMargin: 0
-                    border.width: 1
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: parent.top
-                    anchors.bottomMargin: 0
-                }
-
-                Rectangle {
-                    id: inputLimitSusBox
-                    color: "#00000000"
-                    DocTextField {
-                        id: inputLimitSus
-                        anchors.fill: parent
-                    }
-                    anchors.left: inputLimitFeBox.right
-                    anchors.leftMargin: -1
-                    border.width: 1
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.top: inputLimitFeBox.top
-                    anchors.rightMargin: 0
-                    anchors.right: parent.right
-                    anchors.bottomMargin: 0
+                DocTextField {
+                    id : inputOver
+                    anchors.fill: parent
                 }
                 anchors.left: inputPNameBox.right
                 anchors.leftMargin: -1
@@ -856,14 +796,14 @@ Rectangle {
             }
 
             Rectangle {
-                id: inputTotalCntBox
-                width: 120
+                id: inputUnderBox
+                width: 99
                 color: "#00000000"
                 DocTextField {
-                    id : inputTotalCnt
+                    id : inputUnder
                     anchors.fill: parent
                 }
-                anchors.left: inputlimitBox.right
+                anchors.left: inputOverBox.right
                 anchors.leftMargin: -1
                 border.width: 1
                 anchors.bottom: parent.bottom
@@ -873,14 +813,31 @@ Rectangle {
             }
 
             Rectangle {
-                id: inputNGCntBox
-                width: 120
+                id: inputEtcBox
+                width: 99
                 color: "#00000000"
                 DocTextField {
-                    id : inputNGCnt
+                    id : inputEtc
                     anchors.fill: parent
                 }
-                anchors.left: inputTotalCntBox.right
+                anchors.left: inputUnderBox.right
+                anchors.leftMargin: -1
+                border.width: 1
+                anchors.bottom: parent.bottom
+                anchors.topMargin: 0
+                anchors.top: parent.top
+                anchors.bottomMargin: 0
+            }
+
+            Rectangle {
+                id: inputTotalBox
+                width: 99
+                color: "#00000000"
+                DocTextField {
+                    id : inputTotal
+                    anchors.fill: parent
+                }
+                anchors.left: inputEtcBox.right
                 anchors.leftMargin: -1
                 border.width: 1
                 anchors.bottom: parent.bottom
@@ -896,7 +853,7 @@ Rectangle {
                     id : inputNGRate
                     anchors.fill: parent
                 }
-                anchors.left: inputNGCntBox.right
+                anchors.left: inputTotalBox.right
                 anchors.leftMargin: -1
                 border.width: 1
                 anchors.bottom: parent.bottom
@@ -931,9 +888,10 @@ Rectangle {
 
 }
 
+
+
 /*##^##
 Designer {
-    D{i:23;anchors_x:200}D{i:30;anchors_x:200}D{i:34;anchors_x:200}D{i:41;anchors_x:203}
-D{i:18;anchors_height:200;anchors_width:200;anchors_x:78;anchors_y:463}
+    D{i:0;formeditorZoom:1.75}D{i:23}D{i:30}D{i:34}D{i:41}D{i:18}
 }
 ##^##*/
