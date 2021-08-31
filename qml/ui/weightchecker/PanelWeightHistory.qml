@@ -247,19 +247,19 @@ Rectangle {
                         height: 50
                         anchors.left: eventIcon.right; anchors.leftMargin: 20; anchors.right: parent.right;
                         color: "#FFFFFF"
-                        text:   item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_NORMAL              ? "정상" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_UNDER_WARNING       ? "미달 경고" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_OVER_WARNING        ? "초과 경고" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_UNDER               ? "중량 미달" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_OVER                ? "중량 초과" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETCERROR            ? "기타" :
-                                item.eventType === EnumDefine.EVENT_TYPE_APP_START                  ? "전원ON" :
-                                item.eventType === EnumDefine.EVENT_TYPE_APP_EXIT                   ? "전원OFF" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_STATIC_CARI         ? "정보정" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_DYNAMIC_CARI        ? "동보정" :
-                                item.eventType === EnumDefine.EVENT_TYPE_RUN                        ? "운전" :
-                                item.eventType === EnumDefine.EVENT_TYPE_STOP                       ? "정지" :
-                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETC_METAL_ERROR     ? "금속검출" : ""
+                        text:   item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_NORMAL              ? qsTr("Normal") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_UNDER_WARNING       ? qsTr("Under warning") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_OVER_WARNING        ? qsTr("Over warning") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_UNDER               ? qsTr("Under") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_OVER                ? qsTr("Over") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETCERROR            ? qsTr("Etc") :
+                                item.eventType === EnumDefine.EVENT_TYPE_APP_START                  ? qsTr("Power ON") :
+                                item.eventType === EnumDefine.EVENT_TYPE_APP_EXIT                   ? qsTr("Power OFF") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_STATIC_CARI         ? qsTr("Static Calib") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_DYNAMIC_CARI        ? qsTr("Dynamic Calib") :
+                                item.eventType === EnumDefine.EVENT_TYPE_RUN                        ? qsTr("Run") :
+                                item.eventType === EnumDefine.EVENT_TYPE_STOP                       ? qsTr("Stop") :
+                                item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETC_METAL_ERROR     ? qsTr("Metal detect") : ""
                     }
                 }
 

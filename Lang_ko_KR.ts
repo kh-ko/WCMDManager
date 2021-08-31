@@ -1553,6 +1553,72 @@
         <source>Value</source>
         <translation>값</translation>
     </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="250"/>
+        <source>Normal</source>
+        <translation>정상</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="251"/>
+        <source>Under warning</source>
+        <translation>미달 경고</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="252"/>
+        <source>Over warning</source>
+        <translation>초과 경고</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="253"/>
+        <source>Under</source>
+        <translation>미달</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="254"/>
+        <source>Over</source>
+        <translation>초과</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="255"/>
+        <source>Etc</source>
+        <translation>기타</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="256"/>
+        <source>Power ON</source>
+        <translation>전원 ON</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="258"/>
+        <source>Static Calib</source>
+        <translation>정보정</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="259"/>
+        <source>Dynamic Calib</source>
+        <translation>동보정</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="260"/>
+        <source>Run</source>
+        <translation>운전</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="261"/>
+        <source>Stop</source>
+        <translation>정지</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="262"/>
+        <source>Metal detect</source>
+        <translation>금속검출</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="257"/>
+        <source>Power OFF</source>
+        <oldsource>전원OFF</oldsource>
+        <translation>전원 OFF</translation>
+    </message>
 </context>
 <context>
     <name>PanelWeightManagementInfo</name>
@@ -1587,7 +1653,7 @@
     <message>
         <location filename="qml/ui/weightchecker/PanelWeightPrintReport.qml" line="27"/>
         <source>Report</source>
-        <translation type="unfinished"></translation>
+        <translation>운전일지</translation>
     </message>
 </context>
 <context>

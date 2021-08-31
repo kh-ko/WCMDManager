@@ -245,9 +245,18 @@ public slots:
         setWCOverWaringCnt    (rPacketData->mWCOverWaringCnt);
         setWCOverCnt          (rPacketData->mWCOverCnt);
         setWCEtcErrCnt        (rPacketData->mWCEtcErrCnt);
-        setWCEtcMDErrCnt      (rPacketData->mmWCEtcMDErrCnt);
+        setWCEtcMDErrCnt      (rPacketData->mWCEtcMDErrCnt);
         setWCNGCnt            (rPacketData->mWCUnderCnt + rPacketData->mWCOverCnt + rPacketData->mWCEtcErrCnt);
-        setTotalcnt           (rPacketData->mWCUnderCnt + rPacketData->mWCOverCnt + rPacketData->mWCEtcErrCnt + rPacketData->mWCOverWaringCnt + rPacketData->mWCUnderWaringCnt + rPacketData->mWCNoramlCnt);
+
+        if(rPacketData->mMachineMode == EnumDefine::MachineMode::MACHINE_MODE_ALU)
+        {
+            setTotalcnt(rPacketData->mMDPassCnt + rPacketData->mMDNgCnt);
+        }
+        else
+        {
+            setTotalcnt(rPacketData->mWCEtcMDErrCnt +rPacketData->mWCUnderCnt + rPacketData->mWCOverCnt + rPacketData->mWCEtcErrCnt + rPacketData->mWCOverWaringCnt + rPacketData->mWCUnderWaringCnt + rPacketData->mWCNoramlCnt);
+        }
+
         setTradeTotalWeight   (rPacketData->mTradeTotalWeight);
     }
 public:

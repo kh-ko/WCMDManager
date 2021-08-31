@@ -18,6 +18,7 @@ class EnumDefine: public QObject{
     Q_ENUMS(ConnectState)
     Q_ENUMS(ReportType)
     Q_ENUMS(ReportPageType)
+    Q_ENUMS(MachineMode)
 
 public:
 
@@ -133,6 +134,12 @@ public:
         REPORT_PAGE_MD_DETECT = 2,
         REPORT_PAGE_WC_OP = 3,
         REPORT_PAGE_WC_DETECT = 4,
+    };
+
+    enum MachineMode{
+        MACHINE_MODE_ALU   = 1,
+        MACHINE_MODE_WC    = 2,
+        MACHINE_MODE_COMBI = 3
     };
 };
 
