@@ -46,11 +46,13 @@ signals:
     void signalEventCopyComplete();
 
 public slots:
-    Q_INVOKABLE void onCommandAddHistory(QUrl url)
+    Q_INVOKABLE int onCommandAddHistory(QUrl url)
     {
         qDebug() << "[debug]" << url;
 
-        mHisCopy.copy(url.toLocalFile());
+        int result = 0;
+        mHisCopy.copy(url.toLocalFile(), result);
+        return result;
     }
     Q_INVOKABLE void onCommandSelMenu(int value)
     {
