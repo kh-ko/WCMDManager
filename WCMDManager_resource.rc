@@ -1,6 +1,6 @@
 #include <windows.h>
 
-IDI_ICON1	ICON	DISCARDABLE	"C:\\myfolder\\Work\\02.WCMDManager\\02.Soruce\\work\\logo2.ico"
+IDI_ICON1	ICON	DISCARDABLE	"C:\\Work\\02.AluScanWeightCheckerIntegratedTouch\\04.Source\\20201009-v-1-2-0\\WCMDManager\\logo2.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 0,0,0,0

@@ -114,9 +114,5 @@
         <file>ui/report/PanelWCOPReportNextPage.qml</file>
         <file>ui/report/PanelWCDetectReportFirstPage.qml</file>
         <file>ui/report/PanelWCDetectReportNextPage.qml</file>
-        <file>ui/image_icon/icon_new.png</file>
-        <file>ui/image_icon/icon_novasen.png</file>
-        <file>ui/image_icon/icon_soluray.png</file>
-        <file>ui/PanelMessageBox.qml</file>
     </qresource>
 </RCC>

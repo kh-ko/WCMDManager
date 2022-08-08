@@ -122,32 +122,32 @@
 <context>
     <name>PanelLeftMenu</name>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="89"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="86"/>
         <source>Metal detector</source>
         <translation>금속검출기</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="144"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="141"/>
         <source>Weight checker</source>
         <translation>중량선별기</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="189"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="186"/>
         <source>Monitoring</source>
         <translation>모니터링</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="207"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="204"/>
         <source>Add history</source>
         <translation>파일추가</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="225"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="222"/>
         <source>Sync</source>
         <translation>동기화</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="243"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="240"/>
         <source>Setting</source>
         <translation>설정</translation>
     </message>
@@ -710,14 +710,6 @@
         <location filename="qml/ui/report/PanelMDOPReportWindow.qml" line="23"/>
         <source>Metal detector operate report</source>
         <translation>금속검출기 운전 일지</translation>
-    </message>
-</context>
-<context>
-    <name>PanelMessageBox</name>
-    <message>
-        <location filename="qml/ui/PanelMessageBox.qml" line="54"/>
-        <source>Close</source>
-        <translation>닫기</translation>
     </message>
 </context>
 <context>
@@ -2049,17 +2041,7 @@
     <message>
         <location filename="qml/ui/main.qml" line="28"/>
         <source>WCMD Manager program</source>
-        <translation>중량선별 금속검출 통합형 기기 관리 프로그램</translation>
-    </message>
-    <message>
-        <location filename="qml/ui/main.qml" line="87"/>
-        <source>select &quot;novasen&quot; folder</source>
-        <translation>&quot;novasen&quot;폴더를 선택하세요</translation>
-    </message>
-    <message>
-        <location filename="qml/ui/main.qml" line="87"/>
-        <source>can not found &quot;backup&quot; folder</source>
-        <translation>&quot;backup&quot; 폴더를 찾을 수 없습니다</translation>
+        <translation>중량선별 금속결출 통합형 기기 관리 프로그램</translation>
     </message>
 </context>
 </TS>

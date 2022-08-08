@@ -75,19 +75,9 @@ ApplicationWindow {
             }
 
             onSignalEventClickedAddHistory: {
-                var result = mainModel.onCommandAddHistory(fileUrls);
-
-                if(result === 0)
-                {
-                    var dlgCopyProgress = dialogCopyProgress.createObject(window,{"model" : mainModel});
-                    dlgCopyProgress.open();
-                }
-                else
-                {
-                    var errStr = result === 1 ? qsTr("select \"novasen\" folder") : qsTr("can not found \"backup\" folder")
-
-                    messageBox.showMessage(errStr);
-                }
+                mainModel.onCommandAddHistory(fileUrls);
+                var dlgCopyProgress = dialogCopyProgress.createObject(window,{"model" : mainModel});
+                dlgCopyProgress.open();
             }
 
             onSignalEventClickedSync: {
@@ -176,14 +166,6 @@ ApplicationWindow {
             anchors.fill: parent
             onClicked: {}
         }
-    }
-
-    PanelMessageBox{
-        id : messageBox
-        height: 140
-        width: 500
-
-        visible: false
     }
 
     Component{
