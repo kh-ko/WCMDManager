@@ -19,14 +19,16 @@ Window{
 
     title : qsTr("Report")
 
-    property bool isEditMode : false
-    property var  reportType : EnumDefine.REPORT_MD_CHECKUP
+    property bool    isEditMode : false
+    property var     reportType : EnumDefine.REPORT_MD_CHECKUP
+    property string  selectedPList
 
     signal signalEventClosed()
 
-    function open(reportType ,year, month, day)
+    function open(reportType ,year, month, day, selectedPList)
     {
         dialog.reportType = reportType;
+        dialog.selectedPList = selectedPList;
         dateRange.setDate(year, month, day, year, month, day)
 
         dialog.show()
@@ -44,7 +46,7 @@ Window{
         }
 
         reportContainerModel.onCommandLoadData(dialog.reportType, dateRange.fDate.getFullYear(), dateRange.fDate.getMonth() + 1, dateRange.fDate.getDate(),
-                                               dateRange.tDate.getFullYear(), dateRange.tDate.getMonth() + 1, dateRange.tDate.getDate())
+                                               dateRange.tDate.getFullYear(), dateRange.tDate.getMonth() + 1, dateRange.tDate.getDate(), dialog.selectedPList)
     }
 
     function loadFinish()

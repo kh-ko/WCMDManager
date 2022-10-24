@@ -122,32 +122,32 @@
 <context>
     <name>PanelLeftMenu</name>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="86"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="89"/>
         <source>Metal detector</source>
         <translation>금속검출기</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="141"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="144"/>
         <source>Weight checker</source>
         <translation>중량선별기</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="186"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="189"/>
         <source>Monitoring</source>
         <translation>모니터링</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="204"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="207"/>
         <source>Add history</source>
         <translation>파일추가</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="222"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="225"/>
         <source>Sync</source>
         <translation>동기화</translation>
     </message>
     <message>
-        <location filename="qml/ui/PanelLeftMenu.qml" line="240"/>
+        <location filename="qml/ui/PanelLeftMenu.qml" line="243"/>
         <source>Setting</source>
         <translation>설정</translation>
     </message>
@@ -713,6 +713,14 @@
     </message>
 </context>
 <context>
+    <name>PanelMessageBox</name>
+    <message>
+        <location filename="qml/ui/PanelMessageBox.qml" line="54"/>
+        <source>Close</source>
+        <translation>닫기</translation>
+    </message>
+</context>
+<context>
     <name>PanelMetalCheckupHistory</name>
     <message>
         <location filename="qml/ui/metaldetector/PanelMetalCheckupHistory.qml" line="52"/>
@@ -1044,6 +1052,29 @@
         <location filename="qml/ui/report/PanelReportWindow.qml" line="20"/>
         <source>Report</source>
         <translation>보고서</translation>
+    </message>
+</context>
+<context>
+    <name>PanelSelectProduct</name>
+    <message>
+        <location filename="qml/ui/PanelSelectProduct.qml" line="20"/>
+        <source>Select product</source>
+        <translation>제품 선택</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/PanelSelectProduct.qml" line="93"/>
+        <source>Total</source>
+        <translation>전체</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/PanelSelectProduct.qml" line="195"/>
+        <source>Confirm</source>
+        <translation>확인</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/PanelSelectProduct.qml" line="215"/>
+        <source>Cancel</source>
+        <translation>취소</translation>
     </message>
 </context>
 <context>
@@ -1412,7 +1443,7 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="40"/>
         <source>Weight checker summary</source>
-        <translation type="unfinished"></translation>
+        <translation>중량선별기 요약</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="80"/>
@@ -1422,7 +1453,7 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="124"/>
         <source>Write</source>
-        <translation type="unfinished"></translation>
+        <translation>작성자</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="166"/>
@@ -1442,12 +1473,12 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="317"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>날짜</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="364"/>
         <source>Device number</source>
-        <translation type="unfinished">기기번호</translation>
+        <translation>기기번호</translation>
     </message>
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="399"/>
@@ -1472,7 +1503,7 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportSummaryPage.qml" line="574"/>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>요약</translation>
     </message>
 </context>
 <context>
@@ -1480,7 +1511,7 @@
     <message>
         <location filename="qml/ui/report/PanelWCReportWindow.qml" line="23"/>
         <source>Weight checker report</source>
-        <translation type="unfinished"></translation>
+        <translation>중량선별기 보고서</translation>
     </message>
 </context>
 <context>
@@ -1529,9 +1560,13 @@
         <translation>필터</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="79"/>
         <source>Only NG</source>
-        <translation>불량</translation>
+        <translation type="vanished">불량</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="79"/>
+        <source>Only NG &amp; Calibration</source>
+        <translation type="unfinished">불량 &amp; 보정</translation>
     </message>
     <message>
         <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="84"/>
@@ -1554,67 +1589,67 @@
         <translation>값</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="250"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="252"/>
         <source>Normal</source>
         <translation>정상</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="251"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="253"/>
         <source>Under warning</source>
         <translation>미달 경고</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="252"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="254"/>
         <source>Over warning</source>
         <translation>초과 경고</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="253"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="255"/>
         <source>Under</source>
         <translation>미달</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="254"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="256"/>
         <source>Over</source>
         <translation>초과</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="255"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="257"/>
         <source>Etc</source>
         <translation>기타</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="256"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="258"/>
         <source>Power ON</source>
         <translation>전원 ON</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="258"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="260"/>
         <source>Static Calib</source>
         <translation>정보정</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="259"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="261"/>
         <source>Dynamic Calib</source>
         <translation>동보정</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="260"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="262"/>
         <source>Run</source>
         <translation>운전</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="261"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="263"/>
         <source>Stop</source>
         <translation>정지</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="262"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="264"/>
         <source>Metal detect</source>
         <translation>금속검출</translation>
     </message>
     <message>
-        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="257"/>
+        <location filename="qml/ui/weightchecker/PanelWeightHistory.qml" line="259"/>
         <source>Power OFF</source>
         <oldsource>전원OFF</oldsource>
         <translation>전원 OFF</translation>
@@ -2041,7 +2076,17 @@
     <message>
         <location filename="qml/ui/main.qml" line="28"/>
         <source>WCMD Manager program</source>
-        <translation>중량선별 금속결출 통합형 기기 관리 프로그램</translation>
+        <translation>중량선별 금속검출 통합형 기기 관리 프로그램</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/main.qml" line="87"/>
+        <source>select &quot;novasen&quot; folder</source>
+        <translation>&quot;novasen&quot;폴더를 선택하세요</translation>
+    </message>
+    <message>
+        <location filename="qml/ui/main.qml" line="87"/>
+        <source>can not found &quot;backup&quot; folder</source>
+        <translation>&quot;backup&quot; 폴더를 찾을 수 없습니다</translation>
     </message>
 </context>
 </TS>

@@ -28,9 +28,35 @@ public:
         close();
     }
 
-    bool copy(QString src)
+    bool copy(QString src, int &oErr)
     {
         QString backupFloder = QString("%1/%2").arg(src).arg("backup");
+        QDir targetDir(backupFloder);
+
+        oErr = 0;
+
+        if(src.endsWith("/NOVASEN"))
+        {
+            qDebug() << "[HistoryCopy::copy] OLD version path" << src;
+            return copyOldVersion(src, oErr);
+        }
+
+        if(src.endsWith("/novasen") == false)
+        {
+            qDebug() << "[HistoryCopy::copy] invaild path : " << src;
+            oErr = 1;
+            onComplete(false);
+            return false;
+        }
+
+        if(targetDir.exists() == false)
+        {
+            qDebug() << "[HistoryCopy::copy] can not found backup folder : " << src;
+            onComplete(false);
+            oErr = 2;
+            return false;
+        }
+
         mpThread = new QThread;
         mpFileCopy = new FileCopyLocal;
 
@@ -39,26 +65,43 @@ public:
 
         connect(mpThread, &QThread::finished, mpFileCopy, &QObject::deleteLater);
         connect(this, SIGNAL(signalCommandCopyFolder(QString, QString)), mpFileCopy, SLOT(onCommandCopyFolder(QString, QString)));
+        connect(this, SIGNAL(signalCommandCopyOldFolder(QString, QString)), mpFileCopy, SLOT(onCommandCopyOldFolder(QString, QString)));
         connect(mpFileCopy, SIGNAL(signalEventProgress(int, int)), this, SLOT(onProgress(int, int)));
         connect(mpFileCopy, SIGNAL(signalEventComplete(bool)), this, SLOT(onComplete(bool)));
 
-        if(src.endsWith("/novasen") == false)
-        {
-            qDebug() << "[HistoryCopy::copy] invaild path : " << src;
-            onComplete(false);
-            return false;
-        }
+        emit signalCommandCopyFolder(FileDef::DATABASE_DIR(), backupFloder);
 
+        return true;
+    }
+
+    bool copyOldVersion(QString src, int &oErr)
+    {
+        QString backupFloder = QString("%1/%2").arg(src).arg("backup");
         QDir targetDir(backupFloder);
 
-        if(targetDir.exists() == false)
+        oErr = 0;
+
+        if(src.endsWith("/NOVASEN") == false)
         {
-            qDebug() << "[HistoryCopy::copy] can not found backup folder : " << src;
+            qDebug() << "[" << Q_FUNC_INFO << "][HistoryCopy::copy] invaild path : " << src;
+            oErr = 1;
             onComplete(false);
             return false;
         }
 
-        emit signalCommandCopyFolder(FileDef::DATABASE_DIR(), backupFloder);
+        mpThread = new QThread;
+        mpFileCopy = new FileCopyLocal;
+
+        mpFileCopy->moveToThread(mpThread);
+        mpThread->start();
+
+        connect(mpThread, &QThread::finished, mpFileCopy, &QObject::deleteLater);
+        connect(this, SIGNAL(signalCommandCopyFolder(QString, QString)), mpFileCopy, SLOT(onCommandCopyFolder(QString, QString)));
+        connect(this, SIGNAL(signalCommandCopyOldFolder(QString, QString)), mpFileCopy, SLOT(onCommandCopyOldFolder(QString, QString)));
+        connect(mpFileCopy, SIGNAL(signalEventProgress(int, int)), this, SLOT(onProgress(int, int)));
+        connect(mpFileCopy, SIGNAL(signalEventComplete(bool)), this, SLOT(onComplete(bool)));
+
+        emit signalCommandCopyOldFolder(FileDef::DATABASE_DIR(), src);
 
         return true;
     }
@@ -66,6 +109,7 @@ public:
 
 signals:
     void signalCommandCopyFolder(QString dst, QString src);
+    void signalCommandCopyOldFolder(QString dst, QString src);
     void signalCommandCopyHistory(QString dst, QString ip, QString syncDate);
 
     void signalEventProgress(int procIdx, int totalCnt);

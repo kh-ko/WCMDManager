@@ -75,9 +75,19 @@ ApplicationWindow {
             }
 
             onSignalEventClickedAddHistory: {
-                mainModel.onCommandAddHistory(fileUrls);
-                var dlgCopyProgress = dialogCopyProgress.createObject(window,{"model" : mainModel});
-                dlgCopyProgress.open();
+                var result = mainModel.onCommandAddHistory(fileUrls);
+
+                if(result === 0)
+                {
+                    var dlgCopyProgress = dialogCopyProgress.createObject(window,{"model" : mainModel});
+                    dlgCopyProgress.open();
+                }
+                else
+                {
+                    var errStr = result === 1 ? qsTr("select \"novasen\" folder") : qsTr("can not found \"backup\" folder")
+
+                    messageBox.showMessage(errStr);
+                }
             }
 
             onSignalEventClickedSync: {
@@ -105,14 +115,14 @@ ApplicationWindow {
 
             onSignalClickedOperateReport :
             {
-                var reportDialog = dialogReport.createObject(window);
-                reportDialog.open(EnumDefine.REPORT_MD_OPERATE,mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+                var selectProductDlg = selectProductForMDOP.createObject(window);
+                selectProductDlg.open();
             }
 
             onSignalClickedCheckupReport:
             {
-                var reportDialog = dialogReport.createObject(window);
-                reportDialog.open(EnumDefine.REPORT_MD_CHECKUP, mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+                var selectProductDlg = selectProductForMDCheckup.createObject(window);
+                selectProductDlg.open();
             }
         }
 
@@ -131,8 +141,8 @@ ApplicationWindow {
 
             onSignalClickedReport :
             {
-                var reportDialog = dialogReport.createObject(window);
-                reportDialog.open(EnumDefine.REPORT_WC_OPERATE,mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay());
+                var selectProductDlg = selectProductForWC.createObject(window);
+                selectProductDlg.open();
             }
         }
 
@@ -168,11 +178,62 @@ ApplicationWindow {
         }
     }
 
+    PanelMessageBox{
+        id : messageBox
+        height: 140
+        width: 500
+
+        visible: false
+    }
+
     Component{
         id : dialogReport
 
         PanelReportWindow{}
     }
+
+    Component{
+        id : selectProductForWC
+
+        PanelSelectProduct{
+            onSignalEventClosed: {
+                if(value.length != 0)
+                {
+                    var reportDialog = dialogReport.createObject(window);
+                    reportDialog.open(EnumDefine.REPORT_WC_OPERATE,mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay(), value);
+                }
+            }
+        }
+    }
+
+    Component{
+        id : selectProductForMDOP
+
+        PanelSelectProduct{
+            onSignalEventClosed: {
+                if(value.length != 0)
+                {
+                    var reportDialog = dialogReport.createObject(window);
+                    reportDialog.open(EnumDefine.REPORT_MD_OPERATE,mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay(), value);
+                }
+            }
+        }
+    }
+
+    Component{
+        id : selectProductForMDCheckup
+
+        PanelSelectProduct{
+            onSignalEventClosed: {
+                if(value.length != 0)
+                {
+                    var reportDialog = dialogReport.createObject(window);
+                    reportDialog.open(EnumDefine.REPORT_MD_CHECKUP, mainModel.onCommandGetSelYear(), mainModel.onCommandGetSelMonth(), mainModel.onCommandGetSelDay(), value);
+                }
+            }
+        }
+    }
+
 /*
     Component{
         id : dialogMDOPReportComponent

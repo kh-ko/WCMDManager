@@ -6,10 +6,12 @@
 #include <QTimer>
 #include <QUdpSocket>
 #include <QNetworkInterface>
+#include <QFile>
 
 #include "source/remote/dto/enum/remoteenumdef.h"
 #include "source/remote/dto/devinfodto.h"
 #include "source/remote/strpacket.h"
+#include "source/history/def/filedef.h"
 
 class RemoteSearcher : public QObject
 {
@@ -55,6 +57,7 @@ signals:
 public slots:
     void onTimeout()
     {
+        addForcedDevList();
         searchComplete();
         close();
     }
@@ -176,6 +179,51 @@ private:
         newDevInfo.mIp     = ip;
 
         mDevInfoList.append(newDevInfo);
+    }
+
+    void addForcedDevList()
+    {
+        QFile file;
+        QTextStream oStream;
+        QString line;
+        QStringList cols;
+
+        if(QFile::exists(QString("%1/dev_list.txt").arg(FileDef::DEV_LIST_DIR())) == false)
+        {
+            qDebug() << "[" << Q_FUNC_INFO << "]file can not found";
+
+            return;
+        }
+
+        file.setFileName(QString("%1/dev_list.txt").arg(FileDef::DEV_LIST_DIR()));
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+        if(file.isOpen() == false)
+        {
+            qDebug() << "[" << Q_FUNC_INFO << "]file open failed";
+
+            return;
+        }
+
+        oStream.setCodec("UTF-8");
+        oStream.setDevice(&file);
+
+        for(int i = 0; i < 255; i ++)
+        {
+            if(oStream.atEnd())
+                break;
+
+            line = oStream.readLine();
+
+            if(line.contains(';') == false)
+                continue;
+
+            cols = line.split(";");
+
+            addDevInfo(cols[0].toInt(), cols[1]);
+        }
+
+        file.close();
     }
 };
 

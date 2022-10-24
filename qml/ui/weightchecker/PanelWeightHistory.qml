@@ -76,7 +76,7 @@ Rectangle {
 
             ListElement
             {
-                    itemValue: qsTr("Only NG")
+                    itemValue: qsTr("Only NG & Calibration")
                     itemTag: 0
             }
             ListElement
@@ -181,7 +181,9 @@ Rectangle {
                     (item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_UNDER          ||
                      item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_OVER           ||
                      item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETCERROR       ||
-                     item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETC_METAL_ERROR)) ? 50 : 0
+                     item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_ETC_METAL_ERROR||
+                     item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_DYNAMIC_CARI   ||
+                     item.eventType === EnumDefine.EVENT_TYPE_WEIGHT_STATIC_CARI      )) ? 50 : 0
             anchors.left: parent.left
             anchors.leftMargin: 0
             anchors.right: parent.right

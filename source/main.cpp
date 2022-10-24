@@ -25,6 +25,7 @@
 #include "source/qmlmodel/panelwctrendsmodel.h"
 #include "source/qmlmodel/panelwchistorymodel.h"
 #include "source/qmlmodel/popupmetallimitcriteriamodel.h"
+#include "source/qmlmodel/panelselectproductmodel.h"
 
 #include "source/util/mouseeventspy.h"
 
@@ -68,6 +69,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<PanelWCHistoryModel             >("PanelWCHistoryModel"             , 1, 0, "PanelWCHistoryModel"             );
     qmlRegisterType<WindowSettingModel              >("WindowSettingModel"              , 1, 0, "WindowSettingModel"              );
     qmlRegisterType<PopupMetalLimitCriteriaModel    >("PopupMetalLimitCriteriaModel"    , 1, 0, "PopupMetalLimitCriteriaModel"    );
+    qmlRegisterType<PanelSelectProductModel         >("PanelSelectProductModel"         , 1, 0, "PanelSelectProductModel"         );
+    qmlRegisterType<CheckProductModel               >("CheckProductModel"               , 1, 0, "CheckProductModel"               );
 
 	qmlRegisterSingletonType(QUrl("qrc:/uiengine/ViewManager.qml"), "ViewManager", 1, 0, "ViewManager");
     qmlRegisterSingletonType(QUrl("qrc:/uiengine/FontManager.qml"), "FontManager", 1, 0, "FontManager");

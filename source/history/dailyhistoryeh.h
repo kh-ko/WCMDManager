@@ -140,10 +140,17 @@ private slots:
                         PDWCStatsDto wcStats;
                         wcStats.mSeq = dto.mPDSeq;
                         mPDWCStatsList.append(wcStats);
-                        mpRecentPDWCStats = &mPDWCStatsList[mPDWCStatsList.size() - 1];
+                        pWCStats = &mPDWCStatsList[mPDWCStatsList.size() - 1];
                     }
+
+                    mpRecentPDWCStats = pWCStats;
                 }
+
                 mpRecentPDWCStats->addEvent(dto);
+            }
+
+            if(dto.isWCEvent() || dto.isCalibEvent())
+            {
                 mWCEventList.append(dto);
             }
         }

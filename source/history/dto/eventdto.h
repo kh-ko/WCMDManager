@@ -135,6 +135,18 @@ public:
         }
     }
 
+    static bool isCalibEvent(quint16 eventType)
+    {
+        switch(eventType)
+        {
+            case EnumDef::ET_WEIGHT_STATIC_CARI    :
+            case EnumDef::ET_WEIGHT_DYNAMIC_CARI   :
+                return true;
+            default:
+                return false;
+        }
+    }
+
     static bool isCheckEvent(quint16 eventType)
     {
         switch(eventType)
@@ -297,6 +309,10 @@ public:
         return isMDEvent(mEType);
     }
 
+    bool isCalibEvent()
+    {
+        return isCalibEvent(mEType);
+    }
     bool isNGEvent()
     {
         return isNGEvent(mEType);

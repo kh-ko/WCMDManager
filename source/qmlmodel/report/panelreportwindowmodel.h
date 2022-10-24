@@ -25,6 +25,9 @@ public:
     QString        mStrOver;
     QString        mStrUnder;
     QString        mStrEtc;
+    QString        mStrStaticCalib;
+    QString        mStrDynamicCalib;
+    QString        mStrMetalDetect;
 
     QPrinter       mPrinter;
     QPainter       *mpPainter = nullptr;
@@ -36,6 +39,7 @@ public:
 
     DevInfoDto     mDevInfo;
     EnumDefine::ReportType     mReportType;
+    QList<int>     mSelectedPSeqList;
 
     bool    mIsCheckWrite       = false;
     bool    mIsCheckReview      = false;
@@ -99,12 +103,21 @@ public slots:
         mpPainter->end();
     }
 
-    Q_INVOKABLE void onCommandLoadData(int reportType, int fYear, int fMonth, int fDay, int tYear, int tMonth, int tDay)
+    Q_INVOKABLE void onCommandLoadData(int reportType, int fYear, int fMonth, int fDay, int tYear, int tMonth, int tDay, QString selectedPSeqList)
     {
         mReportType = (EnumDefine::ReportType)reportType;
         mLoadingDate = QDate(fYear, fMonth, fDay);
         mTDate = QDate(tYear, tMonth, tDay);
 
+        QStringList tempPSeqList = selectedPSeqList.split(",");
+
+        foreach(QString pseq, tempPSeqList)
+        {
+            if(pseq.length() > 0)
+            {
+                mSelectedPSeqList.append(pseq.toInt());
+            }
+        }
         load();
     }
 
@@ -115,8 +128,10 @@ public slots:
         switch(mReportType)
         {
         case EnumDefine::REPORT_MD_CHECKUP:
-            if(mDailyHis.mEH.mCheckupEventList.size() == 0 && mDailyHis.mEH.mMDFailList.size() == 0)
+            if(getCountMDCheckupEventSelectedProduct() == 0 && getCountMDFailEventSelectedProduct() == 0)
                 break;
+//            if(mDailyHis.mEH.mCheckupEventList.size() == 0 && mDailyHis.mEH.mMDFailList.size() == 0)
+//                break;
 
             emit signalEventAddedDate(mDailyHis.mEH.mStrDate);
 
@@ -124,6 +139,9 @@ public slots:
 
             foreach(PDCheckupDto checkup, mDailyHis.mEH.mCheckupEventList)
             {
+                if(isSelectedProduct(checkup.mProductSeq) == false)
+                    continue;
+
                 if(pPage->isFull())
                 {
                     emit signalEventLoadedPage(pPage);
@@ -131,8 +149,8 @@ public slots:
                 }
                 QStringList row;
                 row.append(QString::number(checkup.mProductNo).rightJustified(3,'0'));
-                row.append(checkup.mProductName);
                 row.append(checkup.mTime.toString(TIME_FMT));
+                row.append(checkup.mProductName);
                 row.append(mDevInfo.getLimFe(checkup.mProductSeq));
                 row.append(mDevInfo.getLimSus(checkup.mProductSeq));
                 row.append(checkup.mIsPassFe01  == true ? "O" : "X");
@@ -150,6 +168,9 @@ public slots:
 
             foreach(EventDto detect, mDailyHis.mEH.mMDFailList)
             {
+                if(isSelectedProduct(detect.mPDSeq) == false)
+                    continue;
+
                 if(pPage->isFull())
                 {
                     emit signalEventLoadedPage(pPage);
@@ -172,8 +193,10 @@ public slots:
             break;
 
         case EnumDefine::REPORT_MD_OPERATE:
-            if(mDailyHis.mPS.mPSList.size() == 0)
+            if(getCountMDPSSelectedProduct() == 0)
                 break;
+//            if(mDailyHis.mPS.mPSList.size() == 0)
+//                break;
 
             emit signalEventAddedDate(mDailyHis.mEH.mStrDate);
 
@@ -181,6 +204,9 @@ public slots:
 
             foreach(PDStatsDto stats, mDailyHis.mPS.mPSList)
             {
+                if(isSelectedProduct(stats.mSeq) == false)
+                    continue;
+
                 if(pPage->isFull())
                 {
                     emit signalEventLoadedPage(pPage);
@@ -209,8 +235,10 @@ public slots:
             break;
 
         case EnumDefine::REPORT_WC_OPERATE:
-            if(mDailyHis.mPS.mPSList.size() == 0)
+            if(getCountWCPSSelectedProduct() == 0 && getCountWCEventSelectedProduct() == 0)
                 break;
+//            if(mDailyHis.mPS.mPSList.size() == 0)
+//                break;
 
             emit signalEventAddedDate(mDailyHis.mEH.mStrDate);
 
@@ -218,6 +246,9 @@ public slots:
 
             foreach(PDWCStatsDto stats, mDailyHis.mEH.mPDWCStatsList)
             {
+                if(isSelectedProduct(stats.mSeq) == false)
+                    continue;
+
                 if(pPage->isFull())
                 {
                     emit signalEventLoadedPage(pPage);
@@ -249,7 +280,10 @@ public slots:
 
             foreach(EventDto detect, mDailyHis.mEH.mWCEventList)
             {
-                if(!detect.isNGEvent())
+                if(isSelectedProduct(detect.mPDSeq) == false)
+                    continue;
+
+                if(!detect.isNGEvent() && !detect.isCalibEvent())
                     continue;
 
                 if(pPage->isFull())
@@ -268,8 +302,14 @@ public slots:
                     row.append(QString("%1g (%2)").arg(QString::number(((double)detect.mEValue/1000.0), 'f', 1)).arg(mStrOver));
                 else if(detect.mEType == EnumDef::ET_WEIGHT_UNDER)
                     row.append(QString("%1g (%2)").arg(QString::number(((double)detect.mEValue/1000.0), 'f', 1)).arg(mStrUnder));//row.append(mStrUnder);
-                else if(detect.mEType == EnumDef::ET_WEIGHT_ETCERROR || detect.mEType == EnumDef::ET_WEIGHT_ETC_METAL_ERROR)
+                else if(detect.mEType == EnumDef::ET_WEIGHT_ETCERROR)
                     row.append(QString("%1g (%2)").arg(QString::number(((double)detect.mEValue/1000.0), 'f', 1)).arg(mStrEtc));//row.append(mStrEtc);
+                else if(detect.mEType == EnumDef::ET_WEIGHT_ETC_METAL_ERROR)
+                    row.append(QString("%1").arg(mStrMetalDetect));
+                else if(detect.mEType == EnumDef::ET_WEIGHT_STATIC_CARI)
+                    row.append(QString("%1").arg(mStrStaticCalib));
+                else if(detect.mEType == EnumDef::ET_WEIGHT_DYNAMIC_CARI)
+                    row.append(QString("%1").arg(mStrDynamicCalib));
 
                 row.append("");
                 row.append("");
@@ -291,11 +331,11 @@ public:
     explicit PanelReportWindowModel(QObject *parent = nullptr):QObject(parent)
     {
         if(pLSettingSvc->mLanguage == EnumDefine::Language::LANG_KOR){
-            mStrOver = "초과"; mStrUnder = "미달"; mStrEtc = "기타";
+            mStrOver = "초과"; mStrUnder = "미달"; mStrEtc = "기타"; mStrStaticCalib = "정보정"; mStrDynamicCalib = "동보정"; mStrMetalDetect = "금속검출";
         }
         else
         {
-            mStrOver = "Over"; mStrUnder = "Under"; mStrEtc = "Etc";
+            mStrOver = "Over"; mStrUnder = "Under"; mStrEtc = "Etc"; mStrStaticCalib = "Static calibration"; mStrDynamicCalib = "Dynamic calibration"; mStrMetalDetect = "Metal detect";
         }
 
         mDevInfo = pDevInfoSvc->findDevInfo(pDLoaderSvc->mDevNum);
@@ -480,6 +520,84 @@ private:
                pPage->setMetrix(18, 7);
        }
        return pPage;
+    }
+
+    bool isSelectedProduct(int qseq)
+    {
+        foreach(int seq, mSelectedPSeqList)
+        {
+            if(qseq == seq)
+                return true;
+        }
+        return false;
+    }
+
+    int getCountMDCheckupEventSelectedProduct()
+    {
+        int count = 0;
+
+        foreach(PDCheckupDto checkup, mDailyHis.mEH.mCheckupEventList)
+        {
+            if(isSelectedProduct(checkup.mProductSeq))
+                count++;
+        }
+
+        return count;
+    }
+
+    int getCountMDFailEventSelectedProduct()
+    {
+        int count = 0;
+
+         foreach(EventDto detect, mDailyHis.mEH.mMDFailList)
+         {
+             if(isSelectedProduct(detect.mPDSeq))
+                 count++;
+         }
+
+        return count;
+    }
+
+    int getCountMDPSSelectedProduct()
+    {
+        int count = 0;
+
+        foreach(PDStatsDto stats, mDailyHis.mPS.mPSList)
+        {
+            if(isSelectedProduct(stats.mSeq))
+                count++;
+        }
+
+        return count;
+    }
+
+    int getCountWCPSSelectedProduct()
+    {
+        int count = 0;
+
+        foreach(PDWCStatsDto stats, mDailyHis.mEH.mPDWCStatsList)
+        {
+            if(isSelectedProduct(stats.mSeq))
+                count++;
+        }
+
+        return count;
+    }
+
+    int getCountWCEventSelectedProduct()
+    {
+        int count = 0;
+
+        foreach(EventDto detect, mDailyHis.mEH.mWCEventList)
+        {
+            if(!detect.isNGEvent() && !detect.isCalibEvent())
+                continue;
+
+            if(isSelectedProduct(detect.mPDSeq))
+                count++;
+        }
+
+        return count;
     }
 };
 

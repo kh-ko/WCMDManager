@@ -45,18 +45,21 @@ Item {
 
                 color: "#0085ff"
 
+/*
                 Image {
                     id: image
-                    width: 194
-                    height: 77
-                    anchors.verticalCenterOffset: -28
-                    anchors.horizontalCenterOffset: 0
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    //width: 194
+                    //height: 77
+                    anchors.fill: parent
+                    //anchors.verticalCenterOffset: -28
+                    //anchors.horizontalCenterOffset: 0
+                    //anchors.verticalCenter: parent.verticalCenter
+                    //anchors.horizontalCenter: parent.horizontalCenter
                     fillMode: Image.PreserveAspectFit
-                    source: "image_icon/icon.png"
+                    source: "image_icon/icon_soluray.png"
                 }
-
+*/
+                
                 Image {
                     id: image2
                     x: 38

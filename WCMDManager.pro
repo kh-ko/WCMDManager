@@ -82,6 +82,7 @@ HEADERS += \
     source/qmlmodel/panelmetalstatisticsmodel.h \
     source/qmlmodel/panelmonitoritemmodel.h \
     source/qmlmodel/panelmonitorlistmodel.h \
+    source/qmlmodel/panelselectproductmodel.h \
     source/qmlmodel/panelsynclistitemmodel.h \
     source/qmlmodel/panelsyncmodel.h \
     source/qmlmodel/panelwchistogram.h \

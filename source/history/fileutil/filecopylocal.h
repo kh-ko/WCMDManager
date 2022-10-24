@@ -49,6 +49,25 @@ public slots:
         emit signalEventComplete(true);
     }
 
+    void onCommandCopyOldFolder(QString dst, QString src)
+    {
+        //makeOldFileList(src);
+
+//        for(int i = 0; (i < mSrcList.size()) && getCancel() == false; i ++)
+//        {
+//            if(QFile::exists(mDstList[i]))
+//            {
+//                QFile::remove(mDstList[i]);
+//            }
+//            if(QFile::copy(mSrcList[i], mDstList[i]) == false)
+//            {
+//                qDebug() << "[FileCopyLocal::onCommandCopyFolder] copy failed : src = " << mSrcList[i] << ", dst = " << mDstList[i];
+//            }
+//            emit signalEventProgress(i, mSrcList.size());
+//        }
+//        emit signalEventComplete(true);
+    }
+
 private:
     bool mCancel = false;
 

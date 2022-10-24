@@ -16,6 +16,12 @@ public:
         static QString dir = QString("%1/database").arg(QApplication::applicationDirPath());
         return dir;
     }
+
+    static QString DEV_LIST_DIR()
+    {
+        static QString dir = QString("%1/devlist").arg(QApplication::applicationDirPath());
+        return dir;
+    }
 };
 
 #endif // FILEDEF_H
