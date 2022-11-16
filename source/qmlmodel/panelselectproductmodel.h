@@ -17,15 +17,19 @@ class CheckProductModel : public QObject
 private:
     bool    mIsChecked = true;
     int     mPSeq      = 0;
+    int     mPNum      = 0;
     QString mPName     = "";
+
 
 public:
     bool    getIsChecked(){ return mIsChecked; }
     int     getPSeq     (){ return mPSeq     ; }
+    int     getPNum     (){ return mPNum     ; }
     QString getPName    (){ return mPName    ; }
 
     void    setIsChecked(bool    value){ if(mIsChecked == value) return; mIsChecked = value; emit signalEventChangedIsChecked(mIsChecked); }
     void    setPSeq     (int     value){ if(mPSeq      == value) return; mPSeq      = value; emit signalEventChangedPSeq     (mPSeq     ); }
+    void    setPNum     (int     value){ if(mPNum      == value) return; mPNum      = value;                                               }
     void    setPName    (QString value){ if(mPName     == value) return; mPName     = value; emit signalEventChangedPName    (mPName    ); }
 
 signals:
@@ -118,12 +122,19 @@ public:
 
         foreach(PDSettingDto setting, pDLoaderSvc->mDailyHis.mPH.mPDList)
         {
+            int insertIdx = 0;
             CheckProductModel * pProductModel = new CheckProductModel(this);
             pProductModel->setIsChecked(true);
             pProductModel->setPSeq(setting.mSeq);
+            pProductModel->setPNum(setting.mProductNum);
             pProductModel->setPName(QString("%1 %2").arg(setting.mProductNum,3,10,QChar('0')).arg(setting.mName));
 
-            mListProduct.append(pProductModel);
+            for(insertIdx = 0; insertIdx < mListProduct.size(); insertIdx ++)
+            {
+                if(mListProduct[insertIdx]->getPNum() > pProductModel->getPNum())
+                    break;
+            }
+            mListProduct.insert(insertIdx,pProductModel);
         }
     }
 };

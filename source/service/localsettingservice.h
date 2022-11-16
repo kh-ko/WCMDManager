@@ -32,7 +32,7 @@ public:
     }
 
     QString                   mOldVersion           ;
-    QString                   mVersion              = "1.0.5";
+    QString                   mVersion              = "1.0.6";
     int                       mLanguage             ;
     QString                   mPassword             ;
     int                       mMoniteringRefreshCycle;

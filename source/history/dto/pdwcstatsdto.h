@@ -34,6 +34,7 @@ public:
     int          mTotalMaxWeight     = 0;
     int          mTradeMinWeight     = 0;
     int          mTradeMaxWeight     = 0;
+    qint64       mProcutTime         = 0;
 
     QList<quint32>   mTotalTrends;
     QList<quint32>   mTradeTrends;
@@ -65,6 +66,7 @@ public:
         mTotalMaxWeight(copy.mTotalMaxWeight),
         mTradeMinWeight(copy.mTradeMinWeight),
         mTradeMaxWeight(copy.mTradeMaxWeight),
+        mProcutTime    (copy.mProcutTime    ),
         mTotalTrends   (copy.mTotalTrends   ),
         mTradeTrends   (copy.mTradeTrends   ){}
     ~PDWCStatsDto(){}
@@ -95,6 +97,7 @@ public:
         mTotalMaxWeight = other.mTotalMaxWeight;
         mTradeMinWeight = other.mTradeMinWeight;
         mTradeMaxWeight = other.mTradeMaxWeight;
+        mProcutTime     = other.mProcutTime    ;
         mTotalTrends    = other.mTotalTrends   ;
         mTradeTrends    = other.mTradeTrends   ;
 

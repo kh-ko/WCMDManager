@@ -299,6 +299,30 @@ public:
         return false;
     }
 
+    bool isExitEvent()
+    {
+        if(mEType == EnumDef::ET_APP_EXIT)
+            return true;
+
+        return false;
+    }
+
+    bool isRunEvent()
+    {
+        if(mEType == EnumDef::ET_RUN)
+            return true;
+
+        return false;
+    }
+
+    bool isStopEvent()
+    {
+        if(mEType == EnumDef::ET_STOP)
+            return true;
+
+        return false;
+    }
+
     bool isWCEvent()
     {
         return isWCEvent(mEType);

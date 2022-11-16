@@ -5,11 +5,15 @@
 #include <QDebug>
 #include "source/history/dto/enum/enumdef.h"
 #include "source/history/dto/eventdto.h"
+#include "source/history/dto/pdtimesdto.h"
 #include "source/history/dto/pdcheckupdto.h"
 #include "source/history/dto/pdwcstatsdto.h"
 #include "source/history/dailyhistoryph.h"
 #include "source/history/dailyhistoryps.h"
 #include "source/history/fileutil/filereaderex.h"
+
+#define INVAILD_PD_SEQ 0
+
 
 class DailyHistoryEH : public QObject
 {
@@ -28,6 +32,7 @@ public:
     //QList<EventDto>     mEventList;
     QList<PDCheckupDto> mCheckupEventList;
     QList<EventDto>     mMDFailList;
+    QList<PDTimeDto>    mPDTimeList;
     QList<PDWCStatsDto> mPDWCStatsList;
     QList<EventDto>     mWCEventList;
 
@@ -107,12 +112,31 @@ signals:
 private slots:
     void onReaded(QStringList lines)
     {
+
         foreach(QString line, lines)
         {
             EventDto dto;
             if(dto.setValue(line) == false)
                 continue;
 
+
+//            if((mRecentPDSeq != dto.mPDSeq && mRecentPDSeq != INVAILD_PD_SEQ && dto.mPDSeq != INVAILD_PD_SEQ) || dto.isRunEvent() || dto.isStopEvent() || dto.isStartEvent() || dto.isExitEvent())
+//            {
+//                if(mRecentPDSeq != INVAILD_PD_SEQ)
+//                    addPDTime(mRecentPDSeq, dto.mDateTime.toMSecsSinceEpoch() - mRunTime);
+//                mRecentPDSeq = INVAILD_PD_SEQ;
+//            }
+
+//            if(dto.mPDSeq != INVAILD_PD_SEQ)
+//            {
+//                if(mRecentPDSeq == INVAILD_PD_SEQ)
+//                {
+//                    mRunTime = dto.mDateTime.toMSecsSinceEpoch();
+//                }
+//                mRecentPDSeq = dto.mPDSeq;
+//                mStopTime = dto.mDateTime.toMSecsSinceEpoch();
+
+//            }
             //mEventList.append(dto);
 
             if(dto.isMetalCheckup())
@@ -157,6 +181,8 @@ private slots:
 
         if(lines.size() < mReadLineCnt)
         {
+//            if(mRecentPDSeq != INVAILD_PD_SEQ)
+//                addPDTime(mRecentPDSeq, mStopTime - mRunTime);
             loadComplete();
             return;
         }
@@ -166,6 +192,9 @@ private slots:
 
 private:
     PDWCStatsDto     * mpRecentPDWCStats = nullptr;
+    quint64             mRecentPDSeq = INVAILD_PD_SEQ;
+    qint64              mRunTime = 0;
+    qint64              mStopTime = 0;
     int mReadLineCnt = 1000;
 
     void loadComplete()
@@ -232,5 +261,31 @@ private:
         return nullptr;
     }
 
+    PDTimeDto * findPDTimePtr(quint64 pdSeq)
+    {
+        for(int i = 0; i <mPDTimeList.size(); i++)
+        {
+            if(mPDTimeList[i].mSeq == pdSeq)
+                return &mPDTimeList[i];
+        }
+        return nullptr;
+    }
+    void addPDTime(quint64 pdSeq, qint64 time)
+    {
+        PDTimeDto * timeDto = findPDTimePtr(pdSeq);
+
+        if(timeDto == nullptr)
+        {
+            PDTimeDto newTimeDto;
+
+            newTimeDto.mSeq = pdSeq;
+            newTimeDto.mTime = time;
+            mPDTimeList.append(newTimeDto);
+        }
+        else
+        {
+            timeDto->mTime = timeDto->mTime + time;
+        }
+    }
 };
 #endif // DAILYHISTORYEH_H

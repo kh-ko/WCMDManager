@@ -180,13 +180,15 @@ Rectangle {
             property real   ngRate              : ngCount / totalCount
 
             id : item
-            height: 50
+            height: panelmodel.getTotalCnt(dataIdx) > 0 ? 50 : 0
             anchors.left: parent.left
             anchors.leftMargin: 0
             anchors.right: parent.right
             anchors.rightMargin: 0
             color : "#00000000"
 
+
+            visible : panelmodel.getTotalCnt(dataIdx) > 0
 
             MouseArea{
                 id : mouseAreaItem

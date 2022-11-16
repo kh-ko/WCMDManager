@@ -53,6 +53,7 @@ HEADERS += \
     source/history/dto/pdcheckupdto.h \
     source/history/dto/pdsettingdto.h \
     source/history/dto/pdstatsdto.h \
+    source/history/dto/pdtimesdto.h \
     source/history/dto/pdwcstatsdto.h \
     source/history/fileutil/filecopylocal.h \
     source/history/fileutil/filereaderex.h \

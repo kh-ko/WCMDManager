@@ -74,10 +74,16 @@ private slots:
         foreach(QString line, lines)
         {
             PDStatsDto dto;
+            int insertIdx = 0;
             if(dto.setValue(line) == false)
                 continue;
 
-            mPSList.append(dto);
+            for(insertIdx = 0; insertIdx < mPSList.size(); insertIdx ++)
+            {
+                if(mPSList[insertIdx].mNum > dto.mNum)
+                    break;
+            }
+            mPSList.insert(insertIdx, dto);
         }
 
         if(lines.size() < mReadLineCnt)

@@ -212,6 +212,10 @@ public slots:
                     emit signalEventLoadedPage(pPage);
                     pPage= buildPageModel(false, mDailyHis.mEH.mStrDate, EnumDefine::REPORT_PAGE_MD_OP, pageNum++);
                 }
+
+                if(stats.mMDTotalCnt < 1)
+                    continue;
+
                 QStringList row;
                 row.append(QString::number(stats.mNum).rightJustified(3,'0'));
                 row.append(stats.mName);
