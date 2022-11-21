@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.15.0, 2022-11-15T10:02:43. -->
+<!-- Written by QtCreator 4.15.0, 2022-11-20T19:22:42. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -301,6 +301,7 @@
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/myfolder/Work/02.WCMDManager/02.Soruce/x.output</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

@@ -33,6 +33,7 @@ Item {
         text                : inputText.text
 
         fontSizeMode        : Text.HorizontalFit
+        minimumPixelSize    : 8
         font.family         : inputText.font.family
         color               : inputText.color
         font.pixelSize      : inputText.font.pixelSize
